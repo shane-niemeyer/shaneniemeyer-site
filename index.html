@@ -424,7 +424,6 @@ footer.site .wrap { padding-block: 32px; display: flex; flex-wrap: wrap; justify
 footer.site a { color: var(--muted); }
 </style>
 
-<div class="preview"><div class="wrap">Preview build. Copy is in Shane's words and still in progress. Client stories are shared with permission. Photos and video to come.</div></div>
 
 <header class="site">
   <div class="wrap">
@@ -613,9 +612,9 @@ footer.site a { color: var(--muted); }
           <span class="muted">Most people train in the middle. It feels productive. It keeps them stuck.</span>
           <span class="go">Read →</span>
         </a>
-        <form class="subscribe" novalidate>
+        <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="home"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <p class="sub-title">The weekly email</p>
-          <div class="sub-row"><label class="sr" for="sub-home">Email address</label><input id="sub-home" type="email" autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+          <div class="sub-row"><label class="sr" for="sub-home">Email address</label><input id="sub-home" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
           <p class="form-status" aria-live="polite"></p>
         </form>
       </div>
@@ -889,10 +888,12 @@ footer.site a { color: var(--muted); }
       <h2>Tell me where you are.</h2>
       <p class="muted measure">A few lines is enough. We'll start from there.</p>
     </div>
-    <form class="contact" id="contact-form" novalidate>
+    <form class="contact" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="contact">
+      <p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <div class="two">
-        <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" autocomplete="name"></div>
-        <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
       </div>
       <div class="field">
         <label for="c-interest">I'm interested in</label>
@@ -1055,10 +1056,10 @@ footer.site a { color: var(--muted); }
       </div></li>
     </ul>
     <aside>
-      <form class="subscribe" novalidate>
+      <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="writing"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <p class="sub-title">The weekly email</p>
         <p class="muted">One idea a week, in your inbox. No hacks. No shortcuts.</p>
-        <div class="sub-row"><label class="sr" for="sub-writing">Email address</label><input id="sub-writing" type="email" autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+        <div class="sub-row"><label class="sr" for="sub-writing">Email address</label><input id="sub-writing" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
         <p class="form-status" aria-live="polite"></p>
       </form>
     </aside>
@@ -1099,10 +1100,10 @@ footer.site a { color: var(--muted); }
     <p>Much of what I do is continually manipulating the acute variables: training type, exercise selection, intensity, modality and duration. A plan gives us objectivity. It tells us when to go hard and when to back off, instead of leaving it to how we feel on the day.</p>
     <p class="pull">If we're healthy, we're training. If we're training, we're transforming.</p>
 
-    <form class="subscribe" novalidate>
+    <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="post"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <p class="sub-title">Get the next one in your inbox</p>
       <p class="muted">One idea a week. No hacks. No shortcuts.</p>
-      <div class="sub-row"><label class="sr" for="sub-post">Email address</label><input id="sub-post" type="email" autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+      <div class="sub-row"><label class="sr" for="sub-post">Email address</label><input id="sub-post" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
       <p class="form-status" aria-live="polite"></p>
     </form>
 
@@ -1372,10 +1373,10 @@ footer.site a { color: var(--muted); }
       <p class="muted measure">Each module will come with a one-page summary for referring providers: the claim, the strength of the evidence behind it, and what we do on the floor.</p>
       <p class="cite-line"><span class="tag draft">Planned</span></p>
     </div>
-    <form class="subscribe" novalidate>
+    <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="library"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <p class="sub-title">New chapters, as they land</p>
       <p class="muted">One idea a week, in your inbox. No hacks. No shortcuts.</p>
-      <div class="sub-row"><label class="sr" for="sub-library">Email address</label><input id="sub-library" type="email" autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+      <div class="sub-row"><label class="sr" for="sub-library">Email address</label><input id="sub-library" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
       <p class="form-status" aria-live="polite"></p>
     </form>
   </div></section>
@@ -1529,10 +1530,10 @@ footer.site a { color: var(--muted); }
         <span class="go">Read →</span>
       </a>
 
-      <form class="subscribe" novalidate>
+      <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="module"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <p class="sub-title">Get the next module in your inbox</p>
         <p class="muted">One idea a week. No hacks. No shortcuts.</p>
-        <div class="sub-row"><label class="sr" for="sub-module">Email address</label><input id="sub-module" type="email" autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+        <div class="sub-row"><label class="sr" for="sub-module">Email address</label><input id="sub-module" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
         <p class="form-status" aria-live="polite"></p>
       </form>
 
@@ -1662,9 +1663,28 @@ footer.site a { color: var(--muted); }
 
   var form = document.getElementById('contact-form');
   var status = document.getElementById('c-status');
+  function send(f) {
+    return fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(f)).toString()
+    }).then(function (r) { if (!r.ok) throw new Error(r.status); });
+  }
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    status.textContent = 'Preview only. This form is not connected yet.';
+    var name = form.elements.name.value.trim();
+    var email = form.elements.email.value.trim();
+    if (!name || !validEmail(email)) { status.textContent = 'Add your name and a valid email so I can write back.'; return; }
+    var btn = form.querySelector('button[type=submit]');
+    btn.disabled = true; status.textContent = 'Sending…';
+    send(form).then(function () {
+      form.reset();
+      status.textContent = 'Got it. I read every one of these myself, and I\'ll write back soon. — Shane';
+    }).catch(function () {
+      status.textContent = 'That didn\'t go through. Try again in a minute.';
+    }).then(function () { btn.disabled = false; });
   });
 
   Array.prototype.slice.call(document.querySelectorAll('[data-jump]')).forEach(function (a) {
@@ -1689,7 +1709,15 @@ footer.site a { color: var(--muted); }
   Array.prototype.slice.call(document.querySelectorAll('form.subscribe')).forEach(function (f) {
     f.addEventListener('submit', function (e) {
       e.preventDefault();
-      f.querySelector('.form-status').textContent = 'Preview only. Signups go live when the newsletter is set up.';
+      var st = f.querySelector('.form-status');
+      if (!validEmail(f.elements.email.value.trim())) { st.textContent = 'Enter a valid email address.'; return; }
+      var btn = f.querySelector('button[type=submit]');
+      btn.disabled = true; st.textContent = 'Signing you up…';
+      send(f).then(function () {
+        f.reset(); st.textContent = 'You\'re in. The first letter is on its way soon.';
+      }).catch(function () {
+        st.textContent = 'That didn\'t go through. Try again in a minute.';
+      }).then(function () { btn.disabled = false; });
     });
   });
 })();
