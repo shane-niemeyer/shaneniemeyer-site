@@ -147,6 +147,19 @@ nav.primary a[aria-current="page"] { color: var(--ink); background: var(--chip);
 .figure-note { font-family: var(--mono); font-size: 0.72rem; line-height: 1.5; color: var(--muted); }
 .tabnum { font-variant-numeric: tabular-nums; }
 
+
+/* coach card (homepage hero) */
+.coach-card { background: var(--ink); color: var(--ground); border-radius: 12px; padding: clamp(22px, 3vw, 32px); display: grid; gap: 1rem; min-width: 0; }
+.coach-card .eyebrow { color: color-mix(in srgb, var(--ground) 65%, var(--ink)); }
+.coach-card h2 { color: inherit; font-size: clamp(1.5rem, 2.8vw, 2.1rem); line-height: 1.1; }
+.coach-card p { color: color-mix(in srgb, var(--ground) 88%, var(--ink)); }
+.coach-card .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; border-top: 1px solid color-mix(in srgb, var(--ground) 25%, var(--ink)); padding-top: 14px; }
+.coach-card .facts > div { display: grid; gap: 4px; align-content: start; }
+.coach-card .num { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1; }
+.coach-card .what { font-family: var(--mono); font-size: 0.72rem; line-height: 1.4; color: color-mix(in srgb, var(--ground) 65%, var(--ink)); }
+.coach-card .go { font-family: var(--display); font-weight: 700; color: inherit; text-decoration: none; }
+.coach-card .go:hover { text-decoration: underline; }
+
 /* quote */
 .quote { display: grid; gap: 1.25rem; max-width: 46rem; }
 .quote blockquote {
@@ -453,43 +466,26 @@ footer.site a { color: var(--muted); }
         <h1>Training is the process of health.</h1>
         <p class="lead measure">Training is not “working out.” It is structured and directed toward outcomes. It is progressive in nature, and periodized to develop strength and fitness, which are among the strongest predictors of health and longevity.</p>
         <div class="actions">
-          <a class="btn primary" href="#process">See how we work</a>
-          <a class="btn ghost" href="#work">Work with Shane</a>
+          <a class="btn primary" href="#work">Work with Shane</a>
+          <a class="btn ghost" href="#process">See how we work</a>
         </div>
       </div>
-      <figure class="dist" aria-label="Intensity distribution: polarized versus threshold-heavy training">
-        <p class="eyebrow">Where the training time goes</p>
-        <div class="dist-row">
-          <div class="label"><strong>Polarized</strong><span class="tabnum">77 / 3 / 20</span></div>
-          <div class="bar" role="img" aria-label="77 percent below threshold, 3 percent between thresholds, 20 percent above threshold">
-            <span class="b" style="width:77%"></span><span class="m" style="width:3%"></span><span class="a" style="width:20%"></span>
-          </div>
+      <aside class="coach-card" aria-label="About Shane">
+        <!-- photo of Shane coaching goes here when it arrives -->
+        <p class="eyebrow">The story</p>
+        <h2>From a prison cell to the lava fields of Kona.</h2>
+        <p>I understand, more deeply than most, how unwell a human being can be. I also know how far one can come.</p>
+        <div class="facts">
+          <div><span class="num">20+</span><span class="what">years coaching strength and conditioning</span></div>
+          <div><span class="num">5×</span><span class="what">Ironman World Championship qualifier</span></div>
+          <div><span class="num">9:16</span><span class="what">fastest Ironman</span></div>
         </div>
-        <div class="dist-row">
-          <div class="label"><strong>Threshold-heavy</strong><span class="tabnum">46 / 35 / 19</span></div>
-          <div class="bar" role="img" aria-label="46 percent below threshold, 35 percent between thresholds, 19 percent above threshold">
-            <span class="b" style="width:46%"></span><span class="m" style="width:35%"></span><span class="a" style="width:19%"></span>
-          </div>
-        </div>
-        <div class="key">
-          <span><i style="background:var(--cool)"></i>Below threshold</span>
-          <span><i style="background:var(--mid)"></i>Between thresholds</span>
-          <span><i style="background:var(--hot)"></i>Above threshold</span>
-        </div>
-        <figcaption class="figure-note">Share of training time in a 10-week trial with recreational runners. Muñoz et al., 2014. Most people live in the middle. We train at both ends.</figcaption>
-      </figure>
+        <a class="go" href="#story">Read the story →</a>
+      </aside>
     </div>
   </section>
 
   <section class="band surface">
-    <div class="wrap quote">
-      <blockquote>“A healthy man wants a thousand things. A sick man wants only one.”</blockquote>
-      <cite>Proverb</cite>
-      <p class="lead measure">Health and wellbeing is a process, and fitness is the absolute bedrock of that process. We reclaim lost capability and develop latent potential. This is the work of transformation. Truly. This work changes who we are, largely by changing what we are capable of.</p>
-    </div>
-  </section>
-
-  <section class="band">
     <div class="wrap split">
       <div class="stack">
         <p class="eyebrow">If you've given up on your body</p>
@@ -508,7 +504,7 @@ footer.site a { color: var(--muted); }
     </div>
   </section>
 
-  <section class="band surface">
+  <section class="band">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">On the floor</p>
@@ -553,23 +549,27 @@ footer.site a { color: var(--muted); }
     </div>
   </section>
 
-  <section class="band">
-    <div class="wrap stack-lg">
-      <div class="record">
-        <div><span class="num">20+</span><span class="what">years as a strength and conditioning coach</span></div>
-        <div><span class="num">5×</span><span class="what">Ironman World Championship qualifier, Kona</span></div>
-        <div><span class="num">9:16</span><span class="what">fastest Ironman, Ironman Texas</span></div>
-        <div><span class="num" style="font-size:clamp(1.3rem,2.6vw,1.9rem)">CSCS · PES · CES</span><span class="what">certifications</span></div>
+  <section class="band surface">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Ways in</p>
+        <h2>Work with Shane</h2>
       </div>
-      <p class="lead measure">Professional and college athletes. People in their late 80s living with dementia. Cancer patients. People who have lost hundreds of pounds. The same principles, applied across the whole range of the human condition.</p>
+      <div class="ways">
+        <a href="#work"><h3>Coaching</h3><p class="muted">Concierge coaching in person, and programming mapped out online.</p><span class="go">Coaching →</span></a>
+        <a href="#work"><h3>The Lab</h3><p class="muted">VO2 and resting metabolic rate testing, prepared for and interpreted.</p><span class="go">Testing →</span></a>
+        <a href="#work"><h3>Retreats</h3><p class="muted">Co-led with Dr. Jill Carnahan. Spring 2027.</p><span class="go">Retreats →</span></a>
+        <a href="#work"><h3>Speaking</h3><p class="muted">How far a human being can come, and what it takes.</p><span class="go">Speaking →</span></a>
+      </div>
     </div>
   </section>
 
-  <section class="band surface">
+  <section class="band">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">The doctrine</p>
         <h2>What we believe about training</h2>
+        <p class="muted measure">Health and wellbeing is a process, and fitness is the absolute bedrock of that process. We reclaim lost capability and develop latent potential. This is the work of transformation. Truly. This work changes who we are, largely by changing what we are capable of.</p>
       </div>
       <div class="principles">
         <article><h3>Training is a way of being</h3><p class="muted">Not a program we finish. A practice built into the fabric of daily life.</p></article>
@@ -583,29 +583,19 @@ footer.site a { color: var(--muted); }
     </div>
   </section>
 
-  <section class="band">
+  <section class="band surface">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">The Library</p>
         <h2>From the cell to the whole human being.</h2>
-        <p class="muted measure">The book, the modules and the exercise library. Everything we teach about how training transforms us, with the evidence behind every claim.</p>
+        <p class="muted measure">The book, the modules and the exercise library. Everything we teach about how training transforms us, with the evidence behind every claim. One new idea every week.</p>
       </div>
       <div class="shelf">
         <a href="#library"><p class="eyebrow">The book</p><h3>Exercise as Medicine</h3><p class="muted">Fourteen chapters built on one image: the fit cell and the sedentary cell, side by side.</p><span class="go">See the chapters →</span></a>
         <a href="#meet-people-where-they-are"><p class="eyebrow">Module</p><h3>Meet people where they are</h3><p class="muted">Locating the person, progressing the load, and periodizing for a lifetime of training.</p><span class="go">Read →</span></a>
         <a href="#exercises"><p class="eyebrow">Exercise library</p><h3>Every movement on a ladder</h3><p class="muted">From the first rung anyone can stand on, to the top. Filmed and explained.</p><span class="go">Browse →</span></a>
       </div>
-    </div>
-  </section>
-
-  <section class="band surface">
-    <div class="wrap split">
-      <div class="stack">
-        <p class="eyebrow">Writing</p>
-        <h2>One idea a week.</h2>
-        <p class="muted measure">A principle from the doctrine, the science behind it, and what it looks like on the floor. Every piece lives here first. The weekly email brings it to you.</p>
-      </div>
-      <div class="stack">
+      <div class="split" style="margin-top:2rem">
         <a class="latest" href="#never-easy-never-hard">
           <span class="eyebrow">Latest</span>
           <h3>Never truly easy. Never truly hard.</h3>
@@ -622,30 +612,10 @@ footer.site a { color: var(--muted); }
   </section>
 
   <section class="band">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Ways in</p>
-        <h2>Work with Shane</h2>
-      </div>
-      <div class="ways">
-        <a href="#work"><h3>Coaching</h3><p class="muted">Concierge coaching in person, and programming mapped out online.</p><span class="go">Coaching →</span></a>
-        <a href="#work"><h3>The Lab</h3><p class="muted">VO2 and resting metabolic rate testing, prepared for and interpreted.</p><span class="go">Testing →</span></a>
-        <a href="#work"><h3>Retreats</h3><p class="muted">Co-led with Dr. Jill Carnahan. Spring 2027.</p><span class="go">Retreats →</span></a>
-        <a href="#work"><h3>Speaking</h3><p class="muted">How far a human being can come, and what it takes.</p><span class="go">Speaking →</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="band surface">
-    <div class="wrap split">
-      <div class="stack">
-        <p class="eyebrow">The story</p>
-        <h2>From a prison cell to the lava fields of Kona.</h2>
-      </div>
-      <div class="stack">
-        <p class="lead">I understand, more deeply than most, how unwell a human being can be. I also know how far one can come.</p>
-        <div class="actions"><a class="btn ghost" href="#story">Read the story</a><a class="btn ghost" href="#providers">For healthcare providers</a></div>
-      </div>
+    <div class="wrap stack">
+      <p class="lead measure">Professional and college athletes. People in their late 80s living with dementia. Cancer patients. People who have lost hundreds of pounds. The same principles, applied across the whole range of the human condition.</p>
+      <p class="muted">CSCS · PES · CES</p>
+      <div class="actions"><a class="btn primary" href="#work">Start here</a><a class="btn ghost" href="#providers">For healthcare providers</a></div>
     </div>
   </section>
 </div>
