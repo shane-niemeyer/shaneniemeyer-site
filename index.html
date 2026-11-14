@@ -125,7 +125,7 @@ nav.primary a[aria-current="page"] { color: var(--ink); background: var(--chip);
 
 /* hero */
 .hero { padding-block: clamp(40px, 7vw, 84px) clamp(40px, 6vw, 72px); }
-.hero .grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
 .hero .copy { display: grid; gap: 1.4rem; min-width: 0; }
 @media (max-width: 860px) { .hero .grid { grid-template-columns: 1fr; } }
 
@@ -457,27 +457,6 @@ footer.site a { color: var(--muted); }
           <a class="btn ghost" href="#work">Work with Shane</a>
         </div>
       </div>
-      <figure class="dist" aria-label="Intensity distribution: polarized versus threshold-heavy training">
-        <p class="eyebrow">Where the training time goes</p>
-        <div class="dist-row">
-          <div class="label"><strong>Polarized</strong><span class="tabnum">77 / 3 / 20</span></div>
-          <div class="bar" role="img" aria-label="77 percent below threshold, 3 percent between thresholds, 20 percent above threshold">
-            <span class="b" style="width:77%"></span><span class="m" style="width:3%"></span><span class="a" style="width:20%"></span>
-          </div>
-        </div>
-        <div class="dist-row">
-          <div class="label"><strong>Threshold-heavy</strong><span class="tabnum">46 / 35 / 19</span></div>
-          <div class="bar" role="img" aria-label="46 percent below threshold, 35 percent between thresholds, 19 percent above threshold">
-            <span class="b" style="width:46%"></span><span class="m" style="width:35%"></span><span class="a" style="width:19%"></span>
-          </div>
-        </div>
-        <div class="key">
-          <span><i style="background:var(--cool)"></i>Below threshold</span>
-          <span><i style="background:var(--mid)"></i>Between thresholds</span>
-          <span><i style="background:var(--hot)"></i>Above threshold</span>
-        </div>
-        <figcaption class="figure-note">Share of training time in a 10-week trial with recreational runners. Muñoz et al., 2014. Most people live in the middle. We train at both ends.</figcaption>
-      </figure>
     </div>
   </section>
 
@@ -1098,6 +1077,27 @@ footer.site a { color: var(--muted); }
     <h2>What the research shows</h2>
     <p>When 48 well-trained endurance athletes were randomly assigned to four different approaches for nine weeks, the polarized group improved the most on most key measures of endurance, including an 11.7% rise in VO2peak. More threshold training and more high-volume training added nothing further.</p>
     <p>In recreational runners, a polarized plan improved 10K times by 5.0%, against 3.6% for a plan heavy in moderate, between-threshold work. Across the whole group that difference wasn't statistically significant. Among the runners who actually followed their plan, polarized training came out clearly ahead.</p>
+    <figure class="dist" aria-label="Intensity distribution: polarized versus threshold-heavy training">
+      <p class="eyebrow">Where the training time goes</p>
+      <div class="dist-row">
+        <div class="label"><strong>Polarized</strong><span class="tabnum">77 / 3 / 20</span></div>
+        <div class="bar" role="img" aria-label="77 percent below threshold, 3 percent between thresholds, 20 percent above threshold">
+          <span class="b" style="width:77%"></span><span class="m" style="width:3%"></span><span class="a" style="width:20%"></span>
+        </div>
+      </div>
+      <div class="dist-row">
+        <div class="label"><strong>Threshold-heavy</strong><span class="tabnum">46 / 35 / 19</span></div>
+        <div class="bar" role="img" aria-label="46 percent below threshold, 35 percent between thresholds, 19 percent above threshold">
+          <span class="b" style="width:46%"></span><span class="m" style="width:35%"></span><span class="a" style="width:19%"></span>
+        </div>
+      </div>
+      <div class="key">
+        <span><i style="background:var(--cool)"></i>Below threshold</span>
+        <span><i style="background:var(--mid)"></i>Between thresholds</span>
+        <span><i style="background:var(--hot)"></i>Above threshold</span>
+      </div>
+      <figcaption class="figure-note">Share of training time in a 10-week trial with recreational runners. Muñoz et al., 2014. Most people live in the middle. We train at both ends.</figcaption>
+    </figure>
     <p>Most of this research comes from endurance athletes, and the studies are small. It lines up with what I have seen across twenty years on the floor, with athletes and with people in their 70s and 80s alike.</p>
 
     <h2>Structure is the point</h2>
