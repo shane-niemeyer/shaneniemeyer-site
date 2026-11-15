@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meet People Where They Are · The Niemeyer Method</title>
+<meta name="description" content="Locating the person, progressing the load, and periodizing for a lifetime of training.">
+<link rel="canonical" href="https://shaneniemeyer.com/meet-people-where-they-are/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Shane Niemeyer">
+<meta property="og:title" content="Meet People Where They Are · The Niemeyer Method">
+<meta property="og:description" content="Locating the person, progressing the load, and periodizing for a lifetime of training.">
+<meta property="og:url" content="https://shaneniemeyer.com/meet-people-where-they-are/">
+<meta property="og:image" content="https://shaneniemeyer.com/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Shane Niemeyer. Training is the process of health.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="theme-color" content="#FFFFFF">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: a training-log site. Heavy expanded grotesk for conviction, serif for Shane's voice, mono for the lab's numbers.
+   Recurring device: the intensity-distribution bar (below / between / above threshold). */
+:root {
+  --ground: #F1F4F6;
+  --surface: #FFFFFF;
+  --ink: #111C27;
+  --muted: #55636F;
+  --line: #D5DCE2;
+  --chip: #E5EBF1;
+  --accent: #1E4FD0;
+  --accent-ink: #FFFFFF;
+  --cool: #2E7C9B;
+  --mid: #9AA6B1;
+  --hot: #D4471E;
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0C1218; --surface: #131B23; --ink: #E6ECF1; --muted: #93A1AD; --line: #27323C; --chip: #1B2631;
+    --accent: #7D9DFF; --accent-ink: #0C1218; --cool: #5DB2D0; --mid: #5F6C78; --hot: #FF7B55;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0C1218; --surface: #131B23; --ink: #E6ECF1; --muted: #93A1AD; --line: #27323C; --chip: #1B2631;
+  --accent: #7D9DFF; --accent-ink: #0C1218; --cool: #5DB2D0; --mid: #5F6C78; --hot: #FF7B55;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--surface);
+}
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.measure { max-width: 66ch; }
+
+/* type */
+h1, h2, h3, .display {
+  font-family: var(--display); font-stretch: 115%; font-weight: 800;
+  line-height: 1.02; letter-spacing: -0.01em; text-wrap: balance; margin: 0;
+}
+h1 { font-size: clamp(2.5rem, 6.4vw, 4.9rem); }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+h3 { font-size: 1.2rem; font-stretch: 105%; font-weight: 750; line-height: 1.2; letter-spacing: 0; }
+p { margin: 0; }
+.lead { font-size: clamp(1.15rem, 1.9vw, 1.35rem); line-height: 1.55; color: var(--ink); }
+.muted { color: var(--muted); }
+.eyebrow {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+.stack { display: grid; gap: 1rem; }
+.stack-lg { display: grid; gap: 1.75rem; }
+
+/* preview banner + header */
+.preview {
+  background: var(--chip); color: var(--muted);
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.02em;
+}
+.preview .wrap { padding-block: 8px; }
+header.site {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+header.site .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-block: 14px; flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--display); font-stretch: 125%; font-weight: 900; font-size: 1.05rem;
+  letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); text-decoration: none;
+}
+nav.primary { min-width: 0; overflow-x: auto; }
+nav.primary ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.25rem; }
+nav.primary a {
+  display: block; padding: 6px 10px; border-radius: 6px; white-space: nowrap;
+  font-family: var(--display); font-weight: 600; font-size: 0.92rem; color: var(--muted); text-decoration: none;
+}
+nav.primary a:hover { color: var(--ink); background: var(--chip); }
+nav.primary a[aria-current="page"] { color: var(--ink); background: var(--chip); }
+
+.menu-btn { display: none; }
+@media (max-width: 760px) {
+  header.site .wrap { flex-wrap: nowrap; }
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 8px 12px; border-radius: 6px;
+    font-family: var(--display); font-weight: 700; font-size: 0.92rem; color: var(--ink);
+    background: var(--chip); border: 0; cursor: pointer;
+  }
+  .menu-btn::after { content: ""; width: 12px; height: 8px; background: currentColor;
+    clip-path: polygon(0 0, 100% 0, 50% 100%); transition: transform .2s; }
+  .menu-btn[aria-expanded="true"]::after { transform: rotate(180deg); }
+  nav.primary { display: none; position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--surface); border-bottom: 1px solid var(--line); overflow: visible; }
+  header.site.open nav.primary { display: block; }
+  nav.primary ul { flex-direction: column; gap: 0; padding: 8px max(16px, env(safe-area-inset-left, 0px)) 16px; }
+  nav.primary a { padding: 12px 10px; font-size: 1.05rem; border-radius: 6px; }
+}
+
+/* buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 12px 18px; border-radius: 8px;
+  font-family: var(--display); font-weight: 700; font-size: 0.98rem; text-decoration: none;
+  border: 1.5px solid var(--accent); cursor: pointer;
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:hover { filter: brightness(1.06); }
+
+/* sections */
+.band { padding-block: clamp(48px, 7vw, 88px); }
+.band + .band { border-top: 1px solid var(--line); }
+.band.surface { background: var(--surface); }
+.section-head { display: grid; gap: 0.6rem; margin-bottom: 2rem; }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 84px) clamp(40px, 6vw, 72px); }
+.hero .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero .copy { display: grid; gap: 1.4rem; min-width: 0; }
+@media (max-width: 860px) { .hero .grid { grid-template-columns: 1fr; } }
+
+/* intensity distribution panel */
+.dist {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 22px; display: grid; gap: 18px; min-width: 0;
+}
+.dist-row { display: grid; gap: 8px; }
+.dist-row .label { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.dist-row .label strong { color: var(--ink); font-weight: 500; }
+.bar { display: flex; height: 34px; border-radius: 6px; overflow: hidden; background: var(--chip); }
+.bar span { display: block; height: 100%; }
+.bar .b { background: var(--cool); }
+.bar .m { background: var(--mid); }
+.bar .a { background: var(--hot); }
+.key { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
+.key i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.figure-note { font-family: var(--mono); font-size: 0.72rem; line-height: 1.5; color: var(--muted); }
+.tabnum { font-variant-numeric: tabular-nums; }
+
+/* quote */
+.quote { display: grid; gap: 1.25rem; max-width: 46rem; }
+.quote blockquote {
+  margin: 0; font-family: var(--display); font-stretch: 110%; font-weight: 700;
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1.12; text-wrap: balance;
+}
+.quote cite { font-style: normal; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* record row */
+.record { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+.record > div { padding: 18px 16px 4px 0; display: grid; gap: 4px; align-content: start; }
+.record .num { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.record .what { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); line-height: 1.45; }
+@media (max-width: 720px) { .record { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 8px; } }
+
+/* principle list */
+.principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 56px); }
+.principles article { padding-block: 22px; border-top: 1px solid var(--line); display: grid; gap: 0.5rem; min-width: 0; }
+@media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
+
+/* ways in */
+.ways { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.ways a {
+  display: grid; gap: 0.5rem; align-content: start; padding: 20px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; min-width: 0;
+}
+.ways a:hover { border-color: var(--accent); }
+.ways .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); margin-top: 0.25rem; }
+@media (max-width: 900px) { .ways { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .ways { grid-template-columns: 1fr; } }
+
+/* split rows */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: start; }
+@media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+
+/* page header for inner views */
+.page-head { padding-block: clamp(40px, 6vw, 72px) clamp(28px, 4vw, 44px); border-bottom: 1px solid var(--line); }
+.page-head .wrap { display: grid; gap: 1rem; }
+
+/* process timeline */
+.timeline { display: grid; gap: 0; }
+.step { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: clamp(16px, 4vw, 48px); padding-block: 34px; border-top: 1px solid var(--line); }
+.step .when { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); padding-top: 6px; }
+.step .body { display: grid; gap: 0.9rem; min-width: 0; }
+.step ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.25rem; }
+@media (max-width: 720px) { .step { grid-template-columns: 1fr; gap: 10px; } }
+.pull {
+  font-family: var(--display); font-stretch: 110%; font-weight: 750; font-size: 1.3rem; line-height: 1.25;
+  padding-left: 16px; border-left: 3px solid var(--accent);
+}
+.weekly { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.weekly div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 4px; }
+.weekly .v { font-family: var(--display); font-stretch: 115%; font-weight: 800; font-size: 1.35rem; line-height: 1.1; }
+.weekly .k { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+@media (max-width: 560px) { .weekly { grid-template-columns: 1fr; } }
+
+/* evidence */
+.claims { display: grid; gap: 0; }
+.claim { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: clamp(16px, 4vw, 40px); padding-block: 26px; border-top: 1px solid var(--line); }
+.claim .figure { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.claim .text { display: grid; gap: 0.5rem; min-width: 0; }
+.cite-line { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.tag {
+  display: inline-block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px; background: var(--chip); color: var(--ink); margin-right: 6px; vertical-align: 1px;
+}
+.tag.draft { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+@media (max-width: 640px) { .claim { grid-template-columns: 1fr; gap: 8px; } }
+.chapters { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.chapters li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 12px; border-top: 1px solid var(--line); font-family: var(--display); font-weight: 600; min-width: 0; }
+.chapters li span:last-child { font-family: var(--mono); font-weight: 400; font-size: 0.74rem; color: var(--muted); white-space: nowrap; padding-top: 3px; }
+@media (max-width: 680px) { .chapters { grid-template-columns: 1fr; } }
+
+/* offers */
+.offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.offer { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 0.75rem; align-content: start; min-width: 0; }
+.offer ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.2rem; }
+@media (max-width: 760px) { .offers { grid-template-columns: 1fr; } }
+
+/* form */
+form.contact { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+.field { display: grid; gap: 6px; }
+.field label { font-family: var(--display); font-weight: 650; font-size: 0.92rem; }
+.field input, .field select, .field textarea {
+  font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground);
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; width: 100%;
+}
+.field textarea { min-height: 7rem; resize: vertical; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } }
+.form-status { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+
+/* providers */
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.checklist li { padding-block: 14px; border-top: 1px solid var(--line); display: grid; gap: 4px; }
+.checklist li strong { font-family: var(--display); font-weight: 700; }
+
+/* start-here ramp */
+.ramp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.ramp div { border-top: 3px solid var(--accent); padding-top: 10px; display: grid; gap: 4px; align-content: start; }
+.ramp .t { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.ramp p { font-family: var(--display); font-weight: 650; font-size: 1.02rem; line-height: 1.3; }
+@media (max-width: 560px) { .ramp { grid-template-columns: 1fr; } }
+
+/* client stories */
+.stories { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.story-card { background: var(--ground); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 1rem; align-content: start; min-width: 0; }
+.arc { list-style: none; margin: 0; padding: 0 0 0 18px; display: grid; gap: 12px; border-left: 2px solid var(--line); }
+.arc li { position: relative; display: grid; gap: 2px; font-size: 0.98rem; line-height: 1.5; }
+.arc li::before { content: ""; position: absolute; left: -25px; top: 0.3em; width: 12px; height: 12px; border-radius: 50%; background: var(--ground); border: 2px solid var(--accent); }
+.arc li:last-child::before { background: var(--accent); }
+.arc .t { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.said { font-family: var(--display); font-stretch: 105%; font-weight: 700; font-size: 1.08rem; line-height: 1.3; padding-top: 0.9rem; border-top: 1px solid var(--line); }
+@media (max-width: 920px) { .stories { grid-template-columns: 1fr; } }
+
+/* writing */
+.split-wide { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 56px); align-items: start; }
+.split-wide aside { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px); }
+@media (max-width: 860px) { .split-wide { grid-template-columns: 1fr; } .split-wide aside { position: static; } }
+.posts { list-style: none; margin: 0; padding: 0; display: grid; }
+.posts li { border-top: 1px solid var(--line); }
+.post-item { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) auto; gap: 8px 28px; padding-block: 22px; color: var(--ink); text-decoration: none; align-items: baseline; }
+a.post-item:hover h3 { color: var(--accent); }
+.post-item .meta { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.post-item .text { display: grid; gap: 4px; min-width: 0; }
+.post-item .state { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); white-space: nowrap; }
+.post-item.upcoming h3 { color: var(--muted); }
+@media (max-width: 680px) { .post-item { grid-template-columns: 1fr; gap: 6px; } }
+.latest { display: grid; gap: 0.5rem; padding: 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.latest:hover { border-color: var(--accent); }
+.latest .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); }
+.subscribe { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 12px; }
+.sub-title { font-family: var(--display); font-stretch: 110%; font-weight: 800; font-size: 1.2rem; line-height: 1.15; }
+.sub-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.sub-row input { flex: 1 1 13rem; min-width: 0; font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* article */
+.wrap.narrow { max-width: 760px; }
+.back { font-family: var(--display); font-weight: 650; font-size: 0.92rem; text-decoration: none; }
+.post-body { display: grid; gap: 1.15rem; font-size: 1.12rem; line-height: 1.7; }
+.post-body h2 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin-top: 1.4rem; }
+.post-body ul { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.4rem; }
+.post-body .pull { font-size: 1.4rem; }
+.sources { display: grid; gap: 6px; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--line); }
+.sources p { font-family: var(--mono); font-size: 0.76rem; line-height: 1.55; color: var(--muted); }
+
+/* ---------- library ---------- */
+.shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.shelf > a, .shelf > .card {
+  display: grid; gap: 0.6rem; align-content: start; padding: 22px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; min-width: 0;
+}
+.band.surface .shelf > a, .band.surface .shelf > .card { background: var(--ground); }
+.shelf > a:hover { border-color: var(--accent); }
+.shelf .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); margin-top: 0.25rem; }
+@media (max-width: 900px) { .shelf { grid-template-columns: 1fr; } }
+
+.figure-box { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 12px; min-width: 0; }
+.band.surface .figure-box { background: var(--ground); }
+.figure-box svg { width: 100%; height: auto; display: block; }
+
+/* two cities illustration */
+.c-cell { fill: var(--surface); stroke: var(--mid); stroke-width: 1.5; }
+.band.surface .c-cell { fill: var(--surface); }
+.c-nuc { fill: var(--chip); stroke: var(--mid); stroke-width: 1; }
+.c-mito { fill: var(--hot); }
+.c-ribo { fill: var(--ink); opacity: 0.5; }
+.c-cap { fill: none; stroke: var(--cool); stroke-width: 4; stroke-linecap: round; }
+.c-label { fill: var(--ink); font-family: var(--display); font-weight: 750; font-size: 16px; }
+.c-key { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+
+/* book parts */
+.parts { display: grid; }
+.part { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: clamp(16px, 4vw, 48px); padding-block: 28px; border-top: 1px solid var(--line); }
+.part-name { display: grid; gap: 6px; align-content: start; }
+.part-name .n { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.part-name h3 { font-size: 1.2rem; }
+.ch-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.ch { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; gap: 4px 16px; padding-block: 14px; border-top: 1px dashed var(--line); align-items: baseline; }
+.ch:first-child { border-top: 0; padding-top: 2px; }
+.ch .num { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: 1.35rem; line-height: 1; font-variant-numeric: tabular-nums; color: var(--muted); }
+.ch .t { display: grid; gap: 3px; min-width: 0; }
+.ch .t strong { font-family: var(--display); font-weight: 750; font-size: 1.08rem; line-height: 1.25; }
+.ch .t span { color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+.ch .s { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+.ch a.s { color: var(--accent); font-weight: 500; }
+@media (max-width: 720px) {
+  .part { grid-template-columns: 1fr; gap: 12px; }
+  .ch { grid-template-columns: 2.2rem minmax(0, 1fr); }
+  .ch .s { grid-column: 2; }
+}
+
+/* ---------- module (long read) ---------- */
+.module-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+.module .post-body { min-width: 0; }
+.module .post-body h2 { scroll-margin-top: 90px; }
+.post-body a.c { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; white-space: nowrap; }
+.post-body ol { margin: 0; padding-left: 1.4rem; display: grid; gap: 0.5rem; }
+.toc { display: grid; gap: 14px; align-content: start; }
+.toc-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 10px; }
+.toc-box ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.45rem; font-family: var(--display); font-weight: 600; font-size: 0.94rem; line-height: 1.3; }
+.toc-box ol a { color: var(--ink); text-decoration: none; }
+.toc-box ol a:hover { color: var(--accent); }
+.formats { list-style: none; margin: 0; padding: 0; display: grid; }
+.formats li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 9px; border-top: 1px solid var(--line); font-family: var(--display); font-weight: 600; font-size: 0.92rem; }
+.formats li:first-child { border-top: 0; padding-top: 0; }
+.formats li span:last-child { font-family: var(--mono); font-weight: 400; font-size: 0.72rem; color: var(--muted); padding-top: 2px; }
+.formats li.on span:last-child { color: var(--accent); }
+@media (max-width: 860px) { .toc .toc-box.contents { display: none; } }
+
+/* method loop */
+.l-box { fill: none; stroke: var(--mid); stroke-width: 1.25; }
+.l-box.main { fill: var(--chip); stroke: var(--accent); stroke-width: 2; }
+.l-edge { fill: none; stroke: var(--mid); stroke-width: 1.25; }
+.l-head { fill: var(--mid); }
+.l-t { fill: var(--ink); font-family: var(--display); font-weight: 750; font-size: 15px; }
+.l-s { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+.post-body .loop-list { display: none; margin: 0; padding-left: 1.3rem; }
+.loop-list li { font-size: 1rem; }
+@media (max-width: 600px) { .loop svg { display: none; } .post-body .loop-list { display: grid; gap: 0.4rem; } }
+
+/* tissue clock */
+.trow { display: grid; grid-template-columns: 11.5rem minmax(0, 1fr) 8rem; gap: 10px 14px; align-items: center; }
+.trow .tl { font-family: var(--display); font-weight: 650; font-size: 0.95rem; line-height: 1.25; }
+.trow .tv { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+.tbar { height: 22px; border-radius: 5px; background: var(--chip); overflow: hidden; }
+.tbar span { display: block; height: 100%; border-radius: 5px; }
+@media (max-width: 600px) { .trow { grid-template-columns: 1fr auto; } .trow .tbar { grid-column: 1 / -1; grid-row: 2; } }
+
+.next-card { display: grid; gap: 0.4rem; padding: 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.next-card:hover { border-color: var(--accent); }
+.next-card .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); }
+
+/* ---------- exercise library ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button {
+  font-family: var(--display); font-weight: 650; font-size: 0.9rem; color: var(--muted);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer;
+}
+.chips button:hover { color: var(--ink); border-color: var(--mid); }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.ladders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ladder { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.ladder[hidden] { display: none; }
+.ladder header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.rungs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: rung; }
+.rungs li {
+  counter-increment: rung; display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 10px; align-items: center;
+  padding: 9px 10px; border-radius: 8px; background: var(--ground); font-family: var(--display); font-weight: 600; font-size: 0.95rem; line-height: 1.25;
+}
+.rungs li::before {
+  content: counter(rung); display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--accent); border: 1.5px solid var(--accent);
+}
+.feature .rungs li, .band:not(.surface) > .wrap > .ladder .rungs li { background: var(--surface); border: 1px solid var(--line); }
+.rungs li:last-child::before { background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 960px) { .ladders { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .ladders { grid-template-columns: 1fr; } }
+
+.feature { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: start; }
+@media (max-width: 860px) { .feature { grid-template-columns: 1fr; } }
+.video {
+  aspect-ratio: 16 / 9; border-radius: 12px; background: var(--ink); color: var(--surface);
+  display: grid; place-items: center; align-content: center; gap: 10px; text-align: center; padding: 16px;
+}
+.video .play { width: 56px; height: 56px; border-radius: 50%; border: 2px solid currentColor; display: grid; place-items: center; opacity: 0.85; }
+.video .play::after { content: ""; border-left: 16px solid currentColor; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 4px; }
+.video span { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; }
+.note-box { border: 1px dashed var(--mid); border-radius: 10px; padding: 14px 16px; display: grid; gap: 4px; }
+
+/* footer */
+footer.site { background: var(--surface); border-top: 1px solid var(--line); }
+footer.site .wrap { padding-block: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+footer.site a { color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../">Shane Niemeyer</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="primary" id="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="../doctrine/" data-nav="doctrine">Doctrine</a></li>
+        <li><a href="../process/" data-nav="process">Process</a></li>
+        <li><a href="../library/" data-nav="library" aria-current="page">Library</a></li>
+        <li><a href="../writing/" data-nav="writing">Writing</a></li>
+        <li><a href="../work/" data-nav="work">Work with Shane</a></li>
+        <li><a href="../providers/" data-nav="providers">For Providers</a></li>
+        <li><a href="../story/" data-nav="story">Story</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= MODULE: MEET PEOPLE WHERE THEY ARE ================= -->
+<div class="view module" data-view="meet-people-where-they-are" data-section="library">
+  <section class="page-head"><div class="wrap">
+    <a class="back" href="#library">← Library</a>
+    <p class="eyebrow">Module · The Niemeyer Method <span class="tag draft">Draft</span></p>
+    <h1>Meet people where they are.</h1>
+    <p class="lead measure">Locating the person, progressing the load, and periodizing for a lifetime of training.</p>
+    <div class="module-meta"><span>Shane Niemeyer</span><span>12 min read</span><span>24 studies cited</span><span>In the book: Chapter 13, Training</span></div>
+  </div></section>
+
+  <section class="band"><div class="wrap split-wide">
+    <article class="post-body" id="m-top">
+      <p>There is a path. It is everywhere and always, and it heads in the same direction for all of us. Where we stand on it is different for each person. Sometimes it is obscured by the weather of life, by circumstance, but like the sun, which is always shining above the clouds, it's there. Our work is to find where you are on it, and to travel it.</p>
+      <p>The direction is universal: more strength, more aerobic capacity, more access to everything the body can do. What is not universal is how we apply the stimulus. The type of training, how much, how hard and how often have to fit the person in front of us, where they actually are, not where a program assumes they are.</p>
+      <p>This chapter makes one argument. Most training injuries are predictable. They happen when load outpaces the tissues that adapt most slowly. Locate the person accurately, progress them at the pace of their slowest tissues, and build recovery in by design, and they stay healthy. If we're healthy, we're training. If we're training, we're transforming.</p>
+      <p>I have watched this hold across more than twenty years and hundreds of people, from professional athletes to people in their late 80s living with dementia. Intelligent design is what makes lifelong training possible.</p>
+
+      <h2 id="m-glance">The Niemeyer Method at a glance</h2>
+      <figure class="figure-box loop" aria-label="The method is a loop: locate, prescribe, progress, recover, reassess, then adjust">
+        <p class="eyebrow">The method is a loop, not a straight line</p>
+        <svg viewBox="0 0 760 245" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Locate, prescribe, progress, recover, reassess, then adjust and loop back to prescribe">
+<defs><marker id="loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="l-head" d="M0 0L10 5L0 10z"/></marker></defs>
+<g>
+<path class="l-edge" d="M240.0 52H270.0" marker-end="url(#loop-arrow)"/>
+<path class="l-edge" d="M488.0 52H518.0" marker-end="url(#loop-arrow)"/>
+<path class="l-edge" d="M628 88.0V152.0" marker-end="url(#loop-arrow)"/>
+<path class="l-edge" d="M520.0 190H490.0" marker-end="url(#loop-arrow)"/>
+<path class="l-edge" d="M380 154.0V90.0" marker-end="url(#loop-arrow)"/>
+</g>
+<rect class="l-box main" x="24.0" y="16.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="132" y="42" text-anchor="middle">Locate</text>
+<text class="l-s" x="132" y="60" text-anchor="middle">Intake, movement, lab tests</text>
+<text class="l-s" x="132" y="76" text-anchor="middle">Where are you on the path?</text>
+<rect class="l-box" x="272.0" y="16.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="380" y="42" text-anchor="middle">Prescribe</text>
+<text class="l-s" x="380" y="60" text-anchor="middle">Dose from your own thresholds</text>
+<text class="l-s" x="380" y="76" text-anchor="middle">Enough to force adaptation</text>
+<rect class="l-box" x="520.0" y="16.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="628" y="42" text-anchor="middle">Progress</text>
+<text class="l-s" x="628" y="60" text-anchor="middle">At the pace of the slowest</text>
+<text class="l-s" x="628" y="76" text-anchor="middle">tissue. Never a spike.</text>
+<rect class="l-box" x="520.0" y="154.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="628" y="180" text-anchor="middle">Recover</text>
+<text class="l-s" x="628" y="198" text-anchor="middle">Every 3rd to 5th week, cut</text>
+<text class="l-s" x="628" y="214" text-anchor="middle">load about 50%. Sleep.</text>
+<rect class="l-box" x="272.0" y="154.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="380" y="180" text-anchor="middle">Reassess</text>
+<text class="l-s" x="380" y="198" text-anchor="middle">Re-test, and adjust</text>
+<text class="l-s" x="380" y="214" text-anchor="middle">the next block</text>
+<text class="l-s" x="390" y="125.0">adjust</text>
+</svg>
+        <ol class="loop-list">
+          <li><strong>Locate.</strong> Intake, movement, lab tests. Where are you on the path?</li>
+          <li><strong>Prescribe.</strong> Dose from your own thresholds. Enough to force adaptation.</li>
+          <li><strong>Progress.</strong> At the pace of the slowest tissue. Never a spike.</li>
+          <li><strong>Recover.</strong> Every 3rd to 5th week, cut load about 50%. Sleep.</li>
+          <li><strong>Reassess.</strong> Re-test, and adjust the next block.</li>
+        </ol>
+      </figure>
+      <p>We locate once, then keep relocating. Each block of training ends with a reassessment, and the next prescription starts from where the person is now.</p>
+
+      <h2 id="m-locate">Locating: finding where you are on the path</h2>
+      <p>Everything starts with an honest location. Before we ever meet, I ask about injury history, how someone feels physically and about life in general, what their sleep is like, how they characterize their nutrition, what they want, and what gets in the way.</p>
+      <p>The question of what they want matters most. I push people to describe, in as much detail as possible, how they want their body to look, feel and function, and then to feel into that space. We cannot hit a target we cannot see.</p>
+      <p>The first session is a workout that is also an assessment. I modify movement on the spot according to what I see: range of motion, quality of movement, discomfort. You can often see and hear how fit someone is aerobically. Without making anyone nervous, I can identify postural distortions and compensations throughout the kinetic chain.</p>
+      <p>Then we measure. A few simple tests tell us more about a person's future than most of what happens in a doctor's office:</p>
+      <ul>
+        <li><strong>Grip strength.</strong> Among 139,691 adults in 17 countries, every 5 kg of lower grip strength meant 16% higher mortality, a stronger predictor of death than systolic blood pressure (<a class="c" href="https://www.eurekalert.org/news-releases/491049" target="_blank" rel="noopener">Leong et al., 2015</a>).</li>
+        <li><strong>Getting down to the floor and back up.</strong> In 2,002 adults aged 51 to 80, those who needed the most support had 5 to 6 times the risk of death of those who needed the least. Each point gained on the 10-point test meant 21% lower mortality (<a class="c" href="https://escardio.org/The-ESC/Press-Office/Press-releases/Ability-to-sit-and-rise-from-the-floor-is-closely-correlated-with-all-cause-mort" target="_blank" rel="noopener">Brito, Araújo et al., 2014</a>).</li>
+        <li><strong>Aerobic fitness.</strong> Each step up in fitness, measured in METs, meant about 14% lower mortality among more than 750,000 veterans (<a class="c" href="https://www.tctmd.com/news/cardiorespiratory-fitness-key-longevity-regardless-age-sex-and-race" target="_blank" rel="noopener">Kokkinos et al., 2022</a>).</li>
+      </ul>
+      <p>When we test aerobic fitness in the lab, we measure each person's own ventilatory thresholds instead of guessing from age-based formulas. That changes outcomes. In one trial, everyone whose training intensity was set from their own thresholds improved their VO2max, against 60% of those given standard heart-rate zones (<a class="c" href="https://paulogentil.com/pdf/Incidence%20of%20VO2max%20Responders%20to%20Personalized%20versus%20Standardized%20Exercise%20Prescription.pdf" target="_blank" rel="noopener">Weatherwax et al., 2019</a>). Pooled data from 1,544 people across 42 studies found the same: thresholds beat percentages (<a class="c" href="https://lida.sport-iat.de/ta/Record/4095378?lng=en" target="_blank" rel="noopener">Meyler et al., 2025</a>).</p>
+      <p>Locating is not a one-time event. People move along the path, so we keep finding them.</p>
+
+      <h2 id="m-tissue">The slowest tissue sets the pace</h2>
+      <p>Here is the fact most training programs ignore: the body's tissues do not adapt at the same speed.</p>
+      <p>Muscle adapts in weeks. It is constantly being broken down and rebuilt, and a few weeks of good training show up as real strength. Tendons, ligaments, cartilage and bone adapt over months and years.</p>
+      <figure class="figure-box" aria-label="Muscle adapts in weeks; tendon, ligament, cartilage and bone over months and years">
+        <p class="eyebrow">How fast each tissue adapts</p>
+        <div class="trow"><span class="tl">Muscle</span><div class="tbar"><span style="width:10%;background:var(--cool)"></span></div><span class="tv">Weeks</span></div>
+        <div class="trow"><span class="tl">Tendon, ligament, cartilage, bone</span><div class="tbar"><span style="width:100%;background:var(--hot)"></span></div><span class="tv">Months to years</span></div>
+        <figcaption class="figure-note">Illustrative, not to scale. The space between these two bars is where injuries live.</figcaption>
+      </figure>
+      <p>The most striking evidence comes from an unlikely place. Nuclear testing in the 1950s and early 1960s spiked the carbon-14 in the atmosphere, and that spike was recorded in the tissues of everyone alive at the time. Decades later, researchers found the spike still sitting in the core of people's Achilles tendons, while their muscle showed no trace of it. Muscle had been renewed many times over. The tendon core had barely changed since they stopped growing (<a class="c" href="https://sciencedaily.com/releases/2013/02/130212112019.htm" target="_blank" rel="noopener">Heinemeier et al., 2013</a>). The same team later found almost no collagen renewal in adult knee cartilage (<a class="c" href="https://www.science.org/doi/10.1126/scitranslmed.aad8335" target="_blank" rel="noopener">Heinemeier et al., 2016</a>).</p>
+      <p>Tendons do adapt. Across 27 studies, training made tendons stiffer and stronger, and the load had to be heavy to do it: tendons respond to high-magnitude loading, not light work (<a class="c" href="https://sponet.de/Record/4063257" target="_blank" rel="noopener">Bohm et al., 2015</a>). But they adapt on their own clock, which is far slower than muscle's.</p>
+      <p>That gap is where injuries live. In adolescent volleyball players, muscle strength outpaced tendon adaptation, leaving their tendons under more stress than those of experienced adult athletes (<a class="c" href="https://onlinelibrary.wiley.com/doi/10.1111/sms.12166" target="_blank" rel="noopener">Mersmann et al., 2014</a>). The same thing happens to a 55-year-old who feels strong after six weeks and doubles the load. The muscle is ready. The tendon is not.</p>
+      <p>The cost of ignoring this is enormous. Among long-distance triathletes, studies report overuse injury rates anywhere from 37% to 91% (<a class="c" href="https://johk.pl/?p=6236" target="_blank" rel="noopener">Rhind et al., 2022</a>). In distance runners, 19% to 79% (<a class="c" href="https://repub.eur.nl/pub/36044" target="_blank" rel="noopener">van Gent et al., 2007</a>). And most of these injuries trace back to training errors: an estimated 60% or more of overuse running injuries come from training-related variables (<a class="c" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3290924" target="_blank" rel="noopener">Nielsen et al., 2012</a>).</p>
+      <p class="pull">Injury is most often the result of training errors, which are predictable and avoidable through intelligent and individualized design. So we progress at the pace of the slowest tissue, not the fastest.</p>
+
+      <h2 id="m-progress">Progression: enough stimulus, never a spike</h2>
+      <p>Progression has two jobs that pull against each other. The stimulus has to be big enough to force adaptation. And it can never jump faster than the slowest tissue can follow.</p>
+      <p><strong>Enough.</strong> Fitness responds to dose. When 464 sedentary women trained at the same intensity for about 72, 136 or 192 minutes a week, their fitness rose 4.2%, 6.0% and 8.2% over a control group (<a class="c" href="https://reliasmedia.com/articles/105390-exercise-and-fitness-benefits-at-half-pace" target="_blank" rel="noopener">Church et al., 2007</a>). People who seem not to respond usually haven't had enough. In one trial, 69% of people training once a week failed to improve. At four or five sessions a week, no one failed. And when the "non-responders" added two more sessions a week, every one of them responded (<a class="c" href="https://folia.unifr.ch/global/documents/21534" target="_blank" rel="noopener">Montero &amp; Lundby, 2017</a>).</p>
+      <p>There is no age at which this stops. Nursing-home residents aged 87 to 96 gained an average of 174% in leg strength after eight weeks of heavy training (<a class="c" href="https://www.hebrewseniorlife.org/blog/study-redefined-how-we-view-strength-training-and-aging" target="_blank" rel="noopener">Fiatarone et al., 1990</a>).</p>
+      <p><strong>Never a spike.</strong> The danger is the sudden jump. Tracking 5,205 runners across about 588,000 runs, researchers found that a single run 10–30% longer than the longest in the previous 30 days raised injury risk 64%. A run more than twice as long more than doubled it (<a class="c" href="https://blogs.bmj.com/bjsm/?p=11751" target="_blank" rel="noopener">Frandsen et al., 2025</a>). The risk is predictable, which means it can be designed out.</p>
+      <p><strong>Strength that protects.</strong> The right strength work does more than build muscle. It protects tissue. Across 25 trials and 26,610 people, strength training cut sports injuries to less than a third (<a class="c" href="https://blogs.bmj.com/bjsm/2014/07/20/exercises-to-prevent-sports-injuries-lots-of-talk-but-do-they-work/" target="_blank" rel="noopener">Lauersen et al., 2014</a>). In novice runners, a hip-and-core program cut lower-limb injuries by 34% and serious overuse injuries by 52% (<a class="c" href="https://jyx.jyu.fi/bitstreams/e2859d03-5c86-4f9d-99b1-1dae394b39a3/download" target="_blank" rel="noopener">Leppänen et al., 2024</a>).</p>
+      <p>So the plan steps up in deliberate increments, adds strength work that loads the tendons and joints heavily enough to adapt, and never asks the body for a sudden leap it hasn't earned.</p>
+
+      <h2 id="m-period">Periodization: planned waves of work and recovery</h2>
+      <p>Without structure and a plan, there is, inherently, less achievement. Most people do what is convenient, or what they feel like on the day. They lack objectivity. Periodization is the answer: training organized in planned waves, so that work and recovery each arrive on purpose.</p>
+      <p>In practice, it looks like this:</p>
+      <ul>
+        <li><strong>Build, then back off.</strong> Volume and intensity rise over two to four weeks. Then comes a recovery week, cutting both by around 50%. Most people rest every third or fourth week; athletes often go four or five.</li>
+        <li><strong>Weight the aerobic side.</strong> The ACSM minimums are a floor, and probably still not enough: 150 minutes of aerobic work and two days of strength each week. I want people working toward 3 to 5 hours of aerobic training, with about 80% of the total load aerobic.</li>
+        <li><strong>Make easy easy and hard hard.</strong> Most people lack polarity. They never truly recover, so they never get the benefits of true aerobic states, and they never truly go hard, so they never train the top end of the bioenergetic continuum. Most of the work should be genuinely easy, with intervals two days a week.</li>
+        <li><strong>Keep changing the variables.</strong> Training type, exercise selection, intensity, modality and duration are all levers. We move them on purpose.</li>
+      </ul>
+      <p>The research supports each piece. Across 18 studies, periodized strength training produced greater maximal strength than the same training without periodization, and programs that varied the load from day to day beat simple linear plans (<a class="c" href="https://www.fisiologiadelejercicio.com/wp-content/uploads/2017/05/Comparison-of-Periodized-and-Non-Periodized-Resistance.pdf" target="_blank" rel="noopener">Williams et al., 2017</a>). In well-trained endurance athletes, polarized training produced the largest gains in VO2peak, 11.7%, while more threshold work or more volume added nothing (<a class="c" href="https://frontiersin.org/journals/physiology/articles/10.3389/fphys.2014.00033/text" target="_blank" rel="noopener">Stöggl &amp; Sperlich, 2014</a>). In type 2 diabetes, only the combination of aerobic and strength training significantly lowered blood sugar (<a class="c" href="https://www.sciencedaily.com/releases/2010/11/101123174340.htm" target="_blank" rel="noopener">Church et al., 2010</a>).</p>
+      <p>The plan also bends to life. When work, travel or illness crowds training out, fitness holds on less than people think. In younger adults, strength and muscle held for up to 32 weeks on one hard session a week; older adults may need two. Endurance held for up to 15 weeks on as few as two sessions a week. The condition in every case: intensity stays high (<a class="c" href="https://pubmed.ncbi.nlm.nih.gov/33629972" target="_blank" rel="noopener">Spiering et al., 2021</a>). A well-designed plan has a minimum to fall back on, so a hard month never becomes a lost year.</p>
+
+      <h2 id="m-recover">Recovery and the inner life</h2>
+      <p>Adaptation does not happen during the work. It happens during recovery. The recovery week is when and how fitness manifests itself, and how we stay psychologically fresh and hungry.</p>
+      <p>The research shows it plainly. Across 14 studies, endurance athletes who cut their training volume by 41–60% before a race, while keeping intensity and frequency, improved their race performance and their time to exhaustion (<a class="c" href="https://lida.sport-iat.de/ta/Record/4081751?lng=en" target="_blank" rel="noopener">Wang et al., 2023</a>). They did less, and they got better.</p>
+      <p>Sleep is essential. It is foundational. Regular training improves it in return: across 66 studies, exercise improved sleep quality and helped people fall asleep faster and sleep longer (<a class="c" href="https://search.pedro.org.au/search-results/record-detail/42289" target="_blank" rel="noopener">Kredlow et al., 2015</a>).</p>
+      <p>A recovery week is also a good time to catch up on life, and to tend to our inner life. I think it is very important to keep an eye on what we are doing and why we are doing it, and to live an examined life. Our minds can push us around in ways we are unaware of.</p>
+      <p>I encourage us to take quiet moments, to look at the quality and contents of our inner world, and to be active participants in this process of recovery. Our psychological states and our physical states shape each other. Recovery is where we tend to both.</p>
+
+      <h2 id="m-lifetime">A lifetime of training</h2>
+      <p>I learned this first on myself. In prison, I had to start where I was, and where I was, was almost nowhere. I couldn't retain a sentence. I couldn't do much in the way of push-ups or sit-ups. Within weeks, and then months, that changed. A year in, I was in totally different shape than I had ever been. Every system of the body adapts to the demands we impose on it, if we impose them intelligently.</p>
+      <p>Then I spent two decades applying it to other people. Across more than twenty years and hundreds of clients, I can count fewer than 10 injuries caused by training. When we progress loads intelligently and reduce them regularly, keeping people healthy becomes predictable. And because they stay healthy, they keep training, and because they keep training, they keep transforming.</p>
+      <p>That is what makes the results possible:</p>
+      <ul>
+        <li><strong>A woman in her 80s</strong> came to me prone to falls, with very poor balance, afraid of the physical world. Within six months she was doing much better. Within nine, she was in a completely different space. After a year she was almost unrecognizable: roughly five to six times stronger, with far more aerobic capacity, able to get down to the ground and back up. There's a light on in her eyes now. Which, by the way, is a pretty common experience.</li>
+        <li><strong>A high school runner</strong> was constantly injured and running well below her capability. Putting her in a healthier space made consistent training possible, and with consistency comes the development of fitness. She now runs for an Ivy League Division I program, with a lot of success.</li>
+        <li><strong>A woman who started over 300 pounds,</strong> in the lowest fifth for aerobic fitness, has been injury-free for almost a year. Because she stayed healthy, we kept adding volume. She now runs, swims in open water and routinely rides for more than two hours. It is one of the most significant transformations I have ever seen.</li>
+      </ul>
+      <p>The same care applies to testing. Unlike many labs, I prepare people before a maximal test. We talk through the mask, the intensity, what maximal actually feels like, and we run mild simulations so the joints and tissues are ready. Testing someone too early carries risks, to connective tissue and to confidence. The north star is always to remain healthy.</p>
+
+      <h2 id="m-you">What this means for you</h2>
+      <p>It doesn't matter where you have come from, or where you are. The only thing that matters is this moment, and what's next.</p>
+      <ol>
+        <li><strong>Find out where you are.</strong> Get an honest picture of your capability: your strength, your aerobic fitness, how you move, how you get down to the floor and back up. Measured, not guessed.</li>
+        <li><strong>Decide where you are going.</strong> Describe, in as much detail as possible, how you want your body to look, feel and function. Feel into that space. We cannot hit a target we cannot see.</li>
+        <li><strong>Start below your limit and step up.</strong> Build in deliberate increments. Avoid the sudden jump, especially in a single session.</li>
+        <li><strong>Train strength, and weight the aerobic side.</strong> At least 150 minutes of aerobic work and two strength sessions a week as a floor, working toward 3 to 5 hours of aerobic training.</li>
+        <li><strong>Make easy easy and hard hard.</strong></li>
+        <li><strong>Rest on purpose.</strong> Every third, fourth or fifth week, cut the load by about half. Sleep. Tend to your inner life.</li>
+        <li><strong>Reassess.</strong> Test again, and adjust the plan as you change.</li>
+      </ol>
+      <p>Within a couple of weeks, we start to feel better. Within two months, we're a lot better than we were. Several months in, we can look like a completely different person.</p>
+      <p class="pull">This isn't like flipping a switch. It's a process of staying oriented around our ideals and continually moving toward them, no matter how slow. The only thing that matters is that we keep getting up every time we fall down.</p>
+
+      <a class="next-card" href="#never-easy-never-hard">
+        <span class="eyebrow">Next</span>
+        <h3>Never truly easy. Never truly hard.</h3>
+        <span class="muted">Most people train in the middle. It feels productive. It keeps them stuck.</span>
+        <span class="go">Read →</span>
+      </a>
+
+      <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="module"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <p class="sub-title">Get the next module in your inbox</p>
+        <p class="muted">One idea a week. No hacks. No shortcuts.</p>
+        <div class="sub-row"><label class="sr" for="sub-module">Email address</label><input id="sub-module" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
+
+      <div class="sources">
+        <p class="eyebrow">Sources</p>
+        <p>Each study is linked where it is cited. The links go to the paper, its abstract record, or a summary by the journal or a medical news outlet.</p>
+        
+      </div>
+    </article>
+
+    <aside class="toc">
+      <div class="toc-box contents">
+        <p class="eyebrow">In this module</p>
+        <ol>
+          <li><a href="#meet-people-where-they-are" data-jump="m-glance">The Niemeyer Method at a glance</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-locate">Locating</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-tissue">The slowest tissue sets the pace</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-progress">Progression</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-period">Periodization</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-recover">Recovery and the inner life</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-lifetime">A lifetime of training</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-you">What this means for you</a></li>
+        </ol>
+      </div>
+      <div class="toc-box">
+        <p class="eyebrow">Formats</p>
+        <ul class="formats">
+          <li class="on"><span>Read</span><span>Available</span></li>
+          <li><span>Watch</span><span>Coming</span></li>
+          <li><span>One-page summary</span><span>Coming</span></li>
+          <li><span>Provider brief</span><span>Coming</span></li>
+        </ul>
+      </div>
+    </aside>
+  </div></section>
+</div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Shane Niemeyer · Boulder County, Colorado</span>
+    <span><a href="../doctrine/">Doctrine</a> · <a href="../process/">Process</a> · <a href="../library/">Library</a> · <a href="../writing/">Writing</a> · <a href="../providers/">For Providers</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var ROOT = '../', PAGES = ['home','doctrine','process','evidence','work','providers','story','writing','never-easy-never-hard','library','introduction','meet-people-where-they-are','exercises'];
+  var legacy = (location.hash || '').slice(1);
+  if (PAGES.indexOf(legacy) > -1) location.replace(ROOT + (legacy === 'home' ? '' : legacy + '/'));
+
+  var header = document.querySelector('header.site');
+  var menuBtn = header.querySelector('.menu-btn');
+  function setMenu(open) { header.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  menuBtn.addEventListener('click', function () { setMenu(!header.classList.contains('open')); });
+  header.querySelectorAll('nav.primary a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('c-status');
+  function send(f) {
+    return fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(f)).toString()
+    }).then(function (r) { if (!r.ok) throw new Error(r.status); });
+  }
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = form.elements.name.value.trim();
+    var email = form.elements.email.value.trim();
+    if (!name || !validEmail(email)) { status.textContent = 'Add your name and a valid email so I can write back.'; return; }
+    var btn = form.querySelector('button[type=submit]');
+    btn.disabled = true; status.textContent = 'Sending…';
+    send(form).then(function () {
+      form.reset();
+      status.textContent = 'Got it. I read every one of these myself, and I\'ll write back soon. — Shane';
+    }).catch(function () {
+      status.textContent = 'That didn\'t go through. Try again in a minute.';
+    }).then(function () { btn.disabled = false; });
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-jump]')).forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.getElementById(a.getAttribute('data-jump'));
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chips [data-filter]'));
+  var ladders = Array.prototype.slice.call(document.querySelectorAll('.ladder[data-pattern]'));
+  chips.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      chips.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      ladders.forEach(function (l) { l.hidden = !(f === 'all' || l.getAttribute('data-pattern') === f); });
+    });
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('form.subscribe')).forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var st = f.querySelector('.form-status');
+      if (!validEmail(f.elements.email.value.trim())) { st.textContent = 'Enter a valid email address.'; return; }
+      var btn = f.querySelector('button[type=submit]');
+      btn.disabled = true; st.textContent = 'Signing you up…';
+      send(f).then(function () {
+        f.reset(); st.textContent = 'You\'re in. The first letter is on its way soon.';
+      }).catch(function () {
+        st.textContent = 'That didn\'t go through. Try again in a minute.';
+      }).then(function () { btn.disabled = false; });
+    });
+  });
+})();
+</script>
+
+</body></html>
+</body>
+</html>

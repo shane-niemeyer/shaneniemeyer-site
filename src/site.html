@@ -1,0 +1,1877 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Shane Niemeyer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: a training-log site. Heavy expanded grotesk for conviction, serif for Shane's voice, mono for the lab's numbers.
+   Recurring device: the intensity-distribution bar (below / between / above threshold). */
+:root {
+  --ground: #F1F4F6;
+  --surface: #FFFFFF;
+  --ink: #111C27;
+  --muted: #55636F;
+  --line: #D5DCE2;
+  --chip: #E5EBF1;
+  --accent: #1E4FD0;
+  --accent-ink: #FFFFFF;
+  --cool: #2E7C9B;
+  --mid: #9AA6B1;
+  --hot: #D4471E;
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0C1218; --surface: #131B23; --ink: #E6ECF1; --muted: #93A1AD; --line: #27323C; --chip: #1B2631;
+    --accent: #7D9DFF; --accent-ink: #0C1218; --cool: #5DB2D0; --mid: #5F6C78; --hot: #FF7B55;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0C1218; --surface: #131B23; --ink: #E6ECF1; --muted: #93A1AD; --line: #27323C; --chip: #1B2631;
+  --accent: #7D9DFF; --accent-ink: #0C1218; --cool: #5DB2D0; --mid: #5F6C78; --hot: #FF7B55;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--surface);
+}
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.measure { max-width: 66ch; }
+
+/* type */
+h1, h2, h3, .display {
+  font-family: var(--display); font-stretch: 115%; font-weight: 800;
+  line-height: 1.02; letter-spacing: -0.01em; text-wrap: balance; margin: 0;
+}
+h1 { font-size: clamp(2.5rem, 6.4vw, 4.9rem); }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+h3 { font-size: 1.2rem; font-stretch: 105%; font-weight: 750; line-height: 1.2; letter-spacing: 0; }
+p { margin: 0; }
+.lead { font-size: clamp(1.15rem, 1.9vw, 1.35rem); line-height: 1.55; color: var(--ink); }
+.muted { color: var(--muted); }
+.eyebrow {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+.stack { display: grid; gap: 1rem; }
+.stack-lg { display: grid; gap: 1.75rem; }
+
+/* preview banner + header */
+.preview {
+  background: var(--chip); color: var(--muted);
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.02em;
+}
+.preview .wrap { padding-block: 8px; }
+header.site {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+header.site .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-block: 14px; flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--display); font-stretch: 125%; font-weight: 900; font-size: 1.05rem;
+  letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); text-decoration: none;
+}
+nav.primary { min-width: 0; overflow-x: auto; }
+nav.primary ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.25rem; }
+nav.primary a {
+  display: block; padding: 6px 10px; border-radius: 6px; white-space: nowrap;
+  font-family: var(--display); font-weight: 600; font-size: 0.92rem; color: var(--muted); text-decoration: none;
+}
+nav.primary a:hover { color: var(--ink); background: var(--chip); }
+nav.primary a[aria-current="page"] { color: var(--ink); background: var(--chip); }
+
+.menu-btn { display: none; }
+@media (max-width: 760px) {
+  header.site .wrap { flex-wrap: nowrap; }
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 8px 12px; border-radius: 6px;
+    font-family: var(--display); font-weight: 700; font-size: 0.92rem; color: var(--ink);
+    background: var(--chip); border: 0; cursor: pointer;
+  }
+  .menu-btn::after { content: ""; width: 12px; height: 8px; background: currentColor;
+    clip-path: polygon(0 0, 100% 0, 50% 100%); transition: transform .2s; }
+  .menu-btn[aria-expanded="true"]::after { transform: rotate(180deg); }
+  nav.primary { display: none; position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--surface); border-bottom: 1px solid var(--line); overflow: visible; }
+  header.site.open nav.primary { display: block; }
+  nav.primary ul { flex-direction: column; gap: 0; padding: 8px max(16px, env(safe-area-inset-left, 0px)) 16px; }
+  nav.primary a { padding: 12px 10px; font-size: 1.05rem; border-radius: 6px; }
+}
+
+/* buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 12px 18px; border-radius: 8px;
+  font-family: var(--display); font-weight: 700; font-size: 0.98rem; text-decoration: none;
+  border: 1.5px solid var(--accent); cursor: pointer;
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:hover { filter: brightness(1.06); }
+
+/* sections */
+.band { padding-block: clamp(48px, 7vw, 88px); }
+.band + .band { border-top: 1px solid var(--line); }
+.band.surface { background: var(--surface); }
+.section-head { display: grid; gap: 0.6rem; margin-bottom: 2rem; }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 84px) clamp(40px, 6vw, 72px); }
+.hero .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero .copy { display: grid; gap: 1.4rem; min-width: 0; }
+@media (max-width: 860px) { .hero .grid { grid-template-columns: 1fr; } }
+
+/* intensity distribution panel */
+.dist {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 22px; display: grid; gap: 18px; min-width: 0;
+}
+.dist-row { display: grid; gap: 8px; }
+.dist-row .label { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.dist-row .label strong { color: var(--ink); font-weight: 500; }
+.bar { display: flex; height: 34px; border-radius: 6px; overflow: hidden; background: var(--chip); }
+.bar span { display: block; height: 100%; }
+.bar .b { background: var(--cool); }
+.bar .m { background: var(--mid); }
+.bar .a { background: var(--hot); }
+.key { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
+.key i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.figure-note { font-family: var(--mono); font-size: 0.72rem; line-height: 1.5; color: var(--muted); }
+.tabnum { font-variant-numeric: tabular-nums; }
+
+/* quote */
+.quote { display: grid; gap: 1.25rem; max-width: 46rem; }
+.quote blockquote {
+  margin: 0; font-family: var(--display); font-stretch: 110%; font-weight: 700;
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1.12; text-wrap: balance;
+}
+.quote cite { font-style: normal; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* record row */
+.record { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+.record > div { padding: 18px 16px 4px 0; display: grid; gap: 4px; align-content: start; }
+.record .num { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.record .what { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); line-height: 1.45; }
+@media (max-width: 720px) { .record { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 8px; } }
+
+/* principle list */
+.principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 56px); }
+.principles article { padding-block: 22px; border-top: 1px solid var(--line); display: grid; gap: 0.5rem; min-width: 0; }
+@media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
+
+/* ways in */
+.ways { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.ways a {
+  display: grid; gap: 0.5rem; align-content: start; padding: 20px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; min-width: 0;
+}
+.ways a:hover { border-color: var(--accent); }
+.ways .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); margin-top: 0.25rem; }
+@media (max-width: 900px) { .ways { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .ways { grid-template-columns: 1fr; } }
+
+/* split rows */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: start; }
+@media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+
+/* page header for inner views */
+.page-head { padding-block: clamp(40px, 6vw, 72px) clamp(28px, 4vw, 44px); border-bottom: 1px solid var(--line); }
+.page-head .wrap { display: grid; gap: 1rem; }
+
+/* process timeline */
+.timeline { display: grid; gap: 0; }
+.step { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: clamp(16px, 4vw, 48px); padding-block: 34px; border-top: 1px solid var(--line); }
+.step .when { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); padding-top: 6px; }
+.step .body { display: grid; gap: 0.9rem; min-width: 0; }
+.step ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.25rem; }
+@media (max-width: 720px) { .step { grid-template-columns: 1fr; gap: 10px; } }
+.pull {
+  font-family: var(--display); font-stretch: 110%; font-weight: 750; font-size: 1.3rem; line-height: 1.25;
+  padding-left: 16px; border-left: 3px solid var(--accent);
+}
+.weekly { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.weekly div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 4px; }
+.weekly .v { font-family: var(--display); font-stretch: 115%; font-weight: 800; font-size: 1.35rem; line-height: 1.1; }
+.weekly .k { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+@media (max-width: 560px) { .weekly { grid-template-columns: 1fr; } }
+
+/* evidence */
+.claims { display: grid; gap: 0; }
+.claim { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: clamp(16px, 4vw, 40px); padding-block: 26px; border-top: 1px solid var(--line); }
+.claim .figure { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.claim .text { display: grid; gap: 0.5rem; min-width: 0; }
+.cite-line { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.tag {
+  display: inline-block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px; background: var(--chip); color: var(--ink); margin-right: 6px; vertical-align: 1px;
+}
+.tag.draft { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+@media (max-width: 640px) { .claim { grid-template-columns: 1fr; gap: 8px; } }
+.chapters { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.chapters li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 12px; border-top: 1px solid var(--line); font-family: var(--display); font-weight: 600; min-width: 0; }
+.chapters li span:last-child { font-family: var(--mono); font-weight: 400; font-size: 0.74rem; color: var(--muted); white-space: nowrap; padding-top: 3px; }
+@media (max-width: 680px) { .chapters { grid-template-columns: 1fr; } }
+
+/* offers */
+.offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.offer { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 0.75rem; align-content: start; min-width: 0; }
+.offer ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.2rem; }
+@media (max-width: 760px) { .offers { grid-template-columns: 1fr; } }
+
+/* form */
+form.contact { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+.field { display: grid; gap: 6px; }
+.field label { font-family: var(--display); font-weight: 650; font-size: 0.92rem; }
+.field input, .field select, .field textarea {
+  font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground);
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; width: 100%;
+}
+.field textarea { min-height: 7rem; resize: vertical; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } }
+.form-status { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+
+/* providers */
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.checklist li { padding-block: 14px; border-top: 1px solid var(--line); display: grid; gap: 4px; }
+.checklist li strong { font-family: var(--display); font-weight: 700; }
+
+/* start-here ramp */
+.ramp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.ramp div { border-top: 3px solid var(--accent); padding-top: 10px; display: grid; gap: 4px; align-content: start; }
+.ramp .t { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.ramp p { font-family: var(--display); font-weight: 650; font-size: 1.02rem; line-height: 1.3; }
+@media (max-width: 560px) { .ramp { grid-template-columns: 1fr; } }
+
+/* client stories */
+.stories { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.story-card { background: var(--ground); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 1rem; align-content: start; min-width: 0; }
+.arc { list-style: none; margin: 0; padding: 0 0 0 18px; display: grid; gap: 12px; border-left: 2px solid var(--line); }
+.arc li { position: relative; display: grid; gap: 2px; font-size: 0.98rem; line-height: 1.5; }
+.arc li::before { content: ""; position: absolute; left: -25px; top: 0.3em; width: 12px; height: 12px; border-radius: 50%; background: var(--ground); border: 2px solid var(--accent); }
+.arc li:last-child::before { background: var(--accent); }
+.arc .t { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.said { font-family: var(--display); font-stretch: 105%; font-weight: 700; font-size: 1.08rem; line-height: 1.3; padding-top: 0.9rem; border-top: 1px solid var(--line); }
+@media (max-width: 920px) { .stories { grid-template-columns: 1fr; } }
+
+/* writing */
+.split-wide { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 56px); align-items: start; }
+.split-wide aside { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px); }
+@media (max-width: 860px) { .split-wide { grid-template-columns: 1fr; } .split-wide aside { position: static; } }
+.posts { list-style: none; margin: 0; padding: 0; display: grid; }
+.posts li { border-top: 1px solid var(--line); }
+.post-item { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) auto; gap: 8px 28px; padding-block: 22px; color: var(--ink); text-decoration: none; align-items: baseline; }
+a.post-item:hover h3 { color: var(--accent); }
+.post-item .meta { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.post-item .text { display: grid; gap: 4px; min-width: 0; }
+.post-item .state { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); white-space: nowrap; }
+.post-item.upcoming h3 { color: var(--muted); }
+@media (max-width: 680px) { .post-item { grid-template-columns: 1fr; gap: 6px; } }
+.latest { display: grid; gap: 0.5rem; padding: 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.latest:hover { border-color: var(--accent); }
+.latest .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); }
+.subscribe { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 12px; }
+.sub-title { font-family: var(--display); font-stretch: 110%; font-weight: 800; font-size: 1.2rem; line-height: 1.15; }
+.sub-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.sub-row input { flex: 1 1 13rem; min-width: 0; font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* article */
+.wrap.narrow { max-width: 760px; }
+.back { font-family: var(--display); font-weight: 650; font-size: 0.92rem; text-decoration: none; }
+.post-body { display: grid; gap: 1.15rem; font-size: 1.12rem; line-height: 1.7; }
+.post-body h2 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin-top: 1.4rem; }
+.post-body ul { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.4rem; }
+.post-body .pull { font-size: 1.4rem; }
+.sources { display: grid; gap: 6px; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--line); }
+.sources p { font-family: var(--mono); font-size: 0.76rem; line-height: 1.55; color: var(--muted); }
+
+/* ---------- library ---------- */
+.shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.shelf > a, .shelf > .card {
+  display: grid; gap: 0.6rem; align-content: start; padding: 22px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; min-width: 0;
+}
+.band.surface .shelf > a, .band.surface .shelf > .card { background: var(--ground); }
+.shelf > a:hover { border-color: var(--accent); }
+.shelf .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); margin-top: 0.25rem; }
+@media (max-width: 900px) { .shelf { grid-template-columns: 1fr; } }
+
+.figure-box { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 12px; min-width: 0; }
+.band.surface .figure-box { background: var(--ground); }
+.figure-box svg { width: 100%; height: auto; display: block; }
+
+/* two cities illustration */
+.c-cell { fill: var(--surface); stroke: var(--mid); stroke-width: 1.5; }
+.band.surface .c-cell { fill: var(--surface); }
+.c-nuc { fill: var(--chip); stroke: var(--mid); stroke-width: 1; }
+.c-mito { fill: var(--hot); }
+.c-ribo { fill: var(--ink); opacity: 0.5; }
+.c-cap { fill: none; stroke: var(--cool); stroke-width: 4; stroke-linecap: round; }
+.c-label { fill: var(--ink); font-family: var(--display); font-weight: 750; font-size: 16px; }
+.c-key { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+
+/* book parts */
+.parts { display: grid; }
+.part { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: clamp(16px, 4vw, 48px); padding-block: 28px; border-top: 1px solid var(--line); }
+.part-name { display: grid; gap: 6px; align-content: start; }
+.part-name .n { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.part-name h3 { font-size: 1.2rem; }
+.ch-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.ch { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; gap: 4px 16px; padding-block: 14px; border-top: 1px dashed var(--line); align-items: baseline; }
+.ch:first-child { border-top: 0; padding-top: 2px; }
+.ch .num { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: 1.35rem; line-height: 1; font-variant-numeric: tabular-nums; color: var(--muted); }
+.ch .t { display: grid; gap: 3px; min-width: 0; }
+.ch .t strong { font-family: var(--display); font-weight: 750; font-size: 1.08rem; line-height: 1.25; }
+.ch .t span { color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+.ch .s { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+.ch a.s { color: var(--accent); font-weight: 500; }
+@media (max-width: 720px) {
+  .part { grid-template-columns: 1fr; gap: 12px; }
+  .ch { grid-template-columns: 2.2rem minmax(0, 1fr); }
+  .ch .s { grid-column: 2; }
+}
+
+/* ---------- module (long read) ---------- */
+.module-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+.module .post-body { min-width: 0; }
+.module .post-body h2 { scroll-margin-top: 90px; }
+.post-body a.c { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; white-space: nowrap; }
+.post-body ol { margin: 0; padding-left: 1.4rem; display: grid; gap: 0.5rem; }
+.toc { display: grid; gap: 14px; align-content: start; }
+.toc-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 10px; }
+.toc-box ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.45rem; font-family: var(--display); font-weight: 600; font-size: 0.94rem; line-height: 1.3; }
+.toc-box ol a { color: var(--ink); text-decoration: none; }
+.toc-box ol a:hover { color: var(--accent); }
+.formats { list-style: none; margin: 0; padding: 0; display: grid; }
+.formats li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 9px; border-top: 1px solid var(--line); font-family: var(--display); font-weight: 600; font-size: 0.92rem; }
+.formats li:first-child { border-top: 0; padding-top: 0; }
+.formats li span:last-child { font-family: var(--mono); font-weight: 400; font-size: 0.72rem; color: var(--muted); padding-top: 2px; }
+.formats li.on span:last-child { color: var(--accent); }
+@media (max-width: 860px) { .toc .toc-box.contents { display: none; } }
+
+/* method loop */
+.l-box { fill: none; stroke: var(--mid); stroke-width: 1.25; }
+.l-box.main { fill: var(--chip); stroke: var(--accent); stroke-width: 2; }
+.l-edge { fill: none; stroke: var(--mid); stroke-width: 1.25; }
+.l-head { fill: var(--mid); }
+.l-t { fill: var(--ink); font-family: var(--display); font-weight: 750; font-size: 15px; }
+.l-s { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+.post-body .loop-list { display: none; margin: 0; padding-left: 1.3rem; }
+.loop-list li { font-size: 1rem; }
+@media (max-width: 600px) { .loop svg { display: none; } .post-body .loop-list { display: grid; gap: 0.4rem; } }
+
+/* tissue clock */
+.trow { display: grid; grid-template-columns: 11.5rem minmax(0, 1fr) 8rem; gap: 10px 14px; align-items: center; }
+.trow .tl { font-family: var(--display); font-weight: 650; font-size: 0.95rem; line-height: 1.25; }
+.trow .tv { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+.tbar { height: 22px; border-radius: 5px; background: var(--chip); overflow: hidden; }
+.tbar span { display: block; height: 100%; border-radius: 5px; }
+@media (max-width: 600px) { .trow { grid-template-columns: 1fr auto; } .trow .tbar { grid-column: 1 / -1; grid-row: 2; } }
+
+.next-card { display: grid; gap: 0.4rem; padding: 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.next-card:hover { border-color: var(--accent); }
+.next-card .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); }
+
+/* ---------- exercise library ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button {
+  font-family: var(--display); font-weight: 650; font-size: 0.9rem; color: var(--muted);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer;
+}
+.chips button:hover { color: var(--ink); border-color: var(--mid); }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.ladders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ladder { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.ladder[hidden] { display: none; }
+.ladder header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.rungs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: rung; }
+.rungs li {
+  counter-increment: rung; display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 10px; align-items: center;
+  padding: 9px 10px; border-radius: 8px; background: var(--ground); font-family: var(--display); font-weight: 600; font-size: 0.95rem; line-height: 1.25;
+}
+.rungs li::before {
+  content: counter(rung); display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--accent); border: 1.5px solid var(--accent);
+}
+.feature .rungs li, .band:not(.surface) > .wrap > .ladder .rungs li { background: var(--surface); border: 1px solid var(--line); }
+.rungs li:last-child::before { background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 960px) { .ladders { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .ladders { grid-template-columns: 1fr; } }
+
+.feature { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: start; }
+@media (max-width: 860px) { .feature { grid-template-columns: 1fr; } }
+.video {
+  aspect-ratio: 16 / 9; border-radius: 12px; background: var(--ink); color: var(--surface);
+  display: grid; place-items: center; align-content: center; gap: 10px; text-align: center; padding: 16px;
+}
+.video .play { width: 56px; height: 56px; border-radius: 50%; border: 2px solid currentColor; display: grid; place-items: center; opacity: 0.85; }
+.video .play::after { content: ""; border-left: 16px solid currentColor; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 4px; }
+.video span { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; }
+.note-box { border: 1px dashed var(--mid); border-radius: 10px; padding: 14px 16px; display: grid; gap: 4px; }
+
+/* footer */
+footer.site { background: var(--surface); border-top: 1px solid var(--line); }
+footer.site .wrap { padding-block: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+footer.site a { color: var(--muted); }
+</style>
+
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#home">Shane Niemeyer</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="primary" id="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="#doctrine" data-nav="doctrine">Doctrine</a></li>
+        <li><a href="#process" data-nav="process">Process</a></li>
+        <li><a href="#library" data-nav="library">Library</a></li>
+        <li><a href="#writing" data-nav="writing">Writing</a></li>
+        <li><a href="#work" data-nav="work">Work with Shane</a></li>
+        <li><a href="#providers" data-nav="providers">For Providers</a></li>
+        <li><a href="#story" data-nav="story">Story</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HOME ================= -->
+<div class="view" data-view="home">
+  <section class="hero moment">
+    <div class="wrap grid">
+      <div class="copy">
+        <p class="eyebrow">Strength &amp; conditioning coach · Boulder County, Colorado</p>
+        <h1>Training is the process of health.</h1>
+        <p class="lead measure">Training is not “working out.” It is structured and directed toward outcomes. It is progressive in nature, and periodized to develop strength and fitness, which are among the strongest predictors of health and longevity.</p>
+        <div class="actions">
+          <a class="btn primary" href="#process">See how we work</a>
+          <a class="btn ghost" href="#work">Work with Shane</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band surface">
+    <div class="wrap quote">
+      <blockquote>“A healthy man wants a thousand things. A sick man wants only one.”</blockquote>
+      <cite>Proverb</cite>
+      <p class="lead measure">Health and wellbeing is a process, and fitness is the absolute bedrock of that process. We reclaim lost capability and develop latent potential. This is the work of transformation. Truly. This work changes who we are, largely by changing what we are capable of.</p>
+    </div>
+  </section>
+
+  <section class="band moment">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="eyebrow">Whatever your age. Wherever you are.</p>
+        <h2>Set it down.</h2>
+        <p class="lead">What you fear. What you think you can or can't do. Who you've been told you are.</p>
+      </div>
+      <div class="stack-lg">
+        <p class="measure">The past matters only insofar as it informs where we begin. It tells us where you're starting. It doesn't tell us who you are.</p>
+        <p class="lead">The only thing that matters is now, and what's next.</p>
+        <p class="measure">This is the story of your life, and it's being written right now. You're the author. You can edit it. You can develop the main character. You can cut the old stories that aren't serving the plot.</p>
+        <p class="measure"><strong>So let's start with who you could become.</strong> How do you want to feel? How do you want your body to look, feel and move? What do you want your life to look like a year from now? Let your imagination run. That picture is what pulls you forward.</p>
+        <p class="measure"><strong>Then we train toward it.</strong></p>
+        <div class="ramp">
+          <div><span class="t">A couple of weeks</span><p>We're starting to feel better.</p></div>
+          <div><span class="t">Two months</span><p>We're a lot better than we were.</p></div>
+          <div><span class="t">Several months</span><p>We can be a completely different person.</p></div>
+        </div>
+        <div class="actions"><a class="btn primary" href="#work">Start here</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band surface">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">On the floor</p>
+        <h2>Three people. One process.</h2>
+        <p class="muted measure">Shared with permission. Names and details withheld.</p>
+      </div>
+      <div class="stories">
+        <article class="story-card">
+          <p class="eyebrow">In her 80s</p>
+          <h3>From fearful to unafraid</h3>
+          <ol class="arc">
+            <li><span class="t">Day one</span>Prone to falls. Really poor balance. Very unfit, aerobically and metabolically.</li>
+            <li><span class="t">6 months</span>Doing much better.</li>
+            <li><span class="t">9 months</span>In a completely different space.</li>
+            <li><span class="t">1 year</span>Almost unrecognizable. Gets into and out of the ground much, much better. Far more aerobic capacity, and probably five to six times stronger.</li>
+          </ol>
+          <p class="said">“There's a light on in her eyes now. She can navigate physical spaces without fear.”</p>
+          <p class="muted">Which, by the way, is a pretty common experience.</p>
+        </article>
+        <article class="story-card">
+          <p class="eyebrow">High school runner</p>
+          <h3>From injured to Division I</h3>
+          <ol class="arc">
+            <li><span class="t">Day one</span>Constantly injured. Running well below her capability.</li>
+            <li><span class="t">The shift</span>A healthier space made consistent training possible.</li>
+            <li><span class="t">Now</span>Running for an Ivy League Division I program, with a lot of success.</li>
+          </ol>
+          <p class="said">“With consistency comes the development of fitness.”</p>
+        </article>
+        <article class="story-card">
+          <p class="eyebrow">Over 300 pounds</p>
+          <h3>From the lowest fifth to two-hour rides</h3>
+          <ol class="arc">
+            <li><span class="t">Day one</span>Over 300 pounds. VO2 in the lowest quintile.</li>
+            <li><span class="t">The shift</span>Injury-free, so the training volume could keep climbing.</li>
+            <li><span class="t">Under a year</span>Running. Open-water swims. Routine bike rides of over two hours. Fitness, by my estimate, close to the 80th percentile.</li>
+          </ol>
+          <p class="said">“One of the most significant transformations I've ever seen.”</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap stack-lg">
+      <div class="record">
+        <div><span class="num">20+</span><span class="what">years as a strength and conditioning coach</span></div>
+        <div><span class="num">5×</span><span class="what">Ironman World Championship qualifier, Kona</span></div>
+        <div><span class="num">9:16</span><span class="what">fastest Ironman, Ironman Texas</span></div>
+        <div><span class="num" style="font-size:clamp(1.3rem,2.6vw,1.9rem)">CSCS · PES · CES</span><span class="what">certifications</span></div>
+      </div>
+      <p class="lead measure">Professional and college athletes. People in their late 80s living with dementia. Cancer patients. People who have lost hundreds of pounds. The same principles, applied across the whole range of the human condition.</p>
+    </div>
+  </section>
+
+  <section class="band surface">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The doctrine</p>
+        <h2>What we believe about training</h2>
+      </div>
+      <div class="principles">
+        <article><h3>Training is a way of being</h3><p class="muted">Not a program we finish. A practice built into the fabric of daily life.</p></article>
+        <article><h3>Reclaim, then develop</h3><p class="muted">Gain access to as much of our physical capability as possible, at every age.</p></article>
+        <article><h3>As much aerobic fitness as life allows</h3><p class="muted">Combined training, weighted toward the aerobic side by time. Strength is never optional.</p></article>
+        <article><h3>Meet people where they are</h3><p class="muted">If we are healthy, we are training. If we are training, we are transforming.</p></article>
+        <article><h3>Periodized, with rest built in</h3><p class="muted">Fitness shows up during recovery, not during the work itself.</p></article>
+        <article><h3>Body and mind are one system</h3><p class="muted">As capability grows, so do confidence, resilience and our sense of what is possible.</p></article>
+      </div>
+      <div class="actions" style="margin-top:1.75rem"><a class="btn ghost" href="#doctrine">Read the doctrine</a></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The Library</p>
+        <h2>From the cell to the whole human being.</h2>
+        <p class="muted measure">The book, the modules and the exercise library. Everything we teach about how training transforms us, with the evidence behind every claim.</p>
+      </div>
+      <div class="shelf">
+        <a href="#library"><p class="eyebrow">The book</p><h3>Exercise as Medicine</h3><p class="muted">Fourteen chapters built on one image: the fit cell and the sedentary cell, side by side.</p><span class="go">See the chapters →</span></a>
+        <a href="#meet-people-where-they-are"><p class="eyebrow">Module · The Niemeyer Method</p><h3>Meet people where they are</h3><p class="muted">Locating the person, progressing the load, and periodizing for a lifetime of training.</p><span class="go">Read →</span></a>
+        <a href="#exercises"><p class="eyebrow">Exercise library</p><h3>Every movement on a ladder</h3><p class="muted">From the first rung anyone can stand on, to the top. Filmed and explained.</p><span class="go">Browse →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band surface">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="eyebrow">Writing</p>
+        <h2>One idea a week.</h2>
+        <p class="muted measure">A principle from the doctrine, the science behind it, and what it looks like on the floor. Every piece lives here first. The weekly email brings it to you.</p>
+      </div>
+      <div class="stack">
+        <a class="latest" href="#never-easy-never-hard">
+          <span class="eyebrow">Latest</span>
+          <h3>Never truly easy. Never truly hard.</h3>
+          <span class="muted">Most people train in the middle. It feels productive. It keeps them stuck.</span>
+          <span class="go">Read →</span>
+        </a>
+        <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="home"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <p class="sub-title">The weekly email</p>
+          <div class="sub-row"><label class="sr" for="sub-home">Email address</label><input id="sub-home" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Ways in</p>
+        <h2>Work with Shane</h2>
+      </div>
+      <div class="ways">
+        <a href="#work"><h3>Coaching</h3><p class="muted">Concierge coaching in person, and programming mapped out online.</p><span class="go">Coaching →</span></a>
+        <a href="#work"><h3>The Lab</h3><p class="muted">VO2 and resting metabolic rate testing, prepared for and interpreted.</p><span class="go">Testing →</span></a>
+        <a href="#work"><h3>Retreats</h3><p class="muted">Co-led with Dr. Jill Carnahan. Spring 2027.</p><span class="go">Retreats →</span></a>
+        <a href="#work"><h3>Speaking</h3><p class="muted">How far a human being can come, and what it takes.</p><span class="go">Speaking →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band surface moment">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="eyebrow">The story</p>
+        <h2>From a prison cell to the lava fields of Kona.</h2>
+      </div>
+      <div class="stack">
+        <p class="lead">I understand, more deeply than most, how unwell a human being can be. I also know how far one can come.</p>
+        <div class="actions"><a class="btn ghost" href="#story">Read the story</a><a class="btn ghost" href="#providers">For healthcare providers</a></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= DOCTRINE ================= -->
+<div class="view" data-view="doctrine" hidden>
+  <section class="page-head"><div class="wrap">
+    <p class="eyebrow">The doctrine</p>
+    <h1>Training is not something we do a few hours a week.</h1>
+    <p class="lead measure">It is the process of health and wellbeing itself, built into the fabric of daily life. Everything we publish, teach and coach flows from these principles.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="principles">
+      <article><h3>Training is a way of being</h3><p>Training is not a program we finish or a phase we pass through. It is a practice we build into the fabric of our lives and our daily process. The goal is not to complete training. The goal is to become someone who trains, for life.</p></article>
+      <article><h3>Training is how we realize our human potential</h3><p>Strength and power, muscular endurance, aerobic capacity, fundamental motor skills, every range and plane of motion, balance, body awareness, and the ability to get down to the ground and back up with ease. Each one we develop opens up more of life.</p></article>
+      <article><h3>Aerobic fitness: as much as your life allows</h3><p>The ideal is combined training, with the aerobic side carrying more of the weight by time and strength never optional. Cardiorespiratory fitness is one of the strongest predictors of how long and how well we live.</p></article>
+      <article><h3>Meet people where they are</h3><p>There is a path. It is everywhere and always, and it heads in the same direction for all of us. Where we stand on it is different for each person. Sometimes it is obscured by the weather of life, by circumstance, but like the sun, which is always shining above the clouds, it's there. Our work is to find where you are on it, and to travel it.</p><p>We start every person at their current level of capability and progress them rationally and methodically. Muscles adapt in weeks; tendons, ligaments, cartilage and bone adapt over months and years. Intelligent progression is what makes lifelong training possible.</p></article>
+      <article><h3>Dynamic, periodized and built for recovery</h3><p>Adaptation happens during recovery. Planned variation in volume and intensity, deliberate easier weeks, and room for life's disruptions keep progress moving for years instead of months. Rest is part of training.</p></article>
+      <article><h3>Body and mind are one system</h3><p>Our psychological states and our physical states shape each other. Training is one of the few truly transformative processes available in the human experience. It changes not just what we can do, but who we are.</p></article>
+      <article><h3>See the target</h3><p>We cannot hit a target we cannot see. We define, in as much detail as possible, how you want your body to look, feel and function, and then step into that picture. The clearer and more felt the vision, the more naturally the daily work follows.</p></article>
+      <article><h3>No hacks. No shortcuts.</h3><p>Some strategies simply work better than others, and we use the ones the evidence supports. The rest is the work itself, and the work is what transforms us.</p></article>
+    </div>
+  </div></section>
+
+  <section class="band surface"><div class="wrap split">
+    <div class="stack"><p class="eyebrow">Non-negotiables</p><h2>What we never compromise on</h2></div>
+    <ul class="checklist">
+      <li>Training is a lifelong practice, not a program.</li>
+      <li>Build as much aerobic fitness as life allows, always combined with strength.</li>
+      <li>Start where the person is, and progress at the pace of their slowest-adapting tissues.</li>
+      <li>Stay healthy first. Health keeps us training, and training transforms us.</li>
+      <li>Periodize, and build rest in by design.</li>
+      <li>Train the whole person: body and mind move together.</li>
+      <li>Make the target vivid, then show up consistently.</li>
+    </ul>
+  </div></section>
+</div>
+
+<!-- ================= PROCESS ================= -->
+<div class="view" data-view="process" hidden>
+  <section class="page-head"><div class="wrap">
+    <p class="eyebrow">The Niemeyer Method · The process</p>
+    <h1>You don't find yourself. You create yourself, one choice, one action, one day at a time.</h1>
+    <p class="lead measure">We are, right now, each moment, writing the story of our life. We are developing the main character in that story. If we are not, our story is being written for us.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap timeline">
+    <div class="step">
+      <p class="when">Before we meet</p>
+      <div class="body">
+        <h2>Start with who you could become</h2>
+        <p class="measure">When someone reaches out, I ask them a few things before we ever meet:</p>
+        <ul class="measure">
+          <li>Their injury history.</li>
+          <li>How they feel, physically, and how they feel about life in general.</li>
+          <li>What their sleep is like.</li>
+          <li>How they characterize their nutritional habits.</li>
+          <li>What they want, what gets in the way, and what changes we need to make to create this life.</li>
+        </ul>
+        <p class="measure">I have found it powerful and important to push someone's mind toward who they could become: how they want their body to look, feel and function. I ask them to describe an ideal future state and feel into that space. Then we begin anchoring around the thinking and behavioral habits that person would likely have.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="when">Day one</p>
+      <div class="body">
+        <h2>A workout that is also an assessment</h2>
+        <p class="measure">In the first session I walk someone through a workout, modifying movement patterns on the spot according to what I see: ranges of motion, quality of movement, discomfort. Often, you can see and hear how fit someone is aerobically. Without making anyone nervous, I can evaluate movement and identify postural distortions and compensatory patterns throughout the kinetic chain.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="when">The plan</p>
+      <div class="body">
+        <h2>Completely unique to the individual</h2>
+        <p class="measure">How much time do you have? What can you realistically commit to? What do you have access to? What are your preferences? From there, the minimums set by the ACSM are a floor, and probably still not enough.</p>
+        <div class="weekly">
+          <div><span class="v">3–5 hours</span><span class="k">aerobic work per week, the target. 150 minutes is the floor.</span></div>
+          <div><span class="v">2 days</span><span class="k">of strength. The patterns look different for everyone.</span></div>
+          <div><span class="v">~80%</span><span class="k">of total load aerobic, with intervals two days a week.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="when">Every session</p>
+      <div class="body">
+        <h2>Structure, objectivity and polarity</h2>
+        <p class="measure">Without structure and a plan, there is also, inherently, less achievement. Most people do what is convenient, or what they feel like on the day. They lack objectivity. Much of this work is about continually manipulating the acute variables: training type, exercise selection, intensity, modality and duration.</p>
+        <p class="pull measure">Many people lack polarity in their training. They never truly recover, and they never truly go hard.</p>
+        <p class="measure">So they never get the benefits of true aerobic states, and they are never able to train the top end of the bioenergetic continuum. When well-trained endurance athletes were randomly assigned to four approaches, polarized training produced the greatest gains in most key measures of endurance, including VO2peak. And people whose strength training was directly supervised progressed their loads faster and gained more strength than those who followed the identical program alone.</p>
+        <p class="cite-line">Stöggl &amp; Sperlich, Frontiers in Physiology, 2014 · Mazzetti et al., Medicine &amp; Science in Sports &amp; Exercise, 2000</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="when">Every 3rd–5th week</p>
+      <div class="body">
+        <h2>Recovery is where fitness shows up</h2>
+        <p class="measure">Sleep is essential. It is foundational. We build in rest weeks every third, fourth or fifth week, cutting volume and intensity by around 50%. This is when and how fitness manifests itself, and how we stay psychologically fresh and hungry.</p>
+        <p class="measure">It is a good time to catch up on life and tend to our inner life. Our minds can push us around in ways we are unaware of. I encourage us to take quiet moments, to look at the quality and contents of our inner world, and to be active participants in this process of recovery.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="when">Over time</p>
+      <div class="body">
+        <h2>The north star is staying healthy</h2>
+        <p class="measure">Progression depends on training age, history and fitness. Without structure and periodization, injury rates are high: among long-distance triathletes, studies report that anywhere from a third to nine in ten suffer overuse injuries. Most of these injuries trace back to training errors, and training errors are predictable and avoidable through intelligent, individualized design.</p>
+        <p class="pull measure">If we're healthy, we're training. If we're training, we're transforming.</p>
+        <p class="cite-line">Rhind et al., Journal of Human Kinetics, 2022 · van Gent et al., British Journal of Sports Medicine, 2007</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="when">When we test</p>
+      <div class="body">
+        <h2>Prepared for the test, not surprised by it</h2>
+        <p class="measure">Unlike many labs and testing centers, I believe clients should be conditioned for a test. There are risks, to connective tissue and psychologically, in testing someone too early or without preparation. We talk through the mask, the very high intensity, and what maximal actually feels like. It is a place we rarely go. Mild simulations on the treadmill make sure the joints and tissues are ready.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="when">Always</p>
+      <div class="body">
+        <h2>Working with your physician</h2>
+        <p class="measure">I work closely with several physicians and collaborate with a physician advisor all of the time. Fitness is the most powerful and far-reaching medicine we have for chronic disease and aging. No drug touches as many systems. Done right, it is a disease reducer, a life extender and a quality enhancer.</p>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<!-- ================= EVIDENCE ================= -->
+<div class="view" data-view="evidence" data-section="library" hidden>
+  <section class="page-head"><div class="wrap">
+    <a class="back" href="#library">← Library</a>
+    <p class="eyebrow">The evidence</p>
+    <h1>The case for training as medicine.</h1>
+    <p class="lead measure">Every claim we make carries a source and a label: what kind of study it comes from, and how strong it is. Here are the anchor findings. The full chapters are being written now.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap claims">
+    <div class="claim">
+      <p class="figure">~5×</p>
+      <div class="text">
+        <h3>Low fitness is a risk factor as serious as smoking</h3>
+        <p class="measure">Among 122,007 adults given treadmill tests, the least fit had about five times the mortality of the fittest. The risk of low fitness was comparable to or greater than smoking, diabetes and coronary artery disease, and no upper limit of benefit was found.</p>
+        <p class="cite-line"><span class="tag">Cohort</span>Mandsager et al., JAMA Network Open, 2018</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p class="figure">40%</p>
+      <div class="text">
+        <h3>Combined training beats either alone</h3>
+        <p class="measure">Adults who did both aerobic and muscle-strengthening activity had 40% lower all-cause mortality than those who did neither.</p>
+        <p class="cite-line"><span class="tag">Meta-analysis</span>Momma et al., British Journal of Sports Medicine, 2022</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p class="figure">28%</p>
+      <div class="text">
+        <h3>Exercise changes cancer outcomes</h3>
+        <p class="measure">In 889 colon cancer survivors, a structured three-year exercise program after chemotherapy lowered the risk of recurrence or death by 28%, and improved overall survival.</p>
+        <p class="cite-line"><span class="tag">Randomized trial</span>Courneya et al., New England Journal of Medicine, 2025 (CHALLENGE)</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p class="figure">58%</p>
+      <div class="text">
+        <h3>Diabetes can be prevented</h3>
+        <p class="measure">In 3,234 people with prediabetes, a lifestyle program of at least 150 minutes of activity a week plus modest weight loss cut new cases of type 2 diabetes by 58%. The drug metformin cut them by 31%.</p>
+        <p class="cite-line"><span class="tag">Randomized trial</span>Knowler et al., New England Journal of Medicine, 2002 (Diabetes Prevention Program)</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p class="figure">= Rx</p>
+      <div class="text">
+        <h3>Exercise holds its own against drugs</h3>
+        <p class="measure">Across 305 trials, exercise matched drugs on mortality in the secondary prevention of heart disease and in prediabetes, and outperformed them after stroke. Drugs, specifically diuretics, did better in heart failure.</p>
+        <p class="cite-line"><span class="tag">Meta-analysis</span>Naci &amp; Ioannidis, BMJ, 2013</p>
+      </div>
+    </div>
+    <div class="claim">
+      <p class="figure">218</p>
+      <div class="text">
+        <h3>Training treats depression</h3>
+        <p class="measure">Across 218 randomized trials, walking or jogging, strength training and yoga all produced moderate reductions in depression, with larger effects at higher intensity.</p>
+        <p class="cite-line"><span class="tag">Meta-analysis</span>Noetel et al., BMJ, 2024</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band surface"><div class="wrap split">
+    <div class="stack"><p class="eyebrow">Go deeper</p><h2>The whole case, chapter by chapter.</h2></div>
+    <div class="stack">
+      <p class="measure">These findings open the book. The full argument, from the cell to the whole human being, lives in the Library.</p>
+      <div class="actions"><a class="btn primary" href="#library">Open the Library</a></div>
+    </div>
+  </div></section>
+</div>
+
+<!-- ================= WORK ================= -->
+<div class="view" data-view="work" hidden>
+  <section class="page-head"><div class="wrap">
+    <p class="eyebrow">Work with Shane</p>
+    <h1>Most people can feel and function much, much better.</h1>
+    <p class="lead measure">What each person can achieve depends on where they start and what they aspire to. I work mostly with people in their 50s through their 80s, and with athletes of every age.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap offers">
+    <article class="offer">
+      <p class="eyebrow">Coaching</p>
+      <h2>Concierge coaching</h2>
+      <p>In person, with programming mapped out for your training on your own. Built around your time, your access and your preferences, and progressed for life.</p>
+    </article>
+    <article class="offer">
+      <p class="eyebrow">The Lab</p>
+      <h2>Metabolic testing</h2>
+      <p>VO2 and resting metabolic rate testing on a metabolic cart, with a full read of your substrate utilization: how your body uses fat and carbohydrate as intensity climbs.</p>
+      <ul><li>Prepared for the test before you take it</li><li>Results turned into training zones</li><li>Re-tested as you progress</li></ul>
+    </article>
+    <article class="offer">
+      <p class="eyebrow">Retreats</p>
+      <h2>With Dr. Jill Carnahan</h2>
+      <p>Co-led with functional medicine physician Dr. Jill Carnahan. Metabolic testing, training and education, contemplative practice and nervous system regulation.</p>
+      <p class="cite-line"><span class="tag draft">Spring 2027 · dates TBA</span></p>
+    </article>
+    <article class="offer">
+      <p class="eyebrow">Speaking</p>
+      <h2>How far a human being can come</h2>
+      <p>Talks on transformation, training as medicine, and training for life after 40. For organizations, recovery communities, healthcare and athletes.</p>
+      <p class="cite-line"><span class="tag draft">Talk titles in progress</span></p>
+    </article>
+  </div></section>
+
+  <section class="band surface"><div class="wrap split">
+    <div class="stack">
+      <p class="eyebrow">Start here</p>
+      <h2>Tell me where you are.</h2>
+      <p class="muted measure">A few lines is enough. We'll start from there.</p>
+    </div>
+    <form class="contact" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="contact">
+      <p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <div class="two">
+        <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
+      </div>
+      <div class="field">
+        <label for="c-interest">I'm interested in</label>
+        <select id="c-interest" name="interest">
+          <option>Coaching</option><option>Metabolic testing</option><option>Retreats</option><option>Speaking</option><option>Referring a patient</option>
+        </select>
+      </div>
+      <div class="field"><label for="c-msg">Where are you now, and where do you want to be?</label><textarea id="c-msg" name="message"></textarea></div>
+      <div class="actions"><button class="btn primary" type="submit">Send</button></div>
+      <p class="form-status" id="c-status" aria-live="polite"></p>
+    </form>
+  </div></section>
+</div>
+
+<!-- ================= PROVIDERS ================= -->
+<div class="view" data-view="providers" hidden>
+  <section class="page-head"><div class="wrap">
+    <p class="eyebrow">For healthcare providers</p>
+    <h1>Exercise is medicine. This is how we practice it.</h1>
+    <p class="lead measure">We work alongside medical care, never in place of it. I work closely with several physicians and collaborate with a physician advisor all of the time.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap split">
+    <div class="stack"><p class="eyebrow">What a referral gets</p><h2>Evidence, safety and communication</h2></div>
+    <ul class="checklist">
+      <li><strong>Screening before the first session</strong><span class="muted">Injury history, how the patient feels physically and about life, sleep, nutrition, goals and obstacles.</span></li>
+      <li><strong>Progression by the slowest-adapting tissue</strong><span class="muted">Training errors are the leading cause of overuse injury. We design them out.</span></li>
+      <li><strong>Objective measures</strong><span class="muted">VO2 and resting metabolic rate testing with substrate utilization, after the patient is prepared for it.</span></li>
+      <li><strong>Outcome reporting to the referring provider</strong><span class="muted"><span class="tag draft">To be confirmed</span>Measures and reporting schedule being finalized.</span></li>
+      <li><strong>Experience across the range</strong><span class="muted">Cancer patients, older adults living with dementia, major weight loss, and professional athletes.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="band surface"><div class="wrap split">
+    <div class="stack"><p class="eyebrow">Credentials</p><h2>20+ years in strength and conditioning</h2></div>
+    <div class="stack">
+      <p class="measure">Certified Strength and Conditioning Specialist (CSCS, NSCA). Performance Enhancement Specialist (PES) and Corrective Exercise Specialist (CES), NASM.</p>
+      <div class="actions"><a class="btn ghost" href="#evidence">See the evidence</a><a class="btn ghost" href="#work">Refer a patient</a></div>
+      <p class="cite-line"><span class="tag draft">One-page referral sheet coming</span></p>
+    </div>
+  </div></section>
+</div>
+
+<!-- ================= STORY ================= -->
+<div class="view" data-view="story" hidden>
+  <section class="page-head"><div class="wrap">
+    <p class="eyebrow">The story <span class="tag draft">Draft</span></p>
+    <h1>If there is a point, it is how far one can come.</h1>
+    <p class="lead measure">I understand, more deeply than most, how unwell a human being can be. There have been several inflection points in my life. These are the ones that made me who I am, and how I coach.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap timeline">
+    <div class="step">
+      <p class="when">Jail</p>
+      <div class="body">
+        <h2>More unwell than anyone I had ever met</h2>
+        <p class="measure">Addiction, and a bunch of insanity leading into prison. In jail, on my way to prison, I had a suicidal crisis. I tried to end my life, and I survived. That was the very bottom.</p>
+        <p class="measure">I was so toxic from drugs and alcohol and the way I had been living. Incoherent. Cognitively impaired. I was more unhealthy than anyone I had ever met.</p>
+      </div>
+    </div>
+    <div class="step">
+      <p class="when">Prison</p>
+      <div class="body">
+        <h2>The gift of prison</h2>
+        <p class="measure">Then I had the gift of prison: time. Nearly two years of it. I had to start where I was, and where I was, was almost nowhere. I couldn't read, or even retain a sentence. I certainly couldn't do much in the way of push-ups or sit-ups.</p>
+        <p class="measure">Within weeks, and then months, I was able to read, eventually a book a day, taking notes on everything I read. Six months in, and then a year, I was in totally different shape than I was before.</p>
+      </div>
+    </div>
+    <div class="step">
+      <p class="when">What it taught me</p>
+      <div class="body">
+        <h2>Every system adapts to the demands we impose on it</h2>
+        <p class="measure">That cognitive transformation is a testimony to it. Focus was a skill I could develop. Attention, and the use of my attention as a tool, was a skill I could develop. Memory was a skill I could develop. I treated all of it the same way: different stimuli to produce a desirable adaptation.</p>
+        <p class="measure">It helped my inner life too. If I looked at my thoughts, or wrote about them, I could examine them, edit them, and develop them into what I wanted them to be, to an extent.</p>
+        <p class="pull measure">If I sat with my emotional states, I could first identify them. Sometimes I could insert a gap between the stimulus and my response to it. A gap I never had.</p>
+        <p class="measure">That has carried into every domain of my life. Anything in our life affects everything in our life. That's why I work with the whole person. It has to be.</p>
+      </div>
+    </div>
+    <div class="step">
+      <p class="when">After</p>
+      <div class="body">
+        <h2>From a prison cell to Kona</h2>
+        <p class="measure">I got out in my mid-20s and began training. My first race was the Pacific Crest half Ironman in Bend, Oregon, in 2005. Around twenty Ironmans and some sixty half Ironmans followed, with five qualifications for the Ironman World Championship in Kona, five for the 70.3 World Championship, and multiple age-group wins and podiums along the way. I got there within a couple of years, having never seriously swum, biked or run before.</p>
+        <div class="record">
+          <div><span class="num">5×</span><span class="what">Kona qualifier</span></div>
+          <div><span class="num">5×</span><span class="what">70.3 Worlds qualifier</span></div>
+          <div><span class="num">9:16</span><span class="what">Ironman best</span></div>
+          <div><span class="num">4:16</span><span class="what">half Ironman best</span></div>
+        </div>
+        <p class="measure">In the beginning I studied out of necessity. Now, every day, I explore human behavior, cognitive neuroscience, biology and cellular metabolism. For more than twenty years I have coached the widest range of people I can imagine.</p>
+      </div>
+    </div>
+    <div class="step">
+      <p class="when">Later</p>
+      <div class="body">
+        <h2>The work never stops</h2>
+        <p class="measure">My divorce was one of the most important times in my life, because it forced me to do the work. To look at my childhood and early adulthood, and the intense experiences that shaped me. Some for the good. In many ways, I developed maladaptive behaviors.</p>
+        <p class="measure">It gave me the instinct to really look at my life, to dig in, and to become a better man and a better father. While it was perhaps the most painful thing I have ever experienced, in the end, after the darkest moments, somehow, it brought us closer together.</p>
+        <p class="pull measure">The most painful moments are usually the most transformative. It's hard to learn much, at least anything durable, when things are smooth and even.</p>
+      </div>
+    </div>
+    <div class="step">
+      <p class="when">Now</p>
+      <div class="body">
+        <h2>I still fail</h2>
+        <p class="measure">I fail at things all of the time as a father. Failing looks like getting overwhelmed, or overreacting. When it happens, I take deep breaths and de-escalate. I tell my boys I can see that I'm overreacting right now. I apologize, and I try to repair.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band surface">
+    <div class="wrap quote">
+      <p class="lead measure">This isn't like flipping a switch. That's not how it works. It's a process of staying oriented around our ideals and continually moving toward them, no matter how slow.</p>
+      <blockquote>The only thing that matters is that we keep getting up every time we fall down.</blockquote>
+      <p class="muted"><em>The Hurt Artist</em>, Shane's memoir, tells the full story.</p>
+      <p class="cite-line">If you are struggling or thinking about suicide, you are not alone. In the US, call or text 988, the Suicide &amp; Crisis Lifeline, any time.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ================= WRITING ================= -->
+<div class="view" data-view="writing" hidden>
+  <section class="page-head"><div class="wrap">
+    <p class="eyebrow">Writing</p>
+    <h1>Notes from the work.</h1>
+    <p class="lead measure">One idea a week: a principle from the doctrine, the science behind it, and what it looks like on the floor. Every piece lives here first. The weekly email brings it to you.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap split-wide">
+    <ul class="posts">
+      <li><a class="post-item" href="#never-easy-never-hard">
+        <span class="meta">Process · Science</span>
+        <div class="text"><h3>Never truly easy. Never truly hard.</h3><span class="muted">Most people train in the middle. It feels productive. It keeps them stuck.</span></div>
+        <span class="state">6 min read</span>
+      </a></li>
+      <li><div class="post-item upcoming">
+        <span class="meta">Story</span>
+        <div class="text"><h3>Focus is a skill</h3><span class="muted">Attention, memory and the gap between stimulus and response are trainable, like everything else.</span></div>
+        <span class="state"><span class="tag draft">Drafting</span></span>
+      </div></li>
+      <li><div class="post-item upcoming">
+        <span class="meta">On the floor</span>
+        <div class="text"><h3>There's a light on in her eyes</h3><span class="muted">What happens when someone in her 80s stops being afraid of the physical world.</span></div>
+        <span class="state"><span class="tag draft">Drafting</span></span>
+      </div></li>
+      <li><div class="post-item upcoming">
+        <span class="meta">Science</span>
+        <div class="text"><h3>Low fitness is as dangerous as smoking</h3><span class="muted">What 122,007 treadmill tests tell us about how long, and how well, we live.</span></div>
+        <span class="state"><span class="tag draft">Planned</span></span>
+      </div></li>
+      <li><div class="post-item upcoming">
+        <span class="meta">Process</span>
+        <div class="text"><h3>Prepared for the test</h3><span class="muted">Why we condition people before we ever put a mask on them.</span></div>
+        <span class="state"><span class="tag draft">Planned</span></span>
+      </div></li>
+      <li><div class="post-item upcoming">
+        <span class="meta">Story</span>
+        <div class="text"><h3>Keep getting up</h3><span class="muted">On failing as a father, and why the process never ends.</span></div>
+        <span class="state"><span class="tag draft">Planned</span></span>
+      </div></li>
+    </ul>
+    <aside>
+      <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="writing"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <p class="sub-title">The weekly email</p>
+        <p class="muted">One idea a week, in your inbox. No hacks. No shortcuts.</p>
+        <div class="sub-row"><label class="sr" for="sub-writing">Email address</label><input id="sub-writing" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
+    </aside>
+  </div></section>
+</div>
+
+<!-- ================= ARTICLE ================= -->
+<div class="view" data-view="never-easy-never-hard" data-section="writing" hidden>
+  <section class="page-head"><div class="wrap narrow">
+    <a class="back" href="#writing">← Writing</a>
+    <p class="eyebrow">Process · Science <span class="tag draft">Draft</span></p>
+    <h1>Never truly easy. Never truly hard.</h1>
+    <p class="lead">Most people train in the middle. It feels productive. It keeps them stuck.</p>
+    <p class="cite-line">Shane Niemeyer · 6 min read</p>
+  </div></section>
+
+  <section class="band"><div class="wrap narrow post-body">
+    <p>Most people do what is convenient, or what they feel like on the day. I understand why. But without structure and a plan, there is, inherently, less achievement. We lack objectivity about our own training.</p>
+    <p>The most common pattern I see is a lack of polarity. Easy days are too hard, and hard days are not hard enough. People are never really recovering, so they never get the benefits of true aerobic states. And they are never fresh enough to really go hard and train the top end of the bioenergetic continuum.</p>
+    <p>So they live in the middle. Every session is a moderate grind. It feels productive: you sweat, you breathe hard, you go home tired. But it is too hard to build the aerobic base, and not hard enough to build the top end. Weeks turn into months, and not much changes.</p>
+
+    <h2>What polarity looks like</h2>
+    <p>Polarity means making the easy days truly easy and the hard days truly hard. For most of the people I coach, it looks like this:</p>
+    <ul>
+      <li>Around 80% of total training time is easy aerobic work. You can hold a conversation in full sentences.</li>
+      <li>Two days a week include intervals, hard enough that you can only get out a few words at a time.</li>
+      <li>Very little time in the grey zone in between.</li>
+      <li>Every third, fourth or fifth week, volume and intensity drop by around 50%, so the fitness can show up.</li>
+    </ul>
+    <p>The easy volume builds the machinery: more mitochondria, more capillaries, a better ability to burn fat for fuel. The hard work sharpens it. We need both, and we can only do the hard work well if the easy work is actually easy.</p>
+
+    <h2>What the research shows</h2>
+    <p>When 48 well-trained endurance athletes were randomly assigned to four different approaches for nine weeks, the polarized group improved the most on most key measures of endurance, including an 11.7% rise in VO2peak. More threshold training and more high-volume training added nothing further.</p>
+    <p>In recreational runners, a polarized plan improved 10K times by 5.0%, against 3.6% for a plan heavy in moderate, between-threshold work. Across the whole group that difference wasn't statistically significant. Among the runners who actually followed their plan, polarized training came out clearly ahead.</p>
+    <figure class="dist" aria-label="Intensity distribution: polarized versus threshold-heavy training">
+      <p class="eyebrow">Where the training time goes</p>
+      <div class="dist-row">
+        <div class="label"><strong>Polarized</strong><span class="tabnum">77 / 3 / 20</span></div>
+        <div class="bar" role="img" aria-label="77 percent below threshold, 3 percent between thresholds, 20 percent above threshold">
+          <span class="b" style="width:77%"></span><span class="m" style="width:3%"></span><span class="a" style="width:20%"></span>
+        </div>
+      </div>
+      <div class="dist-row">
+        <div class="label"><strong>Threshold-heavy</strong><span class="tabnum">46 / 35 / 19</span></div>
+        <div class="bar" role="img" aria-label="46 percent below threshold, 35 percent between thresholds, 19 percent above threshold">
+          <span class="b" style="width:46%"></span><span class="m" style="width:35%"></span><span class="a" style="width:19%"></span>
+        </div>
+      </div>
+      <div class="key">
+        <span><i style="background:var(--cool)"></i>Below threshold</span>
+        <span><i style="background:var(--mid)"></i>Between thresholds</span>
+        <span><i style="background:var(--hot)"></i>Above threshold</span>
+      </div>
+      <figcaption class="figure-note">Share of training time in a 10-week trial with recreational runners. Muñoz et al., 2014. Most people live in the middle. We train at both ends.</figcaption>
+    </figure>
+    <p>Most of this research comes from endurance athletes, and the studies are small. It lines up with what I have seen across twenty years on the floor, with athletes and with people in their 70s and 80s alike.</p>
+
+    <h2>Structure is the point</h2>
+    <p>Much of what I do is continually manipulating the acute variables: training type, exercise selection, intensity, modality and duration. A plan gives us objectivity. It tells us when to go hard and when to back off, instead of leaving it to how we feel on the day.</p>
+    <p class="pull">If we're healthy, we're training. If we're training, we're transforming.</p>
+
+    <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="post"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <p class="sub-title">Get the next one in your inbox</p>
+      <p class="muted">One idea a week. No hacks. No shortcuts.</p>
+      <div class="sub-row"><label class="sr" for="sub-post">Email address</label><input id="sub-post" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+      <p class="form-status" aria-live="polite"></p>
+    </form>
+
+    <div class="sources">
+      <p class="eyebrow">Sources</p>
+      <p>Stöggl T, Sperlich B. Polarized training has greater impact on key endurance variables than threshold, high intensity, or high volume training. Frontiers in Physiology, 2014.</p>
+      <p>Muñoz I, Seiler S, et al. Does polarized training improve performance in recreational runners? International Journal of Sports Physiology and Performance, 2014.</p>
+      <p>Granata C, Bishop DJ, et al. Training intensity modulates changes in mitochondrial respiration; training volume drives mitochondrial content. 2016–2018.</p>
+    </div>
+  </div></section>
+</div>
+
+<!-- ================= LIBRARY ================= -->
+<div class="view" data-view="library" hidden>
+  <section class="page-head"><div class="wrap">
+    <p class="eyebrow">The Library</p>
+    <h1>From the cell to the whole human being.</h1>
+    <p class="lead measure">Everything we teach about how training transforms us: the book, the modules and the exercise library. Written for anyone who trains, and for the providers who send people to us. Every claim carries its source.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="section-head"><p class="eyebrow">Start here</p><h2>Three ways in.</h2></div>
+    <div class="shelf">
+      <a href="#introduction">
+        <p class="eyebrow">Introduction</p>
+        <h3>Training is the process of health</h3>
+        <p class="muted">Why no intervention reaches further than the pursuit of fitness through training.</p>
+        <span class="go">Read the introduction →</span>
+      </a>
+      <a href="#meet-people-where-they-are">
+        <p class="eyebrow">The Niemeyer Method</p>
+        <h3>Meet people where they are</h3>
+        <p class="muted">Locating the person, progressing the load, and periodizing for a lifetime of training.</p>
+        <span class="go">Read the module →</span>
+      </a>
+      <a href="#evidence">
+        <p class="eyebrow">The evidence</p>
+        <h3>The case in six findings</h3>
+        <p class="muted">Low fitness is as dangerous as smoking. Diabetes can be prevented. Cancer outcomes change.</p>
+        <span class="go">See the evidence →</span>
+      </a>
+    </div>
+  </div></section>
+
+  <section class="band surface"><div class="wrap split">
+    <div class="stack">
+      <p class="eyebrow">The spine of the book</p>
+      <h2>Two cities.</h2>
+      <p class="lead">The fit cell and the sedentary cell, side by side.</p>
+      <p class="measure">The cell is a city: power plants (mitochondria), factories (ribosomes), roads and supply lines (capillaries, GLUT4). Cells aggregate into tissue, tissue into organs, organs into the human being. Each disease chapter opens by asking: what happened to the city?</p>
+    </div>
+    <figure class="figure-box" aria-label="Illustration: a sedentary cell with few mitochondria, ribosomes and capillaries beside a fit cell with many">
+      <svg viewBox="0 0 540 302" xmlns="http://www.w3.org/2000/svg">
+<path class="c-cap" d="M21.7 96.4 L25.0 90.4 L28.6 84.6 L32.6 79.0 L36.9 73.7 L41.6 68.5 L46.6 63.7 L51.9 59.1 L57.5 54.8 L63.3 50.8 L69.4 47.1 L75.7 43.8 L82.2 40.8"/>
+<ellipse class="c-cell" cx="135" cy="145" rx="110" ry="100"/>
+<circle class="c-nuc" cx="145" cy="151" r="25"/>
+<ellipse class="c-mito" cx="65.6" cy="147.4" rx="12" ry="5.5" transform="rotate(-26 65.6 147.4)"/>
+<ellipse class="c-mito" cx="163.6" cy="203.6" rx="12" ry="5.5" transform="rotate(-38 163.6 203.6)"/>
+<ellipse class="c-mito" cx="66.8" cy="93.4" rx="12" ry="5.5" transform="rotate(-30 66.8 93.4)"/>
+<ellipse class="c-mito" cx="121.9" cy="213.5" rx="12" ry="5.5" transform="rotate(-60 121.9 213.5)"/>
+<ellipse class="c-mito" cx="125.6" cy="100.6" rx="12" ry="5.5" transform="rotate(37 125.6 100.6)"/>
+<ellipse class="c-mito" cx="209.8" cy="186.6" rx="12" ry="5.5" transform="rotate(-14 209.8 186.6)"/>
+<circle class="c-ribo" cx="211.2" cy="122.3" r="1.9"/>
+<circle class="c-ribo" cx="225.3" cy="139.0" r="1.9"/>
+<circle class="c-ribo" cx="41.1" cy="170.9" r="1.9"/>
+<circle class="c-ribo" cx="196.3" cy="99.0" r="1.9"/>
+<circle class="c-ribo" cx="44.2" cy="111.5" r="1.9"/>
+<circle class="c-ribo" cx="200.3" cy="80.5" r="1.9"/>
+<circle class="c-ribo" cx="67.0" cy="191.4" r="1.9"/>
+<circle class="c-ribo" cx="53.8" cy="173.7" r="1.9"/>
+<circle class="c-ribo" cx="50.6" cy="129.2" r="1.9"/>
+<circle class="c-ribo" cx="91.9" cy="222.0" r="1.9"/>
+<circle class="c-ribo" cx="71.4" cy="123.9" r="1.9"/>
+<circle class="c-ribo" cx="195.0" cy="110.8" r="1.9"/>
+<circle class="c-ribo" cx="44.8" cy="161.5" r="1.9"/>
+<circle class="c-ribo" cx="78.5" cy="165.3" r="1.9"/>
+<circle class="c-ribo" cx="106.8" cy="135.6" r="1.9"/>
+<circle class="c-ribo" cx="151.4" cy="218.3" r="1.9"/>
+<circle class="c-ribo" cx="79.9" cy="83.0" r="1.9"/>
+<circle class="c-ribo" cx="219.1" cy="165.7" r="1.9"/>
+<circle class="c-ribo" cx="117.7" cy="65.8" r="1.9"/>
+<circle class="c-ribo" cx="77.4" cy="185.9" r="1.9"/>
+<circle class="c-ribo" cx="81.5" cy="209.7" r="1.9"/>
+<circle class="c-ribo" cx="156.2" cy="103.7" r="1.9"/>
+<circle class="c-ribo" cx="123.1" cy="57.1" r="1.9"/>
+<circle class="c-ribo" cx="63.8" cy="118.8" r="1.9"/>
+<circle class="c-ribo" cx="150.9" cy="71.3" r="1.9"/>
+<circle class="c-ribo" cx="104.7" cy="223.2" r="1.9"/>
+<text class="c-label" x="135" y="290" text-anchor="middle">The sedentary cell</text>
+<path class="c-cap" d="M525.7 174.8 L523.1 182.8 L519.8 190.5 L515.9 198.1 L511.4 205.4 L506.3 212.3 L500.8 218.9 L494.7 225.1 L488.1 230.9 L481.1 236.2 L473.7 241.1 L465.9 245.4 L457.8 249.2"/>
+<path class="c-cap" d="M362.2 253.1 L353.8 249.9 L345.7 246.2 L337.8 242.0 L330.4 237.2 L323.3 232.0 L316.6 226.3 L310.4 220.2 L304.7 213.7 L299.6 206.8 L295.0 199.6 L291.0 192.1 L287.5 184.3"/>
+<path class="c-cap" d="M287.5 105.7 L291.0 97.9 L295.0 90.4 L299.6 83.2 L304.7 76.3 L310.4 69.8 L316.6 63.7 L323.3 58.0 L330.4 52.8 L337.8 48.0 L345.7 43.8 L353.8 40.1 L362.2 36.9"/>
+<path class="c-cap" d="M447.8 36.9 L456.2 40.1 L464.3 43.8 L472.2 48.0 L479.6 52.8 L486.7 58.0 L493.4 63.7 L499.6 69.8 L505.3 76.3 L510.4 83.2 L515.0 90.4 L519.0 97.9 L522.5 105.7"/>
+<ellipse class="c-cell" cx="405" cy="145" rx="110" ry="100"/>
+<circle class="c-nuc" cx="415" cy="151" r="25"/>
+<ellipse class="c-mito" cx="401.1" cy="191.1" rx="12" ry="5.5" transform="rotate(18 401.1 191.1)"/>
+<ellipse class="c-mito" cx="457.2" cy="185.7" rx="12" ry="5.5" transform="rotate(-13 457.2 185.7)"/>
+<ellipse class="c-mito" cx="372.4" cy="182.0" rx="12" ry="5.5" transform="rotate(14 372.4 182.0)"/>
+<ellipse class="c-mito" cx="485.0" cy="159.6" rx="12" ry="5.5" transform="rotate(1 485.0 159.6)"/>
+<ellipse class="c-mito" cx="455.2" cy="122.7" rx="12" ry="5.5" transform="rotate(68 455.2 122.7)"/>
+<ellipse class="c-mito" cx="400.8" cy="91.0" rx="12" ry="5.5" transform="rotate(43 400.8 91.0)"/>
+<ellipse class="c-mito" cx="392.2" cy="223.3" rx="12" ry="5.5" transform="rotate(-34 392.2 223.3)"/>
+<ellipse class="c-mito" cx="338.7" cy="131.2" rx="12" ry="5.5" transform="rotate(58 338.7 131.2)"/>
+<ellipse class="c-mito" cx="488.7" cy="121.9" rx="12" ry="5.5" transform="rotate(34 488.7 121.9)"/>
+<ellipse class="c-mito" cx="423.3" cy="108.3" rx="12" ry="5.5" transform="rotate(39 423.3 108.3)"/>
+<ellipse class="c-mito" cx="355.9" cy="78.8" rx="12" ry="5.5" transform="rotate(44 355.9 78.8)"/>
+<ellipse class="c-mito" cx="364.4" cy="212.8" rx="12" ry="5.5" transform="rotate(-13 364.4 212.8)"/>
+<ellipse class="c-mito" cx="445.6" cy="84.9" rx="12" ry="5.5" transform="rotate(56 445.6 84.9)"/>
+<ellipse class="c-mito" cx="430.2" cy="196.2" rx="12" ry="5.5" transform="rotate(53 430.2 196.2)"/>
+<ellipse class="c-mito" cx="337.1" cy="168.6" rx="12" ry="5.5" transform="rotate(27 337.1 168.6)"/>
+<ellipse class="c-mito" cx="377.7" cy="127.7" rx="12" ry="5.5" transform="rotate(37 377.7 127.7)"/>
+<ellipse class="c-mito" cx="450.0" cy="217.1" rx="12" ry="5.5" transform="rotate(37 450.0 217.1)"/>
+<circle class="c-ribo" cx="384.3" cy="189.5" r="1.9"/>
+<circle class="c-ribo" cx="432.3" cy="91.4" r="1.9"/>
+<circle class="c-ribo" cx="457.5" cy="96.3" r="1.9"/>
+<circle class="c-ribo" cx="311.8" cy="164.5" r="1.9"/>
+<circle class="c-ribo" cx="357.9" cy="176.0" r="1.9"/>
+<circle class="c-ribo" cx="452.7" cy="104.2" r="1.9"/>
+<circle class="c-ribo" cx="348.6" cy="149.7" r="1.9"/>
+<circle class="c-ribo" cx="320.3" cy="169.8" r="1.9"/>
+<circle class="c-ribo" cx="306.5" cy="150.6" r="1.9"/>
+<circle class="c-ribo" cx="322.4" cy="133.6" r="1.9"/>
+<circle class="c-ribo" cx="352.7" cy="161.4" r="1.9"/>
+<circle class="c-ribo" cx="387.3" cy="200.6" r="1.9"/>
+<circle class="c-ribo" cx="354.7" cy="182.0" r="1.9"/>
+<circle class="c-ribo" cx="336.8" cy="94.8" r="1.9"/>
+<circle class="c-ribo" cx="317.5" cy="153.3" r="1.9"/>
+<circle class="c-ribo" cx="415.7" cy="194.2" r="1.9"/>
+<circle class="c-ribo" cx="376.2" cy="64.4" r="1.9"/>
+<circle class="c-ribo" cx="313.3" cy="157.8" r="1.9"/>
+<circle class="c-ribo" cx="440.7" cy="61.3" r="1.9"/>
+<circle class="c-ribo" cx="326.4" cy="116.6" r="1.9"/>
+<circle class="c-ribo" cx="320.8" cy="186.9" r="1.9"/>
+<circle class="c-ribo" cx="420.2" cy="228.7" r="1.9"/>
+<circle class="c-ribo" cx="391.4" cy="205.6" r="1.9"/>
+<circle class="c-ribo" cx="362.0" cy="108.5" r="1.9"/>
+<circle class="c-ribo" cx="380.3" cy="84.0" r="1.9"/>
+<circle class="c-ribo" cx="413.9" cy="212.3" r="1.9"/>
+<circle class="c-ribo" cx="418.8" cy="80.3" r="1.9"/>
+<circle class="c-ribo" cx="434.5" cy="73.8" r="1.9"/>
+<circle class="c-ribo" cx="463.4" cy="149.3" r="1.9"/>
+<circle class="c-ribo" cx="385.3" cy="210.2" r="1.9"/>
+<circle class="c-ribo" cx="327.2" cy="193.2" r="1.9"/>
+<circle class="c-ribo" cx="331.9" cy="85.9" r="1.9"/>
+<circle class="c-ribo" cx="388.5" cy="103.4" r="1.9"/>
+<circle class="c-ribo" cx="342.8" cy="92.1" r="1.9"/>
+<circle class="c-ribo" cx="452.8" cy="164.0" r="1.9"/>
+<circle class="c-ribo" cx="461.7" cy="107.3" r="1.9"/>
+<circle class="c-ribo" cx="370.3" cy="154.5" r="1.9"/>
+<circle class="c-ribo" cx="428.3" cy="76.5" r="1.9"/>
+<circle class="c-ribo" cx="329.5" cy="109.4" r="1.9"/>
+<circle class="c-ribo" cx="412.6" cy="75.1" r="1.9"/>
+<circle class="c-ribo" cx="354.4" cy="188.3" r="1.9"/>
+<circle class="c-ribo" cx="316.4" cy="141.0" r="1.9"/>
+<circle class="c-ribo" cx="424.1" cy="216.5" r="1.9"/>
+<circle class="c-ribo" cx="340.8" cy="153.7" r="1.9"/>
+<circle class="c-ribo" cx="478.0" cy="107.3" r="1.9"/>
+<circle class="c-ribo" cx="362.3" cy="138.4" r="1.9"/>
+<circle class="c-ribo" cx="446.2" cy="66.2" r="1.9"/>
+<circle class="c-ribo" cx="347.2" cy="157.8" r="1.9"/>
+<circle class="c-ribo" cx="358.9" cy="120.2" r="1.9"/>
+<circle class="c-ribo" cx="339.0" cy="191.3" r="1.9"/>
+<circle class="c-ribo" cx="315.8" cy="180.5" r="1.9"/>
+<circle class="c-ribo" cx="425.4" cy="63.0" r="1.9"/>
+<circle class="c-ribo" cx="322.3" cy="126.4" r="1.9"/>
+<circle class="c-ribo" cx="468.7" cy="177.0" r="1.9"/>
+<circle class="c-ribo" cx="367.8" cy="113.4" r="1.9"/>
+<circle class="c-ribo" cx="468.5" cy="210.0" r="1.9"/>
+<circle class="c-ribo" cx="405.1" cy="73.4" r="1.9"/>
+<circle class="c-ribo" cx="396.9" cy="69.8" r="1.9"/>
+<circle class="c-ribo" cx="427.3" cy="69.5" r="1.9"/>
+<circle class="c-ribo" cx="421.2" cy="211.2" r="1.9"/>
+<circle class="c-ribo" cx="333.2" cy="149.0" r="1.9"/>
+<circle class="c-ribo" cx="446.6" cy="196.6" r="1.9"/>
+<circle class="c-ribo" cx="460.4" cy="142.2" r="1.9"/>
+<circle class="c-ribo" cx="362.0" cy="163.7" r="1.9"/>
+<circle class="c-ribo" cx="347.6" cy="106.3" r="1.9"/>
+<circle class="c-ribo" cx="382.0" cy="92.2" r="1.9"/>
+<circle class="c-ribo" cx="472.2" cy="89.4" r="1.9"/>
+<circle class="c-ribo" cx="459.3" cy="158.4" r="1.9"/>
+<circle class="c-ribo" cx="474.4" cy="124.5" r="1.9"/>
+<circle class="c-ribo" cx="373.4" cy="162.1" r="1.9"/>
+<circle class="c-ribo" cx="492.7" cy="106.6" r="1.9"/>
+<circle class="c-ribo" cx="404.7" cy="231.8" r="1.9"/>
+<text class="c-label" x="405" y="290" text-anchor="middle">The fit cell</text>
+</svg>
+      <div class="key">
+        <span><i style="background:var(--hot);border-radius:50%"></i>Mitochondria: power plants</span>
+        <span><i style="background:var(--ink);opacity:.5;border-radius:50%;width:6px;height:6px;vertical-align:1px"></i>Ribosomes: factories</span>
+        <span><i style="background:var(--cool);height:4px;width:16px;vertical-align:3px"></i>Capillaries: roads</span>
+      </div>
+      <figcaption class="figure-note">Illustration, not to scale. Mitochondrial density is mostly an aerobic story; ribosomal density is mostly a strength story. The case is for both.</figcaption>
+    </figure>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The book <span class="tag draft">Working title</span></p>
+      <h2>Exercise as Medicine</h2>
+      <p class="muted measure">Fourteen chapters in five parts. Each chapter doubles as a module: read it here, watch it, and use it on the floor.</p>
+    </div>
+    <div class="parts">
+      <div class="part">
+        <div class="part-name"><span class="n">Part one</span><h3>Why it matters</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">01</span><span class="t"><strong>Fitness is capability</strong><span>Fitness as the capacity to tolerate stress. Training, not working out.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">02</span><span class="t"><strong>How we know</strong><span>Cohorts, trials, and measured fitness versus self-reported activity.</span></span><span class="s">Coming</span></li>
+        </ol>
+      </div>
+      <div class="part">
+        <div class="part-name"><span class="n">Part two</span><h3>The cell and the systems</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">03</span><span class="t"><strong>Two cities</strong><span>The fit cell and the sedentary cell. The signals that build mitochondria and ribosomes.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">04</span><span class="t"><strong>Metabolism rewired</strong><span>How exercise reconfigures metabolism. Muscle as an endocrine organ.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">05</span><span class="t"><strong>The infrastructure</strong><span>Heart, lungs and vessels. Connective tissue, fascia and bone.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">06</span><span class="t"><strong>Immunity</strong><span>Fit and unfit immune systems. Recalibration, not simply turning it up.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">07</span><span class="t"><strong>The brain</strong><span>Cognition, movement complexity, and the prevention of dementia. Preserving, not reversing.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">08</span><span class="t"><strong>The mind</strong><span>Exercise makes us feel good. The chemistry of it, and the stress axis.</span></span><span class="s">Coming</span></li>
+        </ol>
+      </div>
+      <div class="part">
+        <div class="part-name"><span class="n">Part three</span><h3>Exercise against disease</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">09</span><span class="t"><strong>Cancer</strong><span>Quality of life, fatigue, treatment completion and outcomes.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">10</span><span class="t"><strong>The pharmacy</strong><span>Heart disease, type 2 diabetes, falls and fractures, frailty.</span></span><span class="s">Coming</span></li>
+        </ol>
+      </div>
+      <div class="part">
+        <div class="part-name"><span class="n">Part four</span><h3>Building it</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">11</span><span class="t"><strong>The two pillars</strong><span>Aerobic fitness mainly protects lifespan. Strength and movement mainly protect healthspan. Together beats either.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">12</span><span class="t"><strong>Aging and the far end of the curve</strong><span>The midlife window, hormones across aging, and what elite athletes teach us.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">13</span><span class="t"><strong>Training</strong><span>Dose, progression and safety. Recovery, sleep and nutrition.</span></span><a class="s" href="#meet-people-where-they-are">Module ready →</a></li>
+        </ol>
+      </div>
+      <div class="part">
+        <div class="part-name"><span class="n">Part five</span><h3>The close</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">14</span><span class="t"><strong>The close</strong><span>A call to action.</span></span><span class="s">Coming</span></li>
+        </ol>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band surface"><div class="wrap split">
+    <div class="stack">
+      <p class="eyebrow">Exercise library</p>
+      <h2>Every movement sits on a ladder.</h2>
+      <p class="measure">We start every person where they are and progress them at the pace of their slowest tissues. So every movement in the library has a first rung anyone can stand on, and a path to the top.</p>
+      <div class="actions"><a class="btn primary" href="#exercises">Browse the library</a></div>
+    </div>
+    <div class="ladder">
+      <header><h3>Ground</h3><span class="tag draft">Sample</span></header>
+      <ol class="rungs">
+        <li>Supported floor transfer</li>
+        <li>Half-kneeling to stand</li>
+        <li>Floor to stand, one hand</li>
+        <li>Floor to stand, no hands</li>
+      </ol>
+    </div>
+  </div></section>
+
+  <section class="band"><div class="wrap split">
+    <div class="stack">
+      <p class="eyebrow">For healthcare providers</p>
+      <h2>A brief for every module.</h2>
+      <p class="muted measure">Each module will come with a one-page summary for referring providers: the claim, the strength of the evidence behind it, and what we do on the floor.</p>
+      <p class="cite-line"><span class="tag draft">Planned</span></p>
+    </div>
+    <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="library"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <p class="sub-title">New chapters, as they land</p>
+      <p class="muted">One idea a week, in your inbox. No hacks. No shortcuts.</p>
+      <div class="sub-row"><label class="sr" for="sub-library">Email address</label><input id="sub-library" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+      <p class="form-status" aria-live="polite"></p>
+    </form>
+  </div></section>
+</div>
+
+<!-- ================= INTRODUCTION ================= -->
+<div class="view module" data-view="introduction" data-section="library" hidden>
+  <section class="page-head"><div class="wrap">
+    <a class="back" href="#library">← Library</a>
+    <p class="eyebrow">The book · Introduction <span class="tag draft">Draft</span></p>
+    <h1>Training is the process of health.</h1>
+    <p class="lead measure">Why no intervention reaches further than the pursuit of fitness through training.</p>
+    <div class="module-meta"><span>Shane Niemeyer</span><span>10 min read</span><span>19 sources cited</span><span>In the book: Introduction</span></div>
+  </div></section>
+
+  <section class="band"><div class="wrap split-wide">
+    <article class="post-body" id="i-top">
+      <p>Training is the process of health.</p>
+      <p>Training is not "working out." It is structured and directed toward outcomes. It is progressive in nature, and periodized to develop strength and fitness, which are among the strongest predictors of health and longevity.</p>
+      <p>The language I use with people in person, and the language I use when I'm texting them, is emotive. It's laden with charge. Sometimes I find myself sounding hyperbolic. Then I remember that I'm on very firm ground.</p>
+      <p>This book makes one argument, and the argument wins itself: there is no more far-reaching, pleiotropic, near magic intervention than the pursuit of fitness through training. Pleiotropic means one cause, many effects. Training is the most powerful and far-reaching medicine we have for chronic disease and aging. No drug touches as many systems.</p>
+      <p>A comprehensive, integrated view of training transcends just working out. It is truly a transformational process. It changes who we are as human beings and our experience of the world. And it has been demonstrated, again and again, to greatly reduce the risk of many different illnesses and to extend lifespan.</p>
+      <p>This introduction lays the ground for everything that follows: what health and wellbeing are, why movement is life, why no intervention reaches further than training, what training actually is, and how it changes who we are.</p>
+
+      <h2 id="i-health">What we mean by health</h2>
+      <p>When the World Health Organization was founded, it defined health as complete physical, mental and social wellbeing, "not merely the absence of disease or infirmity" (<a class="c" href="https://www.who.int/about/governance/constitution" target="_blank" rel="noopener">WHO Constitution, 1946</a>). That is the definition this book works from. Health and wellbeing are one thing, seen from different sides.</p>
+      <p>Most of us were handed a smaller idea: health is what we have until a test says otherwise. But the absence of a diagnosis is not health. Health is capacity. It is the ability to do what we want to do in the world, to move through it without fear, to feel well and think clearly, and to show up fully for the people around us.</p>
+      <p>A healthy man wants a thousand things; a sick man wants only one. Nothing is more important than our health. Which is why I believe the greatest contribution we can make to the world is to improve ourselves, to give ourselves more capacity, so that we can contribute more to those around us and the world at large.</p>
+      <p class="pull">The north star is always to remain healthy. Everything in this book points there.</p>
+
+      <h2 id="i-movement">Movement is life</h2>
+      <p>Our bodies evolved over millennia. All of our systems upregulate in the presence of movement. One of the most observable characteristics of life, of a living organism, is movement. Even now, movement is essential to survival. Certainly it's essential for our health and wellbeing and the optimal human experience.</p>
+      <p>We are subject to physical laws: gravity and resistance and time, all of the elements. We have to navigate through physical spaces and overcome a variety of different forces. A body that cannot meet those forces loses the world, one capability at a time.</p>
+      <p>Movement is essential to learning. Movement is essential to our psychological wellbeing. From subcellular organelles all the way up the histological chain to tissues and organs and ultimately who we are, movement optimizes all of those systems. In fact, there's not one system that's untouched by it.</p>
+      <p>Science is now mapping this, molecule by molecule. In 2024, an NIH-funded consortium trained rats on treadmills for up to eight weeks and analyzed 19 tissues. Every tissue they tested responded, with more than 35,000 molecules changing, including tissues no one associates with movement: the brain, the adrenal gland, the lung, fat (<a class="c" href="https://www.nih.gov/news-events/news-releases/endurance-exercise-affects-all-tissues-body-even-those-not-normally-associated-movement" target="_blank" rel="noopener">NIH, 2024</a>; <a class="c" href="https://research.bidmc.org/robert-gerszten/news/temporal-dynamics-multi-omic-response-endurance-exercise-training" target="_blank" rel="noopener">MoTrPAC Study Group, Nature, 2024</a>). The human studies are under way.</p>
+      <p>Much of what the brain is doing is interpreting sense data from the body. Many different systems of the brain are involved in coordinating complex movement. Our psychological experience of the world tends to be a reflection of the physical state of our body, given that our consciousness, at least in part, is born of physical systems. And the brain itself responds to training: in older adults, a year of walking three days a week grew the hippocampus, the brain's memory center, by about 2%, while in a stretching group it shrank about 1.4% (<a class="c" href="https://naturalhealthresearch.org/exercise-increases-hippocampal-volume-and-improves-memory-in-older-adults/" target="_blank" rel="noopener">Erickson et al., 2011</a>).</p>
+
+      <h2 id="i-further">No intervention reaches further</h2>
+      <p>Start with what predicts how long we live. Among 122,007 adults given treadmill tests, the least fit had about five times the mortality of the fittest, a risk comparable to or greater than smoking, diabetes and coronary artery disease. There was no upper limit to the benefit (<a class="c" href="https://acc.org/latest-in-cardiology/articles/2019/02/20/08/11/cardiorespiratory-fitness-and-long-term-mortality" target="_blank" rel="noopener">Mandsager et al., 2018</a>). The largest synthesis to date, covering 20.9 million observations, found that high fitness meant 53% lower mortality from all causes (<a class="c" href="https://jyx.jyu.fi/jyx/Record/jyx_123456789_94593" target="_blank" rel="noopener">Lang et al., 2024</a>).</p>
+      <p>Fitness is not fixed. It is a target. When the same men were tested twice, about five years apart, those who got fitter had death rates roughly 50% to 70% lower than those who didn't (<a class="c" href="https://cdn.mdedge.com/files/s3fs-public/jfp-archived-issues/1995-volume_40-41/JFP_1995-09_v41_i3_physical-fitness-and-mortality.pdf" target="_blank" rel="noopener">Blair et al., 1995</a>). When fitness moves, the risk moves with it.</p>
+      <p>And when training is prescribed like a treatment and tested like one, it changes the outcomes medicine cares about most:</p>
+      <ul>
+        <li><strong>Diabetes.</strong> In 3,234 adults with prediabetes, a lifestyle program built around at least 150 minutes of activity a week cut new cases of type 2 diabetes by 58%. Metformin cut them by 31% (<a class="c" href="https://pubmed.ncbi.nlm.nih.gov/11832527" target="_blank" rel="noopener">Knowler et al., 2002</a>).</li>
+        <li><strong>Cancer.</strong> In 889 colon cancer survivors, a three-year structured exercise program cut recurrence or death by 28% and improved overall survival (<a class="c" href="https://www.nejm.org/doi/full/10.1056/NEJMoa2502760" target="_blank" rel="noopener">Courneya et al., 2025</a>).</li>
+        <li><strong>Falls.</strong> Across 108 trials and 23,407 older adults, exercise cut the rate of falls by 23%, and programs combining balance, functional and strength work by about 34% (<a class="c" href="https://www.cochrane.org/CD012424/EXERCISE_exercise-preventing-falls-older-people-living-community" target="_blank" rel="noopener">Sherrington et al., 2019</a>).</li>
+        <li><strong>Depression and anxiety.</strong> Across 1,039 trials and 128,119 people, physical activity was highly effective at reducing depression, anxiety and distress, reported as about one and a half times as effective as counselling or leading medications (<a class="c" href="https://sciencedaily.com/releases/2023/02/230223193417.htm" target="_blank" rel="noopener">Singh et al., 2023</a>).</li>
+        <li><strong>The heart and the brain.</strong> Across 305 trials, exercise matched drugs on mortality in coronary heart disease and prediabetes, and outperformed them after stroke (<a class="c" href="https://search.pedro.org.au/search-results/record-detail/37554" target="_blank" rel="noopener">Naci &amp; Ioannidis, 2013</a>). In a 44-year study of Swedish women, the highly fit were far less likely to develop dementia, and when they did, it came 11 years later (<a class="c" href="https://www.eurekalert.org/news-releases/491140" target="_blank" rel="noopener">Hörder et al., 2018</a>).</li>
+      </ul>
+      <p>One intervention. Every one of those outcomes, and more that later chapters take one at a time: the heart, metabolism and mitochondria, genes, the nervous system, immunity, bone and tendon and muscle. That is what pleiotropic means. No pill does this. Nothing else comes close.</p>
+
+      <h2 id="i-training">What training is, and what it is not</h2>
+      <p>None of those results came from working out. They came from training.</p>
+      <p>Working out is what most people do. They do what is convenient, or what they feel like on the day. They lack objectivity, and without structure and a plan there is, inherently, less achievement. Training is structured and directed toward outcomes. It is progressive in nature, and periodized to develop strength and fitness. It starts from where a person actually is, and it is aimed at where they want to be. We cannot hit a target we cannot see.</p>
+      <p>The difference is not semantic. In type 2 diabetes, across 47 trials and 8,538 people, structured exercise training lowered blood sugar meaningfully. Advice to be physically active, on its own, did not change it at all (<a class="c" href="https://www.globalfamilydoctor.com/Resources/A-Ztopiclisting/JournalWatch/Structuredexerciseregimensandglycemiccontrolindiabetics.aspx" target="_blank" rel="noopener">Umpierre et al., 2011</a>). People who seem not to respond to training usually haven't had the right dose. In one trial, 69% of people training once a week failed to improve their fitness. When the non-responders added two sessions a week, every one of them responded (<a class="c" href="https://folia.unifr.ch/global/documents/21534" target="_blank" rel="noopener">Montero &amp; Lundby, 2017</a>).</p>
+      <p>And there is no age at which it stops working. Nursing-home residents aged 87 to 96 gained an average of 174% in leg strength after eight weeks of heavy training (<a class="c" href="https://www.hebrewseniorlife.org/blog/study-redefined-how-we-view-strength-training-and-aging" target="_blank" rel="noopener">Fiatarone et al., 1990</a>).</p>
+      <p>Training asks something of us. It's both an exercise of self-denial, which carries a multitude of benefits, and with each session we complete there's an accomplishment that we couldn't have any other way. That accomplishment compounds.</p>
+      <p class="pull">If we're healthy, we're training. If we're training, we're transforming.</p>
+
+      <h2 id="i-extremes">What the extremes teach us</h2>
+      <p>We've learned so much about human potential through exercise. Human beings have exposed themselves to things no one thought were possible: swimming in incredibly cold temperatures for unbelievable amounts of time, running farther and faster in extreme environments than ever was possible. Tremendous feats of endurance.</p>
+      <p>I'll often wonder at these feats out loud to my clients, and remind them that while these extremities don't apply to them, they do point to what's possible in the human condition, given that we all possess the same systems. Broadly, we're constructed in the same way. We're made of the same things.</p>
+      <p>And while it's true that some have more available to them in terms of potential, for a variety of reasons, I have rarely met anyone who is operating close to their potential, either physically or as a human being.</p>
+      <p>I know what that gap feels like from the inside. I came to training in my mid-twenties from almost nowhere, and went on to qualify for the Ironman World Championship in Kona five times. I am not telling you that so you will want to race. I am telling you because the distance between where I started and where I arrived is the same distance most people are carrying, unused, right now. The work is to reclaim lost capability and develop latent potential.</p>
+
+      <h2 id="i-who">It changes who we are</h2>
+      <p>This work changes who we are, largely by changing what we are capable of.</p>
+      <p>Our psychological states and our physical states shape each other. As capability grows, so do confidence, resilience, mood and our sense of what is possible. The research sees it too. Across 218 trials, walking or jogging, strength training and yoga all reduced depression, and more so at higher intensity (<a class="c" href="https://bibbase.org/network/publication/noetel-sanders-gallardogmez-taylor-cruz-hoek-smith-mahoney-etal-effectofexercisefordepressionsystematicreviewandnetworkmetaanalysisofrandomisedcontrolledtrials-2024" target="_blank" rel="noopener">Noetel et al., 2024</a>). Among 266,939 people followed for more than seven years, the highly active were less likely to develop depression at all (<a class="c" href="https://www.kcl.ac.uk/archive/news/ioppn/records/2018/april/engaging-in-physical-activity-decreases-people's-chance-of-developing-depression" target="_blank" rel="noopener">Schuch et al., 2018</a>). And regular training helps us fall asleep faster and sleep longer (<a class="c" href="https://search.pedro.org.au/search-results/record-detail/42289" target="_blank" rel="noopener">Kredlow et al., 2015</a>).</p>
+      <p>But the numbers only reach so far. A woman in her 80s came to me prone to falls, with very poor balance, afraid of the physical world. After a year she was roughly five to six times stronger and could get down to the ground and back up. There's a light on in her eyes now. No lab value captures that, and it is a pretty common experience.</p>
+      <p>I'm constantly musing about what exercise is and how it shapes us as human beings: how it facilitates the things we want to do in the world, how it helps construct a better experience than we would otherwise have. Where I keep landing is this. We don't discover who we are. We decide who we are going to be, and we become it. Training is one of the most direct ways I know to do that, because every session is a decision made in the body, and the body keeps the record.</p>
+
+      <h2 id="i-path">The path ahead</h2>
+      <p>There is a path, and it heads in the same direction for all of us: more strength, more aerobic capacity, more access to everything the body and the person can do. Where we stand on it is different for each of us. This book is built to help you find where you are, and to travel it. Fourteen chapters, in five parts.</p>
+      <ol>
+        <li><strong>Why it matters.</strong> Chapter 1, Fitness is capability: fitness as the capacity to tolerate stress, and training, not working out. Chapter 2, How we know: what the evidence is, and how strong.</li>
+        <li><strong>The cell and the systems.</strong> Chapter 3, Two cities: the fit cell and the sedentary cell, side by side. Chapter 4, Metabolism rewired, and muscle as an endocrine organ. Chapter 5, The infrastructure: heart, lungs, vessels, connective tissue and bone. Chapter 6, Immunity. Chapter 7, The brain. Chapter 8, The mind.</li>
+        <li><strong>Exercise against disease.</strong> Chapter 9, Cancer. Chapter 10, The pharmacy: heart disease, type 2 diabetes, falls and fractures, frailty.</li>
+        <li><strong>Building it.</strong> Chapter 11, The two pillars: aerobic fitness and strength, and why together beats either. Chapter 12, Aging and the far end of the curve. Chapter 13, Training: how we meet people where they are, progress at the pace of the slowest tissue, periodize the work and recover by design. This is the Niemeyer Method, and everything else rests on it.</li>
+        <li><strong>The close.</strong> Chapter 14: a call to action.</li>
+      </ol>
+      <p>Within a couple of weeks of training well, we start to feel better. Within two months, we're a lot better than we were. Several months in, we can look like a completely different person. This isn't like flipping a switch. It's a process of staying oriented around our ideals and continually moving toward them, no matter how slow.</p>
+      <p class="pull">Training is the process of health. Let's begin where it begins: with where you are.</p>
+
+      <a class="next-card" href="#meet-people-where-they-are">
+        <span class="eyebrow">Next · The Niemeyer Method</span>
+        <h3>Meet people where they are</h3>
+        <span class="muted">Locating the person, progressing the load, and periodizing for a lifetime of training.</span>
+        <span class="go">Read →</span>
+      </a>
+
+      <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="introduction"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <p class="sub-title">Get each new chapter in your inbox</p>
+        <p class="muted">One idea a week. No hacks. No shortcuts.</p>
+        <div class="sub-row"><label class="sr" for="sub-intro">Email address</label><input id="sub-intro" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
+
+      <div class="sources">
+        <p class="eyebrow">Sources</p>
+        <p>Each study is linked where it is cited. The links go to the paper, its abstract record, or a summary by the journal, a university or a medical news outlet. Two findings need care in how they're read: the whole-body molecular map (MoTrPAC) was done in rats, and the dementia finding (Hörder) is observational.</p>
+      </div>
+    </article>
+
+    <aside class="toc">
+      <div class="toc-box contents">
+        <p class="eyebrow">In this introduction</p>
+        <ol>
+          <li><a href="#introduction" data-jump="i-health">What we mean by health</a></li>
+          <li><a href="#introduction" data-jump="i-movement">Movement is life</a></li>
+          <li><a href="#introduction" data-jump="i-further">No intervention reaches further</a></li>
+          <li><a href="#introduction" data-jump="i-training">What training is, and what it is not</a></li>
+          <li><a href="#introduction" data-jump="i-extremes">What the extremes teach us</a></li>
+          <li><a href="#introduction" data-jump="i-who">It changes who we are</a></li>
+          <li><a href="#introduction" data-jump="i-path">The path ahead</a></li>
+        </ol>
+      </div>
+      <div class="toc-box">
+        <p class="eyebrow">Formats</p>
+        <ul class="formats">
+          <li class="on"><span>Read</span><span>Available</span></li>
+          <li><span>Watch</span><span>Coming</span></li>
+          <li><span>One-page summary</span><span>Coming</span></li>
+        </ul>
+      </div>
+    </aside>
+  </div></section>
+</div>
+
+<!-- ================= MODULE: MEET PEOPLE WHERE THEY ARE ================= -->
+<div class="view module" data-view="meet-people-where-they-are" data-section="library" hidden>
+  <section class="page-head"><div class="wrap">
+    <a class="back" href="#library">← Library</a>
+    <p class="eyebrow">Module · The Niemeyer Method <span class="tag draft">Draft</span></p>
+    <h1>Meet people where they are.</h1>
+    <p class="lead measure">Locating the person, progressing the load, and periodizing for a lifetime of training.</p>
+    <div class="module-meta"><span>Shane Niemeyer</span><span>12 min read</span><span>24 studies cited</span><span>In the book: Chapter 13, Training</span></div>
+  </div></section>
+
+  <section class="band"><div class="wrap split-wide">
+    <article class="post-body" id="m-top">
+      <p>There is a path. It is everywhere and always, and it heads in the same direction for all of us. Where we stand on it is different for each person. Sometimes it is obscured by the weather of life, by circumstance, but like the sun, which is always shining above the clouds, it's there. Our work is to find where you are on it, and to travel it.</p>
+      <p>The direction is universal: more strength, more aerobic capacity, more access to everything the body can do. What is not universal is how we apply the stimulus. The type of training, how much, how hard and how often have to fit the person in front of us, where they actually are, not where a program assumes they are.</p>
+      <p>This chapter makes one argument. Most training injuries are predictable. They happen when load outpaces the tissues that adapt most slowly. Locate the person accurately, progress them at the pace of their slowest tissues, and build recovery in by design, and they stay healthy. If we're healthy, we're training. If we're training, we're transforming.</p>
+      <p>I have watched this hold across more than twenty years and hundreds of people, from professional athletes to people in their late 80s living with dementia. Intelligent design is what makes lifelong training possible.</p>
+
+      <h2 id="m-glance">The Niemeyer Method at a glance</h2>
+      <figure class="figure-box loop" aria-label="The method is a loop: locate, prescribe, progress, recover, reassess, then adjust">
+        <p class="eyebrow">The method is a loop, not a straight line</p>
+        <svg viewBox="0 0 760 245" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Locate, prescribe, progress, recover, reassess, then adjust and loop back to prescribe">
+<defs><marker id="loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="l-head" d="M0 0L10 5L0 10z"/></marker></defs>
+<g>
+<path class="l-edge" d="M240.0 52H270.0" marker-end="url(#loop-arrow)"/>
+<path class="l-edge" d="M488.0 52H518.0" marker-end="url(#loop-arrow)"/>
+<path class="l-edge" d="M628 88.0V152.0" marker-end="url(#loop-arrow)"/>
+<path class="l-edge" d="M520.0 190H490.0" marker-end="url(#loop-arrow)"/>
+<path class="l-edge" d="M380 154.0V90.0" marker-end="url(#loop-arrow)"/>
+</g>
+<rect class="l-box main" x="24.0" y="16.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="132" y="42" text-anchor="middle">Locate</text>
+<text class="l-s" x="132" y="60" text-anchor="middle">Intake, movement, lab tests</text>
+<text class="l-s" x="132" y="76" text-anchor="middle">Where are you on the path?</text>
+<rect class="l-box" x="272.0" y="16.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="380" y="42" text-anchor="middle">Prescribe</text>
+<text class="l-s" x="380" y="60" text-anchor="middle">Dose from your own thresholds</text>
+<text class="l-s" x="380" y="76" text-anchor="middle">Enough to force adaptation</text>
+<rect class="l-box" x="520.0" y="16.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="628" y="42" text-anchor="middle">Progress</text>
+<text class="l-s" x="628" y="60" text-anchor="middle">At the pace of the slowest</text>
+<text class="l-s" x="628" y="76" text-anchor="middle">tissue. Never a spike.</text>
+<rect class="l-box" x="520.0" y="154.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="628" y="180" text-anchor="middle">Recover</text>
+<text class="l-s" x="628" y="198" text-anchor="middle">Every 3rd to 5th week, cut</text>
+<text class="l-s" x="628" y="214" text-anchor="middle">load about 50%. Sleep.</text>
+<rect class="l-box" x="272.0" y="154.0" width="216" height="72" rx="8"/>
+<text class="l-t" x="380" y="180" text-anchor="middle">Reassess</text>
+<text class="l-s" x="380" y="198" text-anchor="middle">Re-test, and adjust</text>
+<text class="l-s" x="380" y="214" text-anchor="middle">the next block</text>
+<text class="l-s" x="390" y="125.0">adjust</text>
+</svg>
+        <ol class="loop-list">
+          <li><strong>Locate.</strong> Intake, movement, lab tests. Where are you on the path?</li>
+          <li><strong>Prescribe.</strong> Dose from your own thresholds. Enough to force adaptation.</li>
+          <li><strong>Progress.</strong> At the pace of the slowest tissue. Never a spike.</li>
+          <li><strong>Recover.</strong> Every 3rd to 5th week, cut load about 50%. Sleep.</li>
+          <li><strong>Reassess.</strong> Re-test, and adjust the next block.</li>
+        </ol>
+      </figure>
+      <p>We locate once, then keep relocating. Each block of training ends with a reassessment, and the next prescription starts from where the person is now.</p>
+
+      <h2 id="m-locate">Locating: finding where you are on the path</h2>
+      <p>Everything starts with an honest location. Before we ever meet, I ask about injury history, how someone feels physically and about life in general, what their sleep is like, how they characterize their nutrition, what they want, and what gets in the way.</p>
+      <p>The question of what they want matters most. I push people to describe, in as much detail as possible, how they want their body to look, feel and function, and then to feel into that space. We cannot hit a target we cannot see.</p>
+      <p>The first session is a workout that is also an assessment. I modify movement on the spot according to what I see: range of motion, quality of movement, discomfort. You can often see and hear how fit someone is aerobically. Without making anyone nervous, I can identify postural distortions and compensations throughout the kinetic chain.</p>
+      <p>Then we measure. A few simple tests tell us more about a person's future than most of what happens in a doctor's office:</p>
+      <ul>
+        <li><strong>Grip strength.</strong> Among 139,691 adults in 17 countries, every 5 kg of lower grip strength meant 16% higher mortality, a stronger predictor of death than systolic blood pressure (<a class="c" href="https://www.eurekalert.org/news-releases/491049" target="_blank" rel="noopener">Leong et al., 2015</a>).</li>
+        <li><strong>Getting down to the floor and back up.</strong> In 2,002 adults aged 51 to 80, those who needed the most support had 5 to 6 times the risk of death of those who needed the least. Each point gained on the 10-point test meant 21% lower mortality (<a class="c" href="https://escardio.org/The-ESC/Press-Office/Press-releases/Ability-to-sit-and-rise-from-the-floor-is-closely-correlated-with-all-cause-mort" target="_blank" rel="noopener">Brito, Araújo et al., 2014</a>).</li>
+        <li><strong>Aerobic fitness.</strong> Each step up in fitness, measured in METs, meant about 14% lower mortality among more than 750,000 veterans (<a class="c" href="https://www.tctmd.com/news/cardiorespiratory-fitness-key-longevity-regardless-age-sex-and-race" target="_blank" rel="noopener">Kokkinos et al., 2022</a>).</li>
+      </ul>
+      <p>When we test aerobic fitness in the lab, we measure each person's own ventilatory thresholds instead of guessing from age-based formulas. That changes outcomes. In one trial, everyone whose training intensity was set from their own thresholds improved their VO2max, against 60% of those given standard heart-rate zones (<a class="c" href="https://paulogentil.com/pdf/Incidence%20of%20VO2max%20Responders%20to%20Personalized%20versus%20Standardized%20Exercise%20Prescription.pdf" target="_blank" rel="noopener">Weatherwax et al., 2019</a>). Pooled data from 1,544 people across 42 studies found the same: thresholds beat percentages (<a class="c" href="https://lida.sport-iat.de/ta/Record/4095378?lng=en" target="_blank" rel="noopener">Meyler et al., 2025</a>).</p>
+      <p>Locating is not a one-time event. People move along the path, so we keep finding them.</p>
+
+      <h2 id="m-tissue">The slowest tissue sets the pace</h2>
+      <p>Here is the fact most training programs ignore: the body's tissues do not adapt at the same speed.</p>
+      <p>Muscle adapts in weeks. It is constantly being broken down and rebuilt, and a few weeks of good training show up as real strength. Tendons, ligaments, cartilage and bone adapt over months and years.</p>
+      <figure class="figure-box" aria-label="Muscle adapts in weeks; tendon, ligament, cartilage and bone over months and years">
+        <p class="eyebrow">How fast each tissue adapts</p>
+        <div class="trow"><span class="tl">Muscle</span><div class="tbar"><span style="width:10%;background:var(--cool)"></span></div><span class="tv">Weeks</span></div>
+        <div class="trow"><span class="tl">Tendon, ligament, cartilage, bone</span><div class="tbar"><span style="width:100%;background:var(--hot)"></span></div><span class="tv">Months to years</span></div>
+        <figcaption class="figure-note">Illustrative, not to scale. The space between these two bars is where injuries live.</figcaption>
+      </figure>
+      <p>The most striking evidence comes from an unlikely place. Nuclear testing in the 1950s and early 1960s spiked the carbon-14 in the atmosphere, and that spike was recorded in the tissues of everyone alive at the time. Decades later, researchers found the spike still sitting in the core of people's Achilles tendons, while their muscle showed no trace of it. Muscle had been renewed many times over. The tendon core had barely changed since they stopped growing (<a class="c" href="https://sciencedaily.com/releases/2013/02/130212112019.htm" target="_blank" rel="noopener">Heinemeier et al., 2013</a>). The same team later found almost no collagen renewal in adult knee cartilage (<a class="c" href="https://www.science.org/doi/10.1126/scitranslmed.aad8335" target="_blank" rel="noopener">Heinemeier et al., 2016</a>).</p>
+      <p>Tendons do adapt. Across 27 studies, training made tendons stiffer and stronger, and the load had to be heavy to do it: tendons respond to high-magnitude loading, not light work (<a class="c" href="https://sponet.de/Record/4063257" target="_blank" rel="noopener">Bohm et al., 2015</a>). But they adapt on their own clock, which is far slower than muscle's.</p>
+      <p>That gap is where injuries live. In adolescent volleyball players, muscle strength outpaced tendon adaptation, leaving their tendons under more stress than those of experienced adult athletes (<a class="c" href="https://onlinelibrary.wiley.com/doi/10.1111/sms.12166" target="_blank" rel="noopener">Mersmann et al., 2014</a>). The same thing happens to a 55-year-old who feels strong after six weeks and doubles the load. The muscle is ready. The tendon is not.</p>
+      <p>The cost of ignoring this is enormous. Among long-distance triathletes, studies report overuse injury rates anywhere from 37% to 91% (<a class="c" href="https://johk.pl/?p=6236" target="_blank" rel="noopener">Rhind et al., 2022</a>). In distance runners, 19% to 79% (<a class="c" href="https://repub.eur.nl/pub/36044" target="_blank" rel="noopener">van Gent et al., 2007</a>). And most of these injuries trace back to training errors: an estimated 60% or more of overuse running injuries come from training-related variables (<a class="c" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3290924" target="_blank" rel="noopener">Nielsen et al., 2012</a>).</p>
+      <p class="pull">Injury is most often the result of training errors, which are predictable and avoidable through intelligent and individualized design. So we progress at the pace of the slowest tissue, not the fastest.</p>
+
+      <h2 id="m-progress">Progression: enough stimulus, never a spike</h2>
+      <p>Progression has two jobs that pull against each other. The stimulus has to be big enough to force adaptation. And it can never jump faster than the slowest tissue can follow.</p>
+      <p><strong>Enough.</strong> Fitness responds to dose. When 464 sedentary women trained at the same intensity for about 72, 136 or 192 minutes a week, their fitness rose 4.2%, 6.0% and 8.2% over a control group (<a class="c" href="https://reliasmedia.com/articles/105390-exercise-and-fitness-benefits-at-half-pace" target="_blank" rel="noopener">Church et al., 2007</a>). People who seem not to respond usually haven't had enough. In one trial, 69% of people training once a week failed to improve. At four or five sessions a week, no one failed. And when the "non-responders" added two more sessions a week, every one of them responded (<a class="c" href="https://folia.unifr.ch/global/documents/21534" target="_blank" rel="noopener">Montero &amp; Lundby, 2017</a>).</p>
+      <p>There is no age at which this stops. Nursing-home residents aged 87 to 96 gained an average of 174% in leg strength after eight weeks of heavy training (<a class="c" href="https://www.hebrewseniorlife.org/blog/study-redefined-how-we-view-strength-training-and-aging" target="_blank" rel="noopener">Fiatarone et al., 1990</a>).</p>
+      <p><strong>Never a spike.</strong> The danger is the sudden jump. Tracking 5,205 runners across about 588,000 runs, researchers found that a single run 10–30% longer than the longest in the previous 30 days raised injury risk 64%. A run more than twice as long more than doubled it (<a class="c" href="https://blogs.bmj.com/bjsm/?p=11751" target="_blank" rel="noopener">Frandsen et al., 2025</a>). The risk is predictable, which means it can be designed out.</p>
+      <p><strong>Strength that protects.</strong> The right strength work does more than build muscle. It protects tissue. Across 25 trials and 26,610 people, strength training cut sports injuries to less than a third (<a class="c" href="https://blogs.bmj.com/bjsm/2014/07/20/exercises-to-prevent-sports-injuries-lots-of-talk-but-do-they-work/" target="_blank" rel="noopener">Lauersen et al., 2014</a>). In novice runners, a hip-and-core program cut lower-limb injuries by 34% and serious overuse injuries by 52% (<a class="c" href="https://jyx.jyu.fi/bitstreams/e2859d03-5c86-4f9d-99b1-1dae394b39a3/download" target="_blank" rel="noopener">Leppänen et al., 2024</a>).</p>
+      <p>So the plan steps up in deliberate increments, adds strength work that loads the tendons and joints heavily enough to adapt, and never asks the body for a sudden leap it hasn't earned.</p>
+
+      <h2 id="m-period">Periodization: planned waves of work and recovery</h2>
+      <p>Without structure and a plan, there is, inherently, less achievement. Most people do what is convenient, or what they feel like on the day. They lack objectivity. Periodization is the answer: training organized in planned waves, so that work and recovery each arrive on purpose.</p>
+      <p>In practice, it looks like this:</p>
+      <ul>
+        <li><strong>Build, then back off.</strong> Volume and intensity rise over two to four weeks. Then comes a recovery week, cutting both by around 50%. Most people rest every third or fourth week; athletes often go four or five.</li>
+        <li><strong>Weight the aerobic side.</strong> The ACSM minimums are a floor, and probably still not enough: 150 minutes of aerobic work and two days of strength each week. I want people working toward 3 to 5 hours of aerobic training, with about 80% of the total load aerobic.</li>
+        <li><strong>Make easy easy and hard hard.</strong> Most people lack polarity. They never truly recover, so they never get the benefits of true aerobic states, and they never truly go hard, so they never train the top end of the bioenergetic continuum. Most of the work should be genuinely easy, with intervals two days a week.</li>
+        <li><strong>Keep changing the variables.</strong> Training type, exercise selection, intensity, modality and duration are all levers. We move them on purpose.</li>
+      </ul>
+      <p>The research supports each piece. Across 18 studies, periodized strength training produced greater maximal strength than the same training without periodization, and programs that varied the load from day to day beat simple linear plans (<a class="c" href="https://www.fisiologiadelejercicio.com/wp-content/uploads/2017/05/Comparison-of-Periodized-and-Non-Periodized-Resistance.pdf" target="_blank" rel="noopener">Williams et al., 2017</a>). In well-trained endurance athletes, polarized training produced the largest gains in VO2peak, 11.7%, while more threshold work or more volume added nothing (<a class="c" href="https://frontiersin.org/journals/physiology/articles/10.3389/fphys.2014.00033/text" target="_blank" rel="noopener">Stöggl &amp; Sperlich, 2014</a>). In type 2 diabetes, only the combination of aerobic and strength training significantly lowered blood sugar (<a class="c" href="https://www.sciencedaily.com/releases/2010/11/101123174340.htm" target="_blank" rel="noopener">Church et al., 2010</a>).</p>
+      <p>The plan also bends to life. When work, travel or illness crowds training out, fitness holds on less than people think. In younger adults, strength and muscle held for up to 32 weeks on one hard session a week; older adults may need two. Endurance held for up to 15 weeks on as few as two sessions a week. The condition in every case: intensity stays high (<a class="c" href="https://pubmed.ncbi.nlm.nih.gov/33629972" target="_blank" rel="noopener">Spiering et al., 2021</a>). A well-designed plan has a minimum to fall back on, so a hard month never becomes a lost year.</p>
+
+      <h2 id="m-recover">Recovery and the inner life</h2>
+      <p>Adaptation does not happen during the work. It happens during recovery. The recovery week is when and how fitness manifests itself, and how we stay psychologically fresh and hungry.</p>
+      <p>The research shows it plainly. Across 14 studies, endurance athletes who cut their training volume by 41–60% before a race, while keeping intensity and frequency, improved their race performance and their time to exhaustion (<a class="c" href="https://lida.sport-iat.de/ta/Record/4081751?lng=en" target="_blank" rel="noopener">Wang et al., 2023</a>). They did less, and they got better.</p>
+      <p>Sleep is essential. It is foundational. Regular training improves it in return: across 66 studies, exercise improved sleep quality and helped people fall asleep faster and sleep longer (<a class="c" href="https://search.pedro.org.au/search-results/record-detail/42289" target="_blank" rel="noopener">Kredlow et al., 2015</a>).</p>
+      <p>A recovery week is also a good time to catch up on life, and to tend to our inner life. I think it is very important to keep an eye on what we are doing and why we are doing it, and to live an examined life. Our minds can push us around in ways we are unaware of.</p>
+      <p>I encourage us to take quiet moments, to look at the quality and contents of our inner world, and to be active participants in this process of recovery. Our psychological states and our physical states shape each other. Recovery is where we tend to both.</p>
+
+      <h2 id="m-lifetime">A lifetime of training</h2>
+      <p>I learned this first on myself. In prison, I had to start where I was, and where I was, was almost nowhere. I couldn't retain a sentence. I couldn't do much in the way of push-ups or sit-ups. Within weeks, and then months, that changed. A year in, I was in totally different shape than I had ever been. Every system of the body adapts to the demands we impose on it, if we impose them intelligently.</p>
+      <p>Then I spent two decades applying it to other people. Across more than twenty years and hundreds of clients, I can count fewer than 10 injuries caused by training. When we progress loads intelligently and reduce them regularly, keeping people healthy becomes predictable. And because they stay healthy, they keep training, and because they keep training, they keep transforming.</p>
+      <p>That is what makes the results possible:</p>
+      <ul>
+        <li><strong>A woman in her 80s</strong> came to me prone to falls, with very poor balance, afraid of the physical world. Within six months she was doing much better. Within nine, she was in a completely different space. After a year she was almost unrecognizable: roughly five to six times stronger, with far more aerobic capacity, able to get down to the ground and back up. There's a light on in her eyes now. Which, by the way, is a pretty common experience.</li>
+        <li><strong>A high school runner</strong> was constantly injured and running well below her capability. Putting her in a healthier space made consistent training possible, and with consistency comes the development of fitness. She now runs for an Ivy League Division I program, with a lot of success.</li>
+        <li><strong>A woman who started over 300 pounds,</strong> in the lowest fifth for aerobic fitness, has been injury-free for almost a year. Because she stayed healthy, we kept adding volume. She now runs, swims in open water and routinely rides for more than two hours. It is one of the most significant transformations I have ever seen.</li>
+      </ul>
+      <p>The same care applies to testing. Unlike many labs, I prepare people before a maximal test. We talk through the mask, the intensity, what maximal actually feels like, and we run mild simulations so the joints and tissues are ready. Testing someone too early carries risks, to connective tissue and to confidence. The north star is always to remain healthy.</p>
+
+      <h2 id="m-you">What this means for you</h2>
+      <p>It doesn't matter where you have come from, or where you are. The only thing that matters is this moment, and what's next.</p>
+      <ol>
+        <li><strong>Find out where you are.</strong> Get an honest picture of your capability: your strength, your aerobic fitness, how you move, how you get down to the floor and back up. Measured, not guessed.</li>
+        <li><strong>Decide where you are going.</strong> Describe, in as much detail as possible, how you want your body to look, feel and function. Feel into that space. We cannot hit a target we cannot see.</li>
+        <li><strong>Start below your limit and step up.</strong> Build in deliberate increments. Avoid the sudden jump, especially in a single session.</li>
+        <li><strong>Train strength, and weight the aerobic side.</strong> At least 150 minutes of aerobic work and two strength sessions a week as a floor, working toward 3 to 5 hours of aerobic training.</li>
+        <li><strong>Make easy easy and hard hard.</strong></li>
+        <li><strong>Rest on purpose.</strong> Every third, fourth or fifth week, cut the load by about half. Sleep. Tend to your inner life.</li>
+        <li><strong>Reassess.</strong> Test again, and adjust the plan as you change.</li>
+      </ol>
+      <p>Within a couple of weeks, we start to feel better. Within two months, we're a lot better than we were. Several months in, we can look like a completely different person.</p>
+      <p class="pull">This isn't like flipping a switch. It's a process of staying oriented around our ideals and continually moving toward them, no matter how slow. The only thing that matters is that we keep getting up every time we fall down.</p>
+
+      <a class="next-card" href="#never-easy-never-hard">
+        <span class="eyebrow">Next</span>
+        <h3>Never truly easy. Never truly hard.</h3>
+        <span class="muted">Most people train in the middle. It feels productive. It keeps them stuck.</span>
+        <span class="go">Read →</span>
+      </a>
+
+      <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="module"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <p class="sub-title">Get the next module in your inbox</p>
+        <p class="muted">One idea a week. No hacks. No shortcuts.</p>
+        <div class="sub-row"><label class="sr" for="sub-module">Email address</label><input id="sub-module" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
+
+      <div class="sources">
+        <p class="eyebrow">Sources</p>
+        <p>Each study is linked where it is cited. The links go to the paper, its abstract record, or a summary by the journal or a medical news outlet.</p>
+        
+      </div>
+    </article>
+
+    <aside class="toc">
+      <div class="toc-box contents">
+        <p class="eyebrow">In this module</p>
+        <ol>
+          <li><a href="#meet-people-where-they-are" data-jump="m-glance">The Niemeyer Method at a glance</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-locate">Locating</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-tissue">The slowest tissue sets the pace</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-progress">Progression</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-period">Periodization</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-recover">Recovery and the inner life</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-lifetime">A lifetime of training</a></li>
+          <li><a href="#meet-people-where-they-are" data-jump="m-you">What this means for you</a></li>
+        </ol>
+      </div>
+      <div class="toc-box">
+        <p class="eyebrow">Formats</p>
+        <ul class="formats">
+          <li class="on"><span>Read</span><span>Available</span></li>
+          <li><span>Watch</span><span>Coming</span></li>
+          <li><span>One-page summary</span><span>Coming</span></li>
+          <li><span>Provider brief</span><span>Coming</span></li>
+        </ul>
+      </div>
+    </aside>
+  </div></section>
+</div>
+
+<!-- ================= EXERCISE LIBRARY ================= -->
+<div class="view" data-view="exercises" data-section="library" hidden>
+  <section class="page-head"><div class="wrap">
+    <a class="back" href="#library">← Library</a>
+    <p class="eyebrow">Exercise library <span class="tag draft">Sample layout</span></p>
+    <h1>Every movement sits on a ladder.</h1>
+    <p class="lead measure">We start every person where they are and progress them at the pace of their slowest tissues. So every movement here has a first rung anyone can stand on, and a path to the top. Each one filmed, explained, and linked to what comes before and after it.</p>
+    <p class="cite-line"><span class="tag draft">Placeholder ladders</span>Shane's exercise list and filming replace these.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap feature">
+    <div class="video" role="img" aria-label="Video placeholder"><div class="play"></div><span>Filming to come</span></div>
+    <div class="stack">
+      <p class="eyebrow">Featured · Ground</p>
+      <h2>Getting down to the floor and back up.</h2>
+      <p class="measure">In 2,002 adults aged 51 to 80, those who needed the most support had 5 to 6 times the risk of death of those who needed the least. Each point gained on the 10-point test meant 21% lower mortality.</p>
+      <p class="cite-line"><span class="tag">Cohort</span><a href="https://escardio.org/The-ESC/Press-Office/Press-releases/Ability-to-sit-and-rise-from-the-floor-is-closely-correlated-with-all-cause-mort" target="_blank" rel="noopener">Brito, Araújo et al., 2014</a></p>
+      <ol class="rungs">
+        <li>Supported floor transfer</li>
+        <li>Half-kneeling to stand</li>
+        <li>Floor to stand, one hand</li>
+        <li>Floor to stand, no hands</li>
+      </ol>
+      <div class="note-box"><span class="eyebrow">Coaching notes</span><span class="muted">Shane's cues, common faults and when to move up a rung go here.</span></div>
+    </div>
+  </div></section>
+
+  <section class="band surface"><div class="wrap stack-lg">
+    <div class="section-head" style="margin-bottom:0">
+      <p class="eyebrow">Browse by pattern</p>
+      <h2>Nine patterns. Every rung.</h2>
+    </div>
+    <div class="chips" role="group" aria-label="Filter by movement pattern">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="squat" aria-pressed="false">Squat</button>
+      <button type="button" data-filter="hinge" aria-pressed="false">Hinge</button>
+      <button type="button" data-filter="lunge" aria-pressed="false">Lunge &amp; step</button>
+      <button type="button" data-filter="push" aria-pressed="false">Push</button>
+      <button type="button" data-filter="pull" aria-pressed="false">Pull</button>
+      <button type="button" data-filter="carry" aria-pressed="false">Carry</button>
+      <button type="button" data-filter="ground" aria-pressed="false">Ground</button>
+      <button type="button" data-filter="balance" aria-pressed="false">Balance</button>
+      <button type="button" data-filter="gait" aria-pressed="false">Gait</button>
+    </div>
+    <div class="ladders">
+      <article class="ladder" data-pattern="squat"><header><h3>Squat</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Sit to stand</li><li>Box squat</li><li>Goblet squat</li><li>Front squat</li></ol></article>
+      <article class="ladder" data-pattern="hinge"><header><h3>Hinge</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Dowel hip hinge</li><li>Kettlebell deadlift</li><li>Romanian deadlift</li><li>Trap bar deadlift</li></ol></article>
+      <article class="ladder" data-pattern="lunge"><header><h3>Lunge &amp; step</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Step-up</li><li>Split squat</li><li>Reverse lunge</li><li>Rear-foot elevated split squat</li></ol></article>
+      <article class="ladder" data-pattern="push"><header><h3>Push</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Wall push-up</li><li>Incline push-up</li><li>Push-up</li><li>Weighted push-up</li></ol></article>
+      <article class="ladder" data-pattern="pull"><header><h3>Pull</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Band row</li><li>Supported dumbbell row</li><li>Inverted row</li><li>Pull-up</li></ol></article>
+      <article class="ladder" data-pattern="carry"><header><h3>Carry</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Farmer carry</li><li>Suitcase carry</li><li>Front-rack carry</li><li>Overhead carry</li></ol></article>
+      <article class="ladder" data-pattern="ground"><header><h3>Ground</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Supported floor transfer</li><li>Half-kneeling to stand</li><li>Floor to stand, one hand</li><li>Floor to stand, no hands</li></ol></article>
+      <article class="ladder" data-pattern="balance"><header><h3>Balance</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Tandem stance</li><li>Single-leg stand</li><li>Single-leg reach</li><li>Lateral hops</li></ol></article>
+      <article class="ladder" data-pattern="gait"><header><h3>Gait</h3><span class="eyebrow">4 rungs</span></header><ol class="rungs"><li>Walk</li><li>Incline walk</li><li>Walk-run intervals</li><li>Run</li></ol></article>
+    </div>
+  </div></section>
+</div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Shane Niemeyer · Boulder County, Colorado</span>
+    <span><a href="#doctrine">Doctrine</a> · <a href="#process">Process</a> · <a href="#library">Library</a> · <a href="#writing">Writing</a> · <a href="#providers">For Providers</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
+  var names = views.map(function (v) { return v.getAttribute('data-view'); });
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+  function show() {
+    var name = (location.hash || '').slice(1);
+    if (names.indexOf(name) === -1) name = 'home';
+    var section = name;
+    views.forEach(function (v) {
+      var match = v.getAttribute('data-view') === name;
+      v.hidden = !match;
+      if (match && v.getAttribute('data-section')) section = v.getAttribute('data-section');
+    });
+    navLinks.forEach(function (a) {
+      if (a.getAttribute('data-nav') === section) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', show);
+  show();
+
+  var header = document.querySelector('header.site');
+  var menuBtn = header.querySelector('.menu-btn');
+  function setMenu(open) { header.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  menuBtn.addEventListener('click', function () { setMenu(!header.classList.contains('open')); });
+  header.querySelectorAll('nav.primary a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('c-status');
+  function send(f) {
+    return fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(f)).toString()
+    }).then(function (r) { if (!r.ok) throw new Error(r.status); });
+  }
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = form.elements.name.value.trim();
+    var email = form.elements.email.value.trim();
+    if (!name || !validEmail(email)) { status.textContent = 'Add your name and a valid email so I can write back.'; return; }
+    var btn = form.querySelector('button[type=submit]');
+    btn.disabled = true; status.textContent = 'Sending…';
+    send(form).then(function () {
+      form.reset();
+      status.textContent = 'Got it. I read every one of these myself, and I\'ll write back soon. — Shane';
+    }).catch(function () {
+      status.textContent = 'That didn\'t go through. Try again in a minute.';
+    }).then(function () { btn.disabled = false; });
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-jump]')).forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.getElementById(a.getAttribute('data-jump'));
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chips [data-filter]'));
+  var ladders = Array.prototype.slice.call(document.querySelectorAll('.ladder[data-pattern]'));
+  chips.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      chips.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      ladders.forEach(function (l) { l.hidden = !(f === 'all' || l.getAttribute('data-pattern') === f); });
+    });
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('form.subscribe')).forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var st = f.querySelector('.form-status');
+      if (!validEmail(f.elements.email.value.trim())) { st.textContent = 'Enter a valid email address.'; return; }
+      var btn = f.querySelector('button[type=submit]');
+      btn.disabled = true; st.textContent = 'Signing you up…';
+      send(f).then(function () {
+        f.reset(); st.textContent = 'You\'re in. The first letter is on its way soon.';
+      }).catch(function () {
+        st.textContent = 'That didn\'t go through. Try again in a minute.';
+      }).then(function () { btn.disabled = false; });
+    });
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Library · Shane Niemeyer</title>
+<meta name="description" content="From the cell to the whole human being. The book, the modules and the exercise library: how training transforms us, with the evidence behind every claim.">
+<link rel="canonical" href="https://shaneniemeyer.com/library/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shane Niemeyer">
+<meta property="og:title" content="The Library · Shane Niemeyer">
+<meta property="og:description" content="From the cell to the whole human being. The book, the modules and the exercise library: how training transforms us, with the evidence behind every claim.">
+<meta property="og:url" content="https://shaneniemeyer.com/library/">
+<meta property="og:image" content="https://shaneniemeyer.com/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Shane Niemeyer. Training is the process of health.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="theme-color" content="#FFFFFF">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: a training-log site. Heavy expanded grotesk for conviction, serif for Shane's voice, mono for the lab's numbers.
+   Recurring device: the intensity-distribution bar (below / between / above threshold). */
+:root {
+  --ground: #F1F4F6;
+  --surface: #FFFFFF;
+  --ink: #111C27;
+  --muted: #55636F;
+  --line: #D5DCE2;
+  --chip: #E5EBF1;
+  --accent: #1E4FD0;
+  --accent-ink: #FFFFFF;
+  --cool: #2E7C9B;
+  --mid: #9AA6B1;
+  --hot: #D4471E;
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0C1218; --surface: #131B23; --ink: #E6ECF1; --muted: #93A1AD; --line: #27323C; --chip: #1B2631;
+    --accent: #7D9DFF; --accent-ink: #0C1218; --cool: #5DB2D0; --mid: #5F6C78; --hot: #FF7B55;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0C1218; --surface: #131B23; --ink: #E6ECF1; --muted: #93A1AD; --line: #27323C; --chip: #1B2631;
+  --accent: #7D9DFF; --accent-ink: #0C1218; --cool: #5DB2D0; --mid: #5F6C78; --hot: #FF7B55;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--surface);
+}
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 3px;
+}
+.wrap {
+  max-width: 1120px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.measure { max-width: 66ch; }
+
+/* type */
+h1, h2, h3, .display {
+  font-family: var(--display); font-stretch: 115%; font-weight: 800;
+  line-height: 1.02; letter-spacing: -0.01em; text-wrap: balance; margin: 0;
+}
+h1 { font-size: clamp(2.5rem, 6.4vw, 4.9rem); }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+h3 { font-size: 1.2rem; font-stretch: 105%; font-weight: 750; line-height: 1.2; letter-spacing: 0; }
+p { margin: 0; }
+.lead { font-size: clamp(1.15rem, 1.9vw, 1.35rem); line-height: 1.55; color: var(--ink); }
+.muted { color: var(--muted); }
+.eyebrow {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+.stack { display: grid; gap: 1rem; }
+.stack-lg { display: grid; gap: 1.75rem; }
+
+/* preview banner + header */
+.preview {
+  background: var(--chip); color: var(--muted);
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.02em;
+}
+.preview .wrap { padding-block: 8px; }
+header.site {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+}
+header.site .wrap {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-block: 14px; flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--display); font-stretch: 125%; font-weight: 900; font-size: 1.05rem;
+  letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); text-decoration: none;
+}
+nav.primary { min-width: 0; overflow-x: auto; }
+nav.primary ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.25rem; }
+nav.primary a {
+  display: block; padding: 6px 10px; border-radius: 6px; white-space: nowrap;
+  font-family: var(--display); font-weight: 600; font-size: 0.92rem; color: var(--muted); text-decoration: none;
+}
+nav.primary a:hover { color: var(--ink); background: var(--chip); }
+nav.primary a[aria-current="page"] { color: var(--ink); background: var(--chip); }
+
+.menu-btn { display: none; }
+@media (max-width: 760px) {
+  header.site .wrap { flex-wrap: nowrap; }
+  .menu-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem; padding: 8px 12px; border-radius: 6px;
+    font-family: var(--display); font-weight: 700; font-size: 0.92rem; color: var(--ink);
+    background: var(--chip); border: 0; cursor: pointer;
+  }
+  .menu-btn::after { content: ""; width: 12px; height: 8px; background: currentColor;
+    clip-path: polygon(0 0, 100% 0, 50% 100%); transition: transform .2s; }
+  .menu-btn[aria-expanded="true"]::after { transform: rotate(180deg); }
+  nav.primary { display: none; position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--surface); border-bottom: 1px solid var(--line); overflow: visible; }
+  header.site.open nav.primary { display: block; }
+  nav.primary ul { flex-direction: column; gap: 0; padding: 8px max(16px, env(safe-area-inset-left, 0px)) 16px; }
+  nav.primary a { padding: 12px 10px; font-size: 1.05rem; border-radius: 6px; }
+}
+
+/* buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 12px 18px; border-radius: 8px;
+  font-family: var(--display); font-weight: 700; font-size: 0.98rem; text-decoration: none;
+  border: 1.5px solid var(--accent); cursor: pointer;
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:hover { filter: brightness(1.06); }
+
+/* sections */
+.band { padding-block: clamp(48px, 7vw, 88px); }
+.band + .band { border-top: 1px solid var(--line); }
+.band.surface { background: var(--surface); }
+.section-head { display: grid; gap: 0.6rem; margin-bottom: 2rem; }
+
+/* hero */
+.hero { padding-block: clamp(40px, 7vw, 84px) clamp(40px, 6vw, 72px); }
+.hero .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero .copy { display: grid; gap: 1.4rem; min-width: 0; }
+@media (max-width: 860px) { .hero .grid { grid-template-columns: 1fr; } }
+
+/* intensity distribution panel */
+.dist {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 22px; display: grid; gap: 18px; min-width: 0;
+}
+.dist-row { display: grid; gap: 8px; }
+.dist-row .label { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.dist-row .label strong { color: var(--ink); font-weight: 500; }
+.bar { display: flex; height: 34px; border-radius: 6px; overflow: hidden; background: var(--chip); }
+.bar span { display: block; height: 100%; }
+.bar .b { background: var(--cool); }
+.bar .m { background: var(--mid); }
+.bar .a { background: var(--hot); }
+.key { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
+.key i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.figure-note { font-family: var(--mono); font-size: 0.72rem; line-height: 1.5; color: var(--muted); }
+.tabnum { font-variant-numeric: tabular-nums; }
+
+/* quote */
+.quote { display: grid; gap: 1.25rem; max-width: 46rem; }
+.quote blockquote {
+  margin: 0; font-family: var(--display); font-stretch: 110%; font-weight: 700;
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem); line-height: 1.12; text-wrap: balance;
+}
+.quote cite { font-style: normal; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* record row */
+.record { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+.record > div { padding: 18px 16px 4px 0; display: grid; gap: 4px; align-content: start; }
+.record .num { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.record .what { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); line-height: 1.45; }
+@media (max-width: 720px) { .record { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 8px; } }
+
+/* principle list */
+.principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 56px); }
+.principles article { padding-block: 22px; border-top: 1px solid var(--line); display: grid; gap: 0.5rem; min-width: 0; }
+@media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
+
+/* ways in */
+.ways { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.ways a {
+  display: grid; gap: 0.5rem; align-content: start; padding: 20px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; min-width: 0;
+}
+.ways a:hover { border-color: var(--accent); }
+.ways .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); margin-top: 0.25rem; }
+@media (max-width: 900px) { .ways { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .ways { grid-template-columns: 1fr; } }
+
+/* split rows */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: start; }
+@media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+
+/* page header for inner views */
+.page-head { padding-block: clamp(40px, 6vw, 72px) clamp(28px, 4vw, 44px); border-bottom: 1px solid var(--line); }
+.page-head .wrap { display: grid; gap: 1rem; }
+
+/* process timeline */
+.timeline { display: grid; gap: 0; }
+.step { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: clamp(16px, 4vw, 48px); padding-block: 34px; border-top: 1px solid var(--line); }
+.step .when { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); padding-top: 6px; }
+.step .body { display: grid; gap: 0.9rem; min-width: 0; }
+.step ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.25rem; }
+@media (max-width: 720px) { .step { grid-template-columns: 1fr; gap: 10px; } }
+.pull {
+  font-family: var(--display); font-stretch: 110%; font-weight: 750; font-size: 1.3rem; line-height: 1.25;
+  padding-left: 16px; border-left: 3px solid var(--accent);
+}
+.weekly { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.weekly div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 4px; }
+.weekly .v { font-family: var(--display); font-stretch: 115%; font-weight: 800; font-size: 1.35rem; line-height: 1.1; }
+.weekly .k { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+@media (max-width: 560px) { .weekly { grid-template-columns: 1fr; } }
+
+/* evidence */
+.claims { display: grid; gap: 0; }
+.claim { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: clamp(16px, 4vw, 40px); padding-block: 26px; border-top: 1px solid var(--line); }
+.claim .figure { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.claim .text { display: grid; gap: 0.5rem; min-width: 0; }
+.cite-line { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.tag {
+  display: inline-block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px; background: var(--chip); color: var(--ink); margin-right: 6px; vertical-align: 1px;
+}
+.tag.draft { background: transparent; border: 1px dashed var(--muted); color: var(--muted); }
+@media (max-width: 640px) { .claim { grid-template-columns: 1fr; gap: 8px; } }
+.chapters { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.chapters li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 12px; border-top: 1px solid var(--line); font-family: var(--display); font-weight: 600; min-width: 0; }
+.chapters li span:last-child { font-family: var(--mono); font-weight: 400; font-size: 0.74rem; color: var(--muted); white-space: nowrap; padding-top: 3px; }
+@media (max-width: 680px) { .chapters { grid-template-columns: 1fr; } }
+
+/* offers */
+.offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.offer { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 0.75rem; align-content: start; min-width: 0; }
+.offer ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.2rem; }
+@media (max-width: 760px) { .offers { grid-template-columns: 1fr; } }
+
+/* form */
+form.contact { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+.field { display: grid; gap: 6px; }
+.field label { font-family: var(--display); font-weight: 650; font-size: 0.92rem; }
+.field input, .field select, .field textarea {
+  font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground);
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; width: 100%;
+}
+.field textarea { min-height: 7rem; resize: vertical; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+@media (max-width: 560px) { .two { grid-template-columns: 1fr; } }
+.form-status { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+
+/* providers */
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.checklist li { padding-block: 14px; border-top: 1px solid var(--line); display: grid; gap: 4px; }
+.checklist li strong { font-family: var(--display); font-weight: 700; }
+
+/* start-here ramp */
+.ramp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.ramp div { border-top: 3px solid var(--accent); padding-top: 10px; display: grid; gap: 4px; align-content: start; }
+.ramp .t { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.ramp p { font-family: var(--display); font-weight: 650; font-size: 1.02rem; line-height: 1.3; }
+@media (max-width: 560px) { .ramp { grid-template-columns: 1fr; } }
+
+/* client stories */
+.stories { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.story-card { background: var(--ground); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: grid; gap: 1rem; align-content: start; min-width: 0; }
+.arc { list-style: none; margin: 0; padding: 0 0 0 18px; display: grid; gap: 12px; border-left: 2px solid var(--line); }
+.arc li { position: relative; display: grid; gap: 2px; font-size: 0.98rem; line-height: 1.5; }
+.arc li::before { content: ""; position: absolute; left: -25px; top: 0.3em; width: 12px; height: 12px; border-radius: 50%; background: var(--ground); border: 2px solid var(--accent); }
+.arc li:last-child::before { background: var(--accent); }
+.arc .t { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.said { font-family: var(--display); font-stretch: 105%; font-weight: 700; font-size: 1.08rem; line-height: 1.3; padding-top: 0.9rem; border-top: 1px solid var(--line); }
+@media (max-width: 920px) { .stories { grid-template-columns: 1fr; } }
+
+/* writing */
+.split-wide { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 56px); align-items: start; }
+.split-wide aside { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px); }
+@media (max-width: 860px) { .split-wide { grid-template-columns: 1fr; } .split-wide aside { position: static; } }
+.posts { list-style: none; margin: 0; padding: 0; display: grid; }
+.posts li { border-top: 1px solid var(--line); }
+.post-item { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) auto; gap: 8px 28px; padding-block: 22px; color: var(--ink); text-decoration: none; align-items: baseline; }
+a.post-item:hover h3 { color: var(--accent); }
+.post-item .meta { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.post-item .text { display: grid; gap: 4px; min-width: 0; }
+.post-item .state { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); white-space: nowrap; }
+.post-item.upcoming h3 { color: var(--muted); }
+@media (max-width: 680px) { .post-item { grid-template-columns: 1fr; gap: 6px; } }
+.latest { display: grid; gap: 0.5rem; padding: 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.latest:hover { border-color: var(--accent); }
+.latest .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); }
+.subscribe { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 12px; }
+.sub-title { font-family: var(--display); font-stretch: 110%; font-weight: 800; font-size: 1.2rem; line-height: 1.15; }
+.sub-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.sub-row input { flex: 1 1 13rem; min-width: 0; font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* article */
+.wrap.narrow { max-width: 760px; }
+.back { font-family: var(--display); font-weight: 650; font-size: 0.92rem; text-decoration: none; }
+.post-body { display: grid; gap: 1.15rem; font-size: 1.12rem; line-height: 1.7; }
+.post-body h2 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin-top: 1.4rem; }
+.post-body ul { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.4rem; }
+.post-body .pull { font-size: 1.4rem; }
+.sources { display: grid; gap: 6px; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--line); }
+.sources p { font-family: var(--mono); font-size: 0.76rem; line-height: 1.55; color: var(--muted); }
+
+/* ---------- library ---------- */
+.shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.shelf > a, .shelf > .card {
+  display: grid; gap: 0.6rem; align-content: start; padding: 22px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; min-width: 0;
+}
+.band.surface .shelf > a, .band.surface .shelf > .card { background: var(--ground); }
+.shelf > a:hover { border-color: var(--accent); }
+.shelf .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); margin-top: 0.25rem; }
+@media (max-width: 900px) { .shelf { grid-template-columns: 1fr; } }
+
+.figure-box { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 12px; min-width: 0; }
+.band.surface .figure-box { background: var(--ground); }
+.figure-box svg { width: 100%; height: auto; display: block; }
+
+/* two cities illustration */
+.c-cell { fill: var(--surface); stroke: var(--mid); stroke-width: 1.5; }
+.band.surface .c-cell { fill: var(--surface); }
+.c-nuc { fill: var(--chip); stroke: var(--mid); stroke-width: 1; }
+.c-mito { fill: var(--hot); }
+.c-ribo { fill: var(--ink); opacity: 0.5; }
+.c-cap { fill: none; stroke: var(--cool); stroke-width: 4; stroke-linecap: round; }
+.c-label { fill: var(--ink); font-family: var(--display); font-weight: 750; font-size: 16px; }
+.c-key { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+
+/* book parts */
+.parts { display: grid; }
+.part { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: clamp(16px, 4vw, 48px); padding-block: 28px; border-top: 1px solid var(--line); }
+.part-name { display: grid; gap: 6px; align-content: start; }
+.part-name .n { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.part-name h3 { font-size: 1.2rem; }
+.ch-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.ch { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) auto; gap: 4px 16px; padding-block: 14px; border-top: 1px dashed var(--line); align-items: baseline; }
+.ch:first-child { border-top: 0; padding-top: 2px; }
+.ch .num { font-family: var(--display); font-stretch: 120%; font-weight: 850; font-size: 1.35rem; line-height: 1; font-variant-numeric: tabular-nums; color: var(--muted); }
+.ch .t { display: grid; gap: 3px; min-width: 0; }
+.ch .t strong { font-family: var(--display); font-weight: 750; font-size: 1.08rem; line-height: 1.25; }
+.ch .t span { color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+.ch .s { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+.ch a.s { color: var(--accent); font-weight: 500; }
+@media (max-width: 720px) {
+  .part { grid-template-columns: 1fr; gap: 12px; }
+  .ch { grid-template-columns: 2.2rem minmax(0, 1fr); }
+  .ch .s { grid-column: 2; }
+}
+
+/* ---------- module (long read) ---------- */
+.module-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+.module .post-body { min-width: 0; }
+.module .post-body h2 { scroll-margin-top: 90px; }
+.post-body a.c { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; white-space: nowrap; }
+.post-body ol { margin: 0; padding-left: 1.4rem; display: grid; gap: 0.5rem; }
+.toc { display: grid; gap: 14px; align-content: start; }
+.toc-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 10px; }
+.toc-box ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.45rem; font-family: var(--display); font-weight: 600; font-size: 0.94rem; line-height: 1.3; }
+.toc-box ol a { color: var(--ink); text-decoration: none; }
+.toc-box ol a:hover { color: var(--accent); }
+.formats { list-style: none; margin: 0; padding: 0; display: grid; }
+.formats li { display: flex; justify-content: space-between; gap: 1rem; padding-block: 9px; border-top: 1px solid var(--line); font-family: var(--display); font-weight: 600; font-size: 0.92rem; }
+.formats li:first-child { border-top: 0; padding-top: 0; }
+.formats li span:last-child { font-family: var(--mono); font-weight: 400; font-size: 0.72rem; color: var(--muted); padding-top: 2px; }
+.formats li.on span:last-child { color: var(--accent); }
+@media (max-width: 860px) { .toc .toc-box.contents { display: none; } }
+
+/* method loop */
+.l-box { fill: none; stroke: var(--mid); stroke-width: 1.25; }
+.l-box.main { fill: var(--chip); stroke: var(--accent); stroke-width: 2; }
+.l-edge { fill: none; stroke: var(--mid); stroke-width: 1.25; }
+.l-head { fill: var(--mid); }
+.l-t { fill: var(--ink); font-family: var(--display); font-weight: 750; font-size: 15px; }
+.l-s { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+.post-body .loop-list { display: none; margin: 0; padding-left: 1.3rem; }
+.loop-list li { font-size: 1rem; }
+@media (max-width: 600px) { .loop svg { display: none; } .post-body .loop-list { display: grid; gap: 0.4rem; } }
+
+/* tissue clock */
+.trow { display: grid; grid-template-columns: 11.5rem minmax(0, 1fr) 8rem; gap: 10px 14px; align-items: center; }
+.trow .tl { font-family: var(--display); font-weight: 650; font-size: 0.95rem; line-height: 1.25; }
+.trow .tv { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+.tbar { height: 22px; border-radius: 5px; background: var(--chip); overflow: hidden; }
+.tbar span { display: block; height: 100%; border-radius: 5px; }
+@media (max-width: 600px) { .trow { grid-template-columns: 1fr auto; } .trow .tbar { grid-column: 1 / -1; grid-row: 2; } }
+
+.next-card { display: grid; gap: 0.4rem; padding: 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.next-card:hover { border-color: var(--accent); }
+.next-card .go { font-family: var(--display); font-weight: 700; font-size: 0.9rem; color: var(--accent); }
+
+/* ---------- exercise library ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button {
+  font-family: var(--display); font-weight: 650; font-size: 0.9rem; color: var(--muted);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer;
+}
+.chips button:hover { color: var(--ink); border-color: var(--mid); }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.ladders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ladder { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.ladder[hidden] { display: none; }
+.ladder header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.rungs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: rung; }
+.rungs li {
+  counter-increment: rung; display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: 10px; align-items: center;
+  padding: 9px 10px; border-radius: 8px; background: var(--ground); font-family: var(--display); font-weight: 600; font-size: 0.95rem; line-height: 1.25;
+}
+.rungs li::before {
+  content: counter(rung); display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--accent); border: 1.5px solid var(--accent);
+}
+.feature .rungs li, .band:not(.surface) > .wrap > .ladder .rungs li { background: var(--surface); border: 1px solid var(--line); }
+.rungs li:last-child::before { background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 960px) { .ladders { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .ladders { grid-template-columns: 1fr; } }
+
+.feature { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: start; }
+@media (max-width: 860px) { .feature { grid-template-columns: 1fr; } }
+.video {
+  aspect-ratio: 16 / 9; border-radius: 12px; background: var(--ink); color: var(--surface);
+  display: grid; place-items: center; align-content: center; gap: 10px; text-align: center; padding: 16px;
+}
+.video .play { width: 56px; height: 56px; border-radius: 50%; border: 2px solid currentColor; display: grid; place-items: center; opacity: 0.85; }
+.video .play::after { content: ""; border-left: 16px solid currentColor; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 4px; }
+.video span { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; }
+.note-box { border: 1px dashed var(--mid); border-radius: 10px; padding: 14px 16px; display: grid; gap: 4px; }
+
+/* footer */
+footer.site { background: var(--surface); border-top: 1px solid var(--line); }
+footer.site .wrap { padding-block: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+footer.site a { color: var(--muted); }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../">Shane Niemeyer</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="primary" id="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="../doctrine/" data-nav="doctrine">Doctrine</a></li>
+        <li><a href="../process/" data-nav="process">Process</a></li>
+        <li><a href="../library/" data-nav="library" aria-current="page">Library</a></li>
+        <li><a href="../writing/" data-nav="writing">Writing</a></li>
+        <li><a href="../work/" data-nav="work">Work with Shane</a></li>
+        <li><a href="../providers/" data-nav="providers">For Providers</a></li>
+        <li><a href="../story/" data-nav="story">Story</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= LIBRARY ================= -->
+<div class="view" data-view="library">
+  <section class="page-head"><div class="wrap">
+    <p class="eyebrow">The Library</p>
+    <h1>From the cell to the whole human being.</h1>
+    <p class="lead measure">Everything we teach about how training transforms us: the book, the modules and the exercise library. Written for anyone who trains, and for the providers who send people to us. Every claim carries its source.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="section-head"><p class="eyebrow">Start here</p><h2>Three ways in.</h2></div>
+    <div class="shelf">
+      <a href="#introduction">
+        <p class="eyebrow">Introduction</p>
+        <h3>Training is the process of health</h3>
+        <p class="muted">Why no intervention reaches further than the pursuit of fitness through training.</p>
+        <span class="go">Read the introduction →</span>
+      </a>
+      <a href="#meet-people-where-they-are">
+        <p class="eyebrow">The Niemeyer Method</p>
+        <h3>Meet people where they are</h3>
+        <p class="muted">Locating the person, progressing the load, and periodizing for a lifetime of training.</p>
+        <span class="go">Read the module →</span>
+      </a>
+      <a href="#evidence">
+        <p class="eyebrow">The evidence</p>
+        <h3>The case in six findings</h3>
+        <p class="muted">Low fitness is as dangerous as smoking. Diabetes can be prevented. Cancer outcomes change.</p>
+        <span class="go">See the evidence →</span>
+      </a>
+    </div>
+  </div></section>
+
+  <section class="band surface"><div class="wrap split">
+    <div class="stack">
+      <p class="eyebrow">The spine of the book</p>
+      <h2>Two cities.</h2>
+      <p class="lead">The fit cell and the sedentary cell, side by side.</p>
+      <p class="measure">The cell is a city: power plants (mitochondria), factories (ribosomes), roads and supply lines (capillaries, GLUT4). Cells aggregate into tissue, tissue into organs, organs into the human being. Each disease chapter opens by asking: what happened to the city?</p>
+    </div>
+    <figure class="figure-box" aria-label="Illustration: a sedentary cell with few mitochondria, ribosomes and capillaries beside a fit cell with many">
+      <svg viewBox="0 0 540 302" xmlns="http://www.w3.org/2000/svg">
+<path class="c-cap" d="M21.7 96.4 L25.0 90.4 L28.6 84.6 L32.6 79.0 L36.9 73.7 L41.6 68.5 L46.6 63.7 L51.9 59.1 L57.5 54.8 L63.3 50.8 L69.4 47.1 L75.7 43.8 L82.2 40.8"/>
+<ellipse class="c-cell" cx="135" cy="145" rx="110" ry="100"/>
+<circle class="c-nuc" cx="145" cy="151" r="25"/>
+<ellipse class="c-mito" cx="65.6" cy="147.4" rx="12" ry="5.5" transform="rotate(-26 65.6 147.4)"/>
+<ellipse class="c-mito" cx="163.6" cy="203.6" rx="12" ry="5.5" transform="rotate(-38 163.6 203.6)"/>
+<ellipse class="c-mito" cx="66.8" cy="93.4" rx="12" ry="5.5" transform="rotate(-30 66.8 93.4)"/>
+<ellipse class="c-mito" cx="121.9" cy="213.5" rx="12" ry="5.5" transform="rotate(-60 121.9 213.5)"/>
+<ellipse class="c-mito" cx="125.6" cy="100.6" rx="12" ry="5.5" transform="rotate(37 125.6 100.6)"/>
+<ellipse class="c-mito" cx="209.8" cy="186.6" rx="12" ry="5.5" transform="rotate(-14 209.8 186.6)"/>
+<circle class="c-ribo" cx="211.2" cy="122.3" r="1.9"/>
+<circle class="c-ribo" cx="225.3" cy="139.0" r="1.9"/>
+<circle class="c-ribo" cx="41.1" cy="170.9" r="1.9"/>
+<circle class="c-ribo" cx="196.3" cy="99.0" r="1.9"/>
+<circle class="c-ribo" cx="44.2" cy="111.5" r="1.9"/>
+<circle class="c-ribo" cx="200.3" cy="80.5" r="1.9"/>
+<circle class="c-ribo" cx="67.0" cy="191.4" r="1.9"/>
+<circle class="c-ribo" cx="53.8" cy="173.7" r="1.9"/>
+<circle class="c-ribo" cx="50.6" cy="129.2" r="1.9"/>
+<circle class="c-ribo" cx="91.9" cy="222.0" r="1.9"/>
+<circle class="c-ribo" cx="71.4" cy="123.9" r="1.9"/>
+<circle class="c-ribo" cx="195.0" cy="110.8" r="1.9"/>
+<circle class="c-ribo" cx="44.8" cy="161.5" r="1.9"/>
+<circle class="c-ribo" cx="78.5" cy="165.3" r="1.9"/>
+<circle class="c-ribo" cx="106.8" cy="135.6" r="1.9"/>
+<circle class="c-ribo" cx="151.4" cy="218.3" r="1.9"/>
+<circle class="c-ribo" cx="79.9" cy="83.0" r="1.9"/>
+<circle class="c-ribo" cx="219.1" cy="165.7" r="1.9"/>
+<circle class="c-ribo" cx="117.7" cy="65.8" r="1.9"/>
+<circle class="c-ribo" cx="77.4" cy="185.9" r="1.9"/>
+<circle class="c-ribo" cx="81.5" cy="209.7" r="1.9"/>
+<circle class="c-ribo" cx="156.2" cy="103.7" r="1.9"/>
+<circle class="c-ribo" cx="123.1" cy="57.1" r="1.9"/>
+<circle class="c-ribo" cx="63.8" cy="118.8" r="1.9"/>
+<circle class="c-ribo" cx="150.9" cy="71.3" r="1.9"/>
+<circle class="c-ribo" cx="104.7" cy="223.2" r="1.9"/>
+<text class="c-label" x="135" y="290" text-anchor="middle">The sedentary cell</text>
+<path class="c-cap" d="M525.7 174.8 L523.1 182.8 L519.8 190.5 L515.9 198.1 L511.4 205.4 L506.3 212.3 L500.8 218.9 L494.7 225.1 L488.1 230.9 L481.1 236.2 L473.7 241.1 L465.9 245.4 L457.8 249.2"/>
+<path class="c-cap" d="M362.2 253.1 L353.8 249.9 L345.7 246.2 L337.8 242.0 L330.4 237.2 L323.3 232.0 L316.6 226.3 L310.4 220.2 L304.7 213.7 L299.6 206.8 L295.0 199.6 L291.0 192.1 L287.5 184.3"/>
+<path class="c-cap" d="M287.5 105.7 L291.0 97.9 L295.0 90.4 L299.6 83.2 L304.7 76.3 L310.4 69.8 L316.6 63.7 L323.3 58.0 L330.4 52.8 L337.8 48.0 L345.7 43.8 L353.8 40.1 L362.2 36.9"/>
+<path class="c-cap" d="M447.8 36.9 L456.2 40.1 L464.3 43.8 L472.2 48.0 L479.6 52.8 L486.7 58.0 L493.4 63.7 L499.6 69.8 L505.3 76.3 L510.4 83.2 L515.0 90.4 L519.0 97.9 L522.5 105.7"/>
+<ellipse class="c-cell" cx="405" cy="145" rx="110" ry="100"/>
+<circle class="c-nuc" cx="415" cy="151" r="25"/>
+<ellipse class="c-mito" cx="401.1" cy="191.1" rx="12" ry="5.5" transform="rotate(18 401.1 191.1)"/>
+<ellipse class="c-mito" cx="457.2" cy="185.7" rx="12" ry="5.5" transform="rotate(-13 457.2 185.7)"/>
+<ellipse class="c-mito" cx="372.4" cy="182.0" rx="12" ry="5.5" transform="rotate(14 372.4 182.0)"/>
+<ellipse class="c-mito" cx="485.0" cy="159.6" rx="12" ry="5.5" transform="rotate(1 485.0 159.6)"/>
+<ellipse class="c-mito" cx="455.2" cy="122.7" rx="12" ry="5.5" transform="rotate(68 455.2 122.7)"/>
+<ellipse class="c-mito" cx="400.8" cy="91.0" rx="12" ry="5.5" transform="rotate(43 400.8 91.0)"/>
+<ellipse class="c-mito" cx="392.2" cy="223.3" rx="12" ry="5.5" transform="rotate(-34 392.2 223.3)"/>
+<ellipse class="c-mito" cx="338.7" cy="131.2" rx="12" ry="5.5" transform="rotate(58 338.7 131.2)"/>
+<ellipse class="c-mito" cx="488.7" cy="121.9" rx="12" ry="5.5" transform="rotate(34 488.7 121.9)"/>
+<ellipse class="c-mito" cx="423.3" cy="108.3" rx="12" ry="5.5" transform="rotate(39 423.3 108.3)"/>
+<ellipse class="c-mito" cx="355.9" cy="78.8" rx="12" ry="5.5" transform="rotate(44 355.9 78.8)"/>
+<ellipse class="c-mito" cx="364.4" cy="212.8" rx="12" ry="5.5" transform="rotate(-13 364.4 212.8)"/>
+<ellipse class="c-mito" cx="445.6" cy="84.9" rx="12" ry="5.5" transform="rotate(56 445.6 84.9)"/>
+<ellipse class="c-mito" cx="430.2" cy="196.2" rx="12" ry="5.5" transform="rotate(53 430.2 196.2)"/>
+<ellipse class="c-mito" cx="337.1" cy="168.6" rx="12" ry="5.5" transform="rotate(27 337.1 168.6)"/>
+<ellipse class="c-mito" cx="377.7" cy="127.7" rx="12" ry="5.5" transform="rotate(37 377.7 127.7)"/>
+<ellipse class="c-mito" cx="450.0" cy="217.1" rx="12" ry="5.5" transform="rotate(37 450.0 217.1)"/>
+<circle class="c-ribo" cx="384.3" cy="189.5" r="1.9"/>
+<circle class="c-ribo" cx="432.3" cy="91.4" r="1.9"/>
+<circle class="c-ribo" cx="457.5" cy="96.3" r="1.9"/>
+<circle class="c-ribo" cx="311.8" cy="164.5" r="1.9"/>
+<circle class="c-ribo" cx="357.9" cy="176.0" r="1.9"/>
+<circle class="c-ribo" cx="452.7" cy="104.2" r="1.9"/>
+<circle class="c-ribo" cx="348.6" cy="149.7" r="1.9"/>
+<circle class="c-ribo" cx="320.3" cy="169.8" r="1.9"/>
+<circle class="c-ribo" cx="306.5" cy="150.6" r="1.9"/>
+<circle class="c-ribo" cx="322.4" cy="133.6" r="1.9"/>
+<circle class="c-ribo" cx="352.7" cy="161.4" r="1.9"/>
+<circle class="c-ribo" cx="387.3" cy="200.6" r="1.9"/>
+<circle class="c-ribo" cx="354.7" cy="182.0" r="1.9"/>
+<circle class="c-ribo" cx="336.8" cy="94.8" r="1.9"/>
+<circle class="c-ribo" cx="317.5" cy="153.3" r="1.9"/>
+<circle class="c-ribo" cx="415.7" cy="194.2" r="1.9"/>
+<circle class="c-ribo" cx="376.2" cy="64.4" r="1.9"/>
+<circle class="c-ribo" cx="313.3" cy="157.8" r="1.9"/>
+<circle class="c-ribo" cx="440.7" cy="61.3" r="1.9"/>
+<circle class="c-ribo" cx="326.4" cy="116.6" r="1.9"/>
+<circle class="c-ribo" cx="320.8" cy="186.9" r="1.9"/>
+<circle class="c-ribo" cx="420.2" cy="228.7" r="1.9"/>
+<circle class="c-ribo" cx="391.4" cy="205.6" r="1.9"/>
+<circle class="c-ribo" cx="362.0" cy="108.5" r="1.9"/>
+<circle class="c-ribo" cx="380.3" cy="84.0" r="1.9"/>
+<circle class="c-ribo" cx="413.9" cy="212.3" r="1.9"/>
+<circle class="c-ribo" cx="418.8" cy="80.3" r="1.9"/>
+<circle class="c-ribo" cx="434.5" cy="73.8" r="1.9"/>
+<circle class="c-ribo" cx="463.4" cy="149.3" r="1.9"/>
+<circle class="c-ribo" cx="385.3" cy="210.2" r="1.9"/>
+<circle class="c-ribo" cx="327.2" cy="193.2" r="1.9"/>
+<circle class="c-ribo" cx="331.9" cy="85.9" r="1.9"/>
+<circle class="c-ribo" cx="388.5" cy="103.4" r="1.9"/>
+<circle class="c-ribo" cx="342.8" cy="92.1" r="1.9"/>
+<circle class="c-ribo" cx="452.8" cy="164.0" r="1.9"/>
+<circle class="c-ribo" cx="461.7" cy="107.3" r="1.9"/>
+<circle class="c-ribo" cx="370.3" cy="154.5" r="1.9"/>
+<circle class="c-ribo" cx="428.3" cy="76.5" r="1.9"/>
+<circle class="c-ribo" cx="329.5" cy="109.4" r="1.9"/>
+<circle class="c-ribo" cx="412.6" cy="75.1" r="1.9"/>
+<circle class="c-ribo" cx="354.4" cy="188.3" r="1.9"/>
+<circle class="c-ribo" cx="316.4" cy="141.0" r="1.9"/>
+<circle class="c-ribo" cx="424.1" cy="216.5" r="1.9"/>
+<circle class="c-ribo" cx="340.8" cy="153.7" r="1.9"/>
+<circle class="c-ribo" cx="478.0" cy="107.3" r="1.9"/>
+<circle class="c-ribo" cx="362.3" cy="138.4" r="1.9"/>
+<circle class="c-ribo" cx="446.2" cy="66.2" r="1.9"/>
+<circle class="c-ribo" cx="347.2" cy="157.8" r="1.9"/>
+<circle class="c-ribo" cx="358.9" cy="120.2" r="1.9"/>
+<circle class="c-ribo" cx="339.0" cy="191.3" r="1.9"/>
+<circle class="c-ribo" cx="315.8" cy="180.5" r="1.9"/>
+<circle class="c-ribo" cx="425.4" cy="63.0" r="1.9"/>
+<circle class="c-ribo" cx="322.3" cy="126.4" r="1.9"/>
+<circle class="c-ribo" cx="468.7" cy="177.0" r="1.9"/>
+<circle class="c-ribo" cx="367.8" cy="113.4" r="1.9"/>
+<circle class="c-ribo" cx="468.5" cy="210.0" r="1.9"/>
+<circle class="c-ribo" cx="405.1" cy="73.4" r="1.9"/>
+<circle class="c-ribo" cx="396.9" cy="69.8" r="1.9"/>
+<circle class="c-ribo" cx="427.3" cy="69.5" r="1.9"/>
+<circle class="c-ribo" cx="421.2" cy="211.2" r="1.9"/>
+<circle class="c-ribo" cx="333.2" cy="149.0" r="1.9"/>
+<circle class="c-ribo" cx="446.6" cy="196.6" r="1.9"/>
+<circle class="c-ribo" cx="460.4" cy="142.2" r="1.9"/>
+<circle class="c-ribo" cx="362.0" cy="163.7" r="1.9"/>
+<circle class="c-ribo" cx="347.6" cy="106.3" r="1.9"/>
+<circle class="c-ribo" cx="382.0" cy="92.2" r="1.9"/>
+<circle class="c-ribo" cx="472.2" cy="89.4" r="1.9"/>
+<circle class="c-ribo" cx="459.3" cy="158.4" r="1.9"/>
+<circle class="c-ribo" cx="474.4" cy="124.5" r="1.9"/>
+<circle class="c-ribo" cx="373.4" cy="162.1" r="1.9"/>
+<circle class="c-ribo" cx="492.7" cy="106.6" r="1.9"/>
+<circle class="c-ribo" cx="404.7" cy="231.8" r="1.9"/>
+<text class="c-label" x="405" y="290" text-anchor="middle">The fit cell</text>
+</svg>
+      <div class="key">
+        <span><i style="background:var(--hot);border-radius:50%"></i>Mitochondria: power plants</span>
+        <span><i style="background:var(--ink);opacity:.5;border-radius:50%;width:6px;height:6px;vertical-align:1px"></i>Ribosomes: factories</span>
+        <span><i style="background:var(--cool);height:4px;width:16px;vertical-align:3px"></i>Capillaries: roads</span>
+      </div>
+      <figcaption class="figure-note">Illustration, not to scale. Mitochondrial density is mostly an aerobic story; ribosomal density is mostly a strength story. The case is for both.</figcaption>
+    </figure>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The book <span class="tag draft">Working title</span></p>
+      <h2>Exercise as Medicine</h2>
+      <p class="muted measure">Fourteen chapters in five parts. Each chapter doubles as a module: read it here, watch it, and use it on the floor.</p>
+    </div>
+    <div class="parts">
+      <div class="part">
+        <div class="part-name"><span class="n">Part one</span><h3>Why it matters</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">01</span><span class="t"><strong>Fitness is capability</strong><span>Fitness as the capacity to tolerate stress. Training, not working out.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">02</span><span class="t"><strong>How we know</strong><span>Cohorts, trials, and measured fitness versus self-reported activity.</span></span><span class="s">Coming</span></li>
+        </ol>
+      </div>
+      <div class="part">
+        <div class="part-name"><span class="n">Part two</span><h3>The cell and the systems</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">03</span><span class="t"><strong>Two cities</strong><span>The fit cell and the sedentary cell. The signals that build mitochondria and ribosomes.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">04</span><span class="t"><strong>Metabolism rewired</strong><span>How exercise reconfigures metabolism. Muscle as an endocrine organ.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">05</span><span class="t"><strong>The infrastructure</strong><span>Heart, lungs and vessels. Connective tissue, fascia and bone.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">06</span><span class="t"><strong>Immunity</strong><span>Fit and unfit immune systems. Recalibration, not simply turning it up.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">07</span><span class="t"><strong>The brain</strong><span>Cognition, movement complexity, and the prevention of dementia. Preserving, not reversing.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">08</span><span class="t"><strong>The mind</strong><span>Exercise makes us feel good. The chemistry of it, and the stress axis.</span></span><span class="s">Coming</span></li>
+        </ol>
+      </div>
+      <div class="part">
+        <div class="part-name"><span class="n">Part three</span><h3>Exercise against disease</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">09</span><span class="t"><strong>Cancer</strong><span>Quality of life, fatigue, treatment completion and outcomes.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">10</span><span class="t"><strong>The pharmacy</strong><span>Heart disease, type 2 diabetes, falls and fractures, frailty.</span></span><span class="s">Coming</span></li>
+        </ol>
+      </div>
+      <div class="part">
+        <div class="part-name"><span class="n">Part four</span><h3>Building it</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">11</span><span class="t"><strong>The two pillars</strong><span>Aerobic fitness mainly protects lifespan. Strength and movement mainly protect healthspan. Together beats either.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">12</span><span class="t"><strong>Aging and the far end of the curve</strong><span>The midlife window, hormones across aging, and what elite athletes teach us.</span></span><span class="s">Coming</span></li>
+          <li class="ch"><span class="num">13</span><span class="t"><strong>Training</strong><span>Dose, progression and safety. Recovery, sleep and nutrition.</span></span><a class="s" href="#meet-people-where-they-are">Module ready →</a></li>
+        </ol>
+      </div>
+      <div class="part">
+        <div class="part-name"><span class="n">Part five</span><h3>The close</h3></div>
+        <ol class="ch-list">
+          <li class="ch"><span class="num">14</span><span class="t"><strong>The close</strong><span>A call to action.</span></span><span class="s">Coming</span></li>
+        </ol>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band surface"><div class="wrap split">
+    <div class="stack">
+      <p class="eyebrow">Exercise library</p>
+      <h2>Every movement sits on a ladder.</h2>
+      <p class="measure">We start every person where they are and progress them at the pace of their slowest tissues. So every movement in the library has a first rung anyone can stand on, and a path to the top.</p>
+      <div class="actions"><a class="btn primary" href="#exercises">Browse the library</a></div>
+    </div>
+    <div class="ladder">
+      <header><h3>Ground</h3><span class="tag draft">Sample</span></header>
+      <ol class="rungs">
+        <li>Supported floor transfer</li>
+        <li>Half-kneeling to stand</li>
+        <li>Floor to stand, one hand</li>
+        <li>Floor to stand, no hands</li>
+      </ol>
+    </div>
+  </div></section>
+
+  <section class="band"><div class="wrap split">
+    <div class="stack">
+      <p class="eyebrow">For healthcare providers</p>
+      <h2>A brief for every module.</h2>
+      <p class="muted measure">Each module will come with a one-page summary for referring providers: the claim, the strength of the evidence behind it, and what we do on the floor.</p>
+      <p class="cite-line"><span class="tag draft">Planned</span></p>
+    </div>
+    <form class="subscribe" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate><input type="hidden" name="form-name" value="newsletter"><input type="hidden" name="source" value="library"><p class="sr" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <p class="sub-title">New chapters, as they land</p>
+      <p class="muted">One idea a week, in your inbox. No hacks. No shortcuts.</p>
+      <div class="sub-row"><label class="sr" for="sub-library">Email address</label><input id="sub-library" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><button class="btn primary" type="submit">Subscribe</button></div>
+      <p class="form-status" aria-live="polite"></p>
+    </form>
+  </div></section>
+</div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Shane Niemeyer · Boulder County, Colorado</span>
+    <span><a href="../doctrine/">Doctrine</a> · <a href="../process/">Process</a> · <a href="../library/">Library</a> · <a href="../writing/">Writing</a> · <a href="../providers/">For Providers</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var ROOT = '../', PAGES = ['home','doctrine','process','evidence','work','providers','story','writing','never-easy-never-hard','library','introduction','meet-people-where-they-are','exercises'];
+  var legacy = (location.hash || '').slice(1);
+  if (PAGES.indexOf(legacy) > -1) location.replace(ROOT + (legacy === 'home' ? '' : legacy + '/'));
+
+  var header = document.querySelector('header.site');
+  var menuBtn = header.querySelector('.menu-btn');
+  function setMenu(open) { header.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  menuBtn.addEventListener('click', function () { setMenu(!header.classList.contains('open')); });
+  header.querySelectorAll('nav.primary a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  var form = document.getElementById('contact-form');
+  var status = document.getElementById('c-status');
+  function send(f) {
+    return fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(f)).toString()
+    }).then(function (r) { if (!r.ok) throw new Error(r.status); });
+  }
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = form.elements.name.value.trim();
+    var email = form.elements.email.value.trim();
+    if (!name || !validEmail(email)) { status.textContent = 'Add your name and a valid email so I can write back.'; return; }
+    var btn = form.querySelector('button[type=submit]');
+    btn.disabled = true; status.textContent = 'Sending…';
+    send(form).then(function () {
+      form.reset();
+      status.textContent = 'Got it. I read every one of these myself, and I\'ll write back soon. — Shane';
+    }).catch(function () {
+      status.textContent = 'That didn\'t go through. Try again in a minute.';
+    }).then(function () { btn.disabled = false; });
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-jump]')).forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.getElementById(a.getAttribute('data-jump'));
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chips [data-filter]'));
+  var ladders = Array.prototype.slice.call(document.querySelectorAll('.ladder[data-pattern]'));
+  chips.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      chips.forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      ladders.forEach(function (l) { l.hidden = !(f === 'all' || l.getAttribute('data-pattern') === f); });
+    });
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('form.subscribe')).forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var st = f.querySelector('.form-status');
+      if (!validEmail(f.elements.email.value.trim())) { st.textContent = 'Enter a valid email address.'; return; }
+      var btn = f.querySelector('button[type=submit]');
+      btn.disabled = true; st.textContent = 'Signing you up…';
+      send(f).then(function () {
+        f.reset(); st.textContent = 'You\'re in. The first letter is on its way soon.';
+      }).catch(function () {
+        st.textContent = 'That didn\'t go through. Try again in a minute.';
+      }).then(function () { btn.disabled = false; });
+    });
+  });
+})();
+</script>
+
+</body></html>
+</body>
+</html>
