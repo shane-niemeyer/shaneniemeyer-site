@@ -102,6 +102,7 @@ def build(theme, out):
         top = links(shell_top, root)
         top = re.sub(r'(<a href="[^"]*" data-nav="%s")' % re.escape(section), r'\1 aria-current="page"', top)
         block = re.sub(r"(<div class=\"view[^>]*?)\s+hidden>", r"\1>", block, count=1)
+        block = links(block, root)
         bottom = links(shell_bottom, root)
         bottom = re.sub(r"  var views = .*?\n  show\(\);\n", lambda m: router_js(root), bottom, flags=re.S)
         e = html.escape
