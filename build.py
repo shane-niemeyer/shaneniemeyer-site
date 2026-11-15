@@ -169,7 +169,7 @@ def build(theme, out):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--theme", default="")
+    ap.add_argument("--theme", default="ember")
     ap.add_argument("--out", default=HERE)
     a = ap.parse_args()
     print("built:", ", ".join(build(a.theme, a.out)))

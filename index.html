@@ -19,7 +19,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#14110F">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -460,6 +460,61 @@ a.post-item:hover h3 { color: var(--accent); }
 footer.site { background: var(--surface); border-top: 1px solid var(--line); }
 footer.site .wrap { padding-block: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
 footer.site a { color: var(--muted); }
+</style>
+<style>
+/* Ember theme: warm paper for reading, near-black for the big moments, ember as the one accent.
+   Layered over the base styles; only colors, a few sizes and the .moment sections change. */
+:root, :root[data-theme="light"] {
+  --ground: #F4EFE7;
+  --surface: #FBF8F2;
+  --ink: #1B1714;
+  --muted: #6A6058;
+  --line: #E1D8CC;
+  --chip: #EAE2D6;
+  --accent: #B8400E;
+  --accent-ink: #FFFFFF;
+  --cool: #3A7486;
+  --mid: #A79C90;
+  --hot: #E4572E;
+  --night: #14110F;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #12100E; --surface: #1A1714; --ink: #EEE7DE; --muted: #A69A8E; --line: #2C2621; --chip: #231E1A;
+    --accent: #F0703F; --accent-ink: #12100E; --cool: #5FA3B5; --mid: #6E645B; --hot: #F0703F; --night: #0A0908;
+  }
+}
+
+/* the moments: hero, "Set it down", the story */
+.moment {
+  --ground: var(--night); --surface: var(--night);
+  --ink: #F3EEE7; --muted: #B3A699; --line: #2E2823; --chip: #241F1B;
+  --accent: #F0703F; --accent-ink: #14110F;
+  background: var(--night) !important; color: var(--ink);
+  border-top: 0 !important;
+}
+.moment + .band { border-top: 0; }
+.moment .eyebrow { color: var(--accent); display: inline-flex; align-items: center; gap: 12px; }
+.moment .eyebrow::before { content: ""; width: 36px; height: 3px; background: var(--accent); flex: none; }
+.moment .btn.ghost { color: var(--ink); border-color: #5A4F46; }
+.moment .btn.ghost:hover { border-color: var(--ink); filter: none; }
+
+.hero.moment { padding-block: clamp(64px, 11vw, 148px) clamp(56px, 9vw, 120px); }
+.hero.moment h1 { font-size: clamp(2.9rem, 8vw, 6.4rem); font-stretch: 120%; letter-spacing: -0.02em; }
+.hero.moment .lead { color: #D9D0C5; }
+
+.band.moment h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+
+/* the proverb: let it breathe */
+.quote blockquote { font-size: clamp(2rem, 4.6vw, 3.4rem); }
+
+/* header and footer sit on paper */
+header.site { background: var(--surface); }
+.brand { letter-spacing: 0.04em; }
+.brand::after { content: ""; display: inline-block; width: 8px; height: 8px; margin-left: 6px; background: var(--accent); vertical-align: 2px; }
+.record { border-top-color: var(--accent); }
+.btn.primary:hover { filter: brightness(1.08); }
+
 </style>
 </head>
 <body>

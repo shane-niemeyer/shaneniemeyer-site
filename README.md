@@ -11,4 +11,4 @@ The site for Shane Niemeyer: doctrine, library, and coaching.
 - **Commit both the source and the built files.** Netlify serves the repo as-is on every push to `main`.
 - Page titles and share descriptions live in the `META` table at the top of `build.py`.
 - Old `#page` links (for example `/#doctrine`) redirect to the new page addresses.
-- `python3 build.py --theme ember --out /tmp/preview` builds a themed preview (`src/ember.css`) without touching the live files.
+- The live design is the Ember theme (`src/ember.css`, layered over the base styles). `python3 build.py --theme "" --out /tmp/old` builds the previous look if we ever need it back.
